@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Line1">
+          <DataField>Line1</DataField>
+        </Field>
+        <Field Name="Line2">
+          <DataField>Line2</DataField>
+        </Field>
+        <Field Name="Line3">
+          <DataField>Line3</DataField>
+        </Field>
+        <Field Name="Line4">
+          <DataField>Line4</DataField>
+        </Field>
+        <Field Name="Settings_UrlText">
+          <DataField>Settings_UrlText</DataField>
+        </Field>
+        <Field Name="Settings_Url">
+          <DataField>Settings_Url</DataField>
+        </Field>
+        <Field Name="SettingsWin_UrlText">
+          <DataField>SettingsWin_UrlText</DataField>
+        </Field>
+        <Field Name="SettingsWin_Url">
+          <DataField>SettingsWin_Url</DataField>
+        </Field>
+        <Field Name="UserName">
+          <DataField>UserName</DataField>
+        </Field>
+        <Field Name="DocumentType">
+          <DataField>DocumentType</DataField>
+        </Field>
+        <Field Name="DocumentNo">
+          <DataField>DocumentNo</DataField>
+        </Field>
+        <Field Name="Document_UrlText">
+          <DataField>Document_UrlText</DataField>
+        </Field>
+        <Field Name="Document_Url">
+          <DataField>Document_Url</DataField>
+        </Field>
+        <Field Name="CustomLink_UrlText">
+          <DataField>CustomLink_UrlText</DataField>
+        </Field>
+        <Field Name="CustomLink_Url">
+          <DataField>CustomLink_Url</DataField>
+        </Field>
+        <Field Name="ActionText">
+          <DataField>ActionText</DataField>
+        </Field>
+        <Field Name="Field1Label">
+          <DataField>Field1Label</DataField>
+        </Field>
+        <Field Name="Field1Value">
+          <DataField>Field1Value</DataField>
+        </Field>
+        <Field Name="Field2Label">
+          <DataField>Field2Label</DataField>
+        </Field>
+        <Field Name="Field2Value">
+          <DataField>Field2Value</DataField>
+        </Field>
+        <Field Name="Field3Label">
+          <DataField>Field3Label</DataField>
+        </Field>
+        <Field Name="Field3Value">
+          <DataField>Field3Value</DataField>
+        </Field>
+        <Field Name="Field4Label">
+          <DataField>Field4Label</DataField>
+        </Field>
+        <Field Name="Field4Value">
+          <DataField>Field4Value</DataField>
+        </Field>
+        <Field Name="Field5Label">
+          <DataField>Field5Label</DataField>
+        </Field>
+        <Field Name="Field5Value">
+          <DataField>Field5Value</DataField>
+        </Field>
+        <Field Name="Field6Label">
+          <DataField>Field6Label</DataField>
+        </Field>
+        <Field Name="Field6Value">
+          <DataField>Field6Value</DataField>
+        </Field>
+        <Field Name="Field7Label">
+          <DataField>Field7Label</DataField>
+        </Field>
+        <Field Name="Field7Value">
+          <DataField>Field7Value</DataField>
+        </Field>
+        <Field Name="DetailsValue">
+          <DataField>DetailsValue</DataField>
+        </Field>
+        <Field Name="RequesterDetails">
+          <DataField>RequesterDetails</DataField>
+        </Field>
+        <Field Name="Line2Lbl">
+          <DataField>Line2Lbl</DataField>
+        </Field>
+        <Field Name="Line4Lbl">
+          <DataField>Line4Lbl</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

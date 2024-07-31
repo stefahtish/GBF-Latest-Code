@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>2bd563be-3363-46d9-87df-41ad62092847</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox26">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>KENYA DAIRY BOARD</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Maiandra GD</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>AUDIT PROGRAM</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Maiandra GD</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TITLE: MONITORING AND EVALUATION OF STATIONS</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Maiandra GD</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DATE:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Maiandra GD</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Date_AuditHeader.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Maiandra GD</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>0.5842cm</Top>
+            <Left>0.73237cm</Left>
+            <Height>2.29333cm</Height>
+            <Width>16.67785cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox27">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Audit Scope and objectives:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Maiandra GD</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Maiandra GD</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Maiandra GD</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The objectives of this audit include but are not limited to:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Maiandra GD</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox27</rd:DefaultName>
+            <Top>4.18253cm</Top>
+            <Left>0.73237cm</Left>
+            <Height>3.24583cm</Height>
+            <Width>16.17367cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>13.23621cm</Height>
+        <Style />
+      </Body>
+      <Width>19.79312cm</Width>
+      <Page>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>1cm</TopMargin>
+        <BottomMargin>1cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+        </Field>
+        <Field Name="CompLogo">
+          <DataField>CompLogo</DataField>
+        </Field>
+        <Field Name="CompAddr">
+          <DataField>CompAddr</DataField>
+        </Field>
+        <Field Name="CompAddr2">
+          <DataField>CompAddr2</DataField>
+        </Field>
+        <Field Name="CompCity">
+          <DataField>CompCity</DataField>
+        </Field>
+        <Field Name="CompPhoneNo">
+          <DataField>CompPhoneNo</DataField>
+        </Field>
+        <Field Name="CompEmail">
+          <DataField>CompEmail</DataField>
+        </Field>
+        <Field Name="CompWebsite">
+          <DataField>CompWebsite</DataField>
+        </Field>
+        <Field Name="CompCountry">
+          <DataField>CompCountry</DataField>
+        </Field>
+        <Field Name="CompPostCode">
+          <DataField>CompPostCode</DataField>
+        </Field>
+        <Field Name="No_AuditHeader">
+          <DataField>No_AuditHeader</DataField>
+        </Field>
+        <Field Name="Title">
+          <DataField>Title</DataField>
+        </Field>
+        <Field Name="Date_AuditHeader">
+          <DataField>Date_AuditHeader</DataField>
+        </Field>
+        <Field Name="Description_AuditHeader">
+          <DataField>Description_AuditHeader</DataField>
+        </Field>
+        <Field Name="ShortcutDimension1Code">
+          <DataField>ShortcutDimension1Code</DataField>
+        </Field>
+        <Field Name="ShortcutDimension2Code">
+          <DataField>ShortcutDimension2Code</DataField>
+        </Field>
+        <Field Name="CreatedBy">
+          <DataField>CreatedBy</DataField>
+        </Field>
+        <Field Name="ApproverName">
+          <DataField>ApproverName</DataField>
+        </Field>
+        <Field Name="ApproverDate">
+          <DataField>ApproverDate</DataField>
+        </Field>
+        <Field Name="AuditFirm_AuditHeader">
+          <DataField>AuditFirm_AuditHeader</DataField>
+        </Field>
+        <Field Name="AuditManager_AuditHeader">
+          <DataField>AuditManager_AuditHeader</DataField>
+        </Field>
+        <Field Name="AuditDescription2">
+          <DataField>AuditDescription2</DataField>
+        </Field>
+        <Field Name="WorkPlanRef">
+          <DataField>WorkPlanRef</DataField>
+        </Field>
+        <Field Name="DoneBy">
+          <DataField>DoneBy</DataField>
+        </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+        </Field>
+        <Field Name="AuditLineType">
+          <DataField>AuditLineType</DataField>
+        </Field>
+        <Field Name="AuditDescription">
+          <DataField>AuditDescription</DataField>
+        </Field>
+        <Field Name="Auditor_AuditLines">
+          <DataField>Auditor_AuditLines</DataField>
+        </Field>
+        <Field Name="AuditorName_AuditLines">
+          <DataField>AuditorName_AuditLines</DataField>
+        </Field>
+        <Field Name="Approver">
+          <DataField>Approver</DataField>
+        </Field>
+        <Field Name="ProgramScope_AuditLines">
+          <DataField>ProgramScope_AuditLines</DataField>
+        </Field>
+        <Field Name="Review_AuditLines">
+          <DataField>Review_AuditLines</DataField>
+        </Field>
+        <Field Name="Review_Scope_No">
+          <DataField>Review_Scope_No</DataField>
+        </Field>
+        <Field Name="Procedures_Prepared_By">
+          <DataField>Procedures_Prepared_By</DataField>
+        </Field>
+        <Field Name="ReviewProcedure_AuditLines">
+          <DataField>ReviewProcedure_AuditLines</DataField>
+        </Field>
+        <Field Name="Objective">
+          <DataField>Objective</DataField>
+        </Field>
+        <Field Name="Line_No_">
+          <DataField>Line_No_</DataField>
+        </Field>
+        <Field Name="Scope">
+          <DataField>Scope</DataField>
+        </Field>
+        <Field Name="Prefieldwork_Step">
+          <DataField>Prefieldwork_Step</DataField>
+        </Field>
+        <Field Name="Prefieldwork_Description">
+          <DataField>Prefieldwork_Description</DataField>
+        </Field>
+        <Field Name="Prefieldwork_DoneBy">
+          <DataField>Prefieldwork_DoneBy</DataField>
+        </Field>
+        <Field Name="Prefieldwork_WorkPlan">
+          <DataField>Prefieldwork_WorkPlan</DataField>
+        </Field>
+        <Field Name="AuditStep_Description">
+          <DataField>AuditStep_Description</DataField>
+        </Field>
+        <Field Name="AuditStep_DoneBy">
+          <DataField>AuditStep_DoneBy</DataField>
+        </Field>
+        <Field Name="AuditStep_WorkPlan">
+          <DataField>AuditStep_WorkPlan</DataField>
+        </Field>
+        <Field Name="Review">
+          <DataField>Review</DataField>
+        </Field>
+        <Field Name="ReviewScope">
+          <DataField>ReviewScope</DataField>
+        </Field>
+        <Field Name="Review_Procedure_Blob">
+          <DataField>Review_Procedure_Blob</DataField>
+        </Field>
+        <Field Name="Done_By">
+          <DataField>Done_By</DataField>
+        </Field>
+        <Field Name="WorkPlan_Ref">
+          <DataField>WorkPlan_Ref</DataField>
+        </Field>
+        <Field Name="ReportingResult_Description">
+          <DataField>ReportingResult_Description</DataField>
+        </Field>
+        <Field Name="ReportingResult_DoneBy">
+          <DataField>ReportingResult_DoneBy</DataField>
+        </Field>
+        <Field Name="ReportingResult_WorkPlanRef">
+          <DataField>ReportingResult_WorkPlanRef</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

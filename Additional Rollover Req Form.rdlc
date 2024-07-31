@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="EntryDate_PaymentsInvestments">
+          <DataField>EntryDate_PaymentsInvestments</DataField>
+        </Field>
+        <Field Name="IntitutionName_PaymentsInvestments">
+          <DataField>IntitutionName_PaymentsInvestments</DataField>
+        </Field>
+        <Field Name="InterestRate_PaymentsInvestments">
+          <DataField>InterestRate_PaymentsInvestments</DataField>
+        </Field>
+        <Field Name="InterestRate_PaymentsInvestmentsFormat">
+          <DataField>InterestRate_PaymentsInvestmentsFormat</DataField>
+        </Field>
+        <Field Name="ChequeNo_PaymentsInvestments">
+          <DataField>ChequeNo_PaymentsInvestments</DataField>
+        </Field>
+        <Field Name="InvestmentNo_PaymentsInvestments">
+          <DataField>InvestmentNo_PaymentsInvestments</DataField>
+        </Field>
+        <Field Name="ValueDate">
+          <DataField>ValueDate</DataField>
+        </Field>
+        <Field Name="EffectiveDate">
+          <DataField>EffectiveDate</DataField>
+        </Field>
+        <Field Name="RequisitionNo_PaymentsInvestments">
+          <DataField>RequisitionNo_PaymentsInvestments</DataField>
+        </Field>
+        <Field Name="IntitutionName">
+          <DataField>IntitutionName</DataField>
+        </Field>
+        <Field Name="InterestMethod">
+          <DataField>InterestMethod</DataField>
+        </Field>
+        <Field Name="InterestRate">
+          <DataField>InterestRate</DataField>
+        </Field>
+        <Field Name="InterestRateFormat">
+          <DataField>InterestRateFormat</DataField>
+        </Field>
+        <Field Name="Payee_PaymentsInvestments">
+          <DataField>Payee_PaymentsInvestments</DataField>
+        </Field>
+        <Field Name="Approver1Name">
+          <DataField>Approver1Name</DataField>
+        </Field>
+        <Field Name="Approver2Name">
+          <DataField>Approver2Name</DataField>
+        </Field>
+        <Field Name="RepaymentDate">
+          <DataField>RepaymentDate</DataField>
+        </Field>
+        <Field Name="Approver3Name">
+          <DataField>Approver3Name</DataField>
+        </Field>
+        <Field Name="MaturityDate">
+          <DataField>MaturityDate</DataField>
+        </Field>
+        <Field Name="Date1">
+          <DataField>Date1</DataField>
+        </Field>
+        <Field Name="Currency_PaymentsInvestments">
+          <DataField>Currency_PaymentsInvestments</DataField>
+        </Field>
+        <Field Name="Date2">
+          <DataField>Date2</DataField>
+        </Field>
+        <Field Name="Date3">
+          <DataField>Date3</DataField>
+        </Field>
+        <Field Name="Picture">
+          <DataField>Picture</DataField>
+        </Field>
+        <Field Name="DateSent">
+          <DataField>DateSent</DataField>
+        </Field>
+        <Field Name="SenderName">
+          <DataField>SenderName</DataField>
+        </Field>
+        <Field Name="No_PaymentsInvestments">
+          <DataField>No_PaymentsInvestments</DataField>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+        </Field>
+        <Field Name="FaceValue_InvPaymentLines">
+          <DataField>FaceValue_InvPaymentLines</DataField>
+        </Field>
+        <Field Name="FaceValue_InvPaymentLinesFormat">
+          <DataField>FaceValue_InvPaymentLinesFormat</DataField>
+        </Field>
+        <Field Name="Amount_InvPaymentLines">
+          <DataField>Amount_InvPaymentLines</DataField>
+        </Field>
+        <Field Name="Amount_InvPaymentLinesFormat">
+          <DataField>Amount_InvPaymentLinesFormat</DataField>
+        </Field>
+        <Field Name="BankName">
+          <DataField>BankName</DataField>
+        </Field>
+        <Field Name="GrossAmount_InvPaymentLines">
+          <DataField>GrossAmount_InvPaymentLines</DataField>
+        </Field>
+        <Field Name="GrossAmount_InvPaymentLinesFormat">
+          <DataField>GrossAmount_InvPaymentLinesFormat</DataField>
+        </Field>
+        <Field Name="Portfolio_InvPaymentLines">
+          <DataField>Portfolio_InvPaymentLines</DataField>
+        </Field>
+        <Field Name="PaymentAmt">
+          <DataField>PaymentAmt</DataField>
+        </Field>
+        <Field Name="PaymentAmtFormat">
+          <DataField>PaymentAmtFormat</DataField>
+        </Field>
+        <Field Name="AdditionalAmount_InvPaymentLines">
+          <DataField>AdditionalAmount_InvPaymentLines</DataField>
+        </Field>
+        <Field Name="AdditionalAmount_InvPaymentLinesFormat">
+          <DataField>AdditionalAmount_InvPaymentLinesFormat</DataField>
+        </Field>
+        <Field Name="InterestAmount_InvPaymentLines">
+          <DataField>InterestAmount_InvPaymentLines</DataField>
+        </Field>
+        <Field Name="InterestAmount_InvPaymentLinesFormat">
+          <DataField>InterestAmount_InvPaymentLinesFormat</DataField>
+        </Field>
+        <Field Name="InvestmentDate">
+          <DataField>InvestmentDate</DataField>
+        </Field>
+        <Field Name="MaturityValue">
+          <DataField>MaturityValue</DataField>
+        </Field>
+        <Field Name="MaturityValueFormat">
+          <DataField>MaturityValueFormat</DataField>
+        </Field>
+        <Field Name="IssueDate">
+          <DataField>IssueDate</DataField>
+        </Field>
+        <Field Name="MaturityDate_InvestmentRequisitionHeader">
+          <DataField>MaturityDate_InvestmentRequisitionHeader</DataField>
+        </Field>
+        <Field Name="RequestNo">
+          <DataField>RequestNo</DataField>
+        </Field>
+        <Field Name="InterestRate_InvestmentRequisitionHeader">
+          <DataField>InterestRate_InvestmentRequisitionHeader</DataField>
+        </Field>
+        <Field Name="InterestRate_InvestmentRequisitionHeaderFormat">
+          <DataField>InterestRate_InvestmentRequisitionHeaderFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

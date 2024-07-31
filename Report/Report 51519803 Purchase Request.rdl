@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No_InternalRequestHeader">
+          <DataField>No_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="ReasonDescription_InternalRequestHeader">
+          <DataField>ReasonDescription_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="DocumentDate_InternalRequestHeader">
+          <DataField>DocumentDate_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="ExpectedReceiptDate_InternalRequestHeader">
+          <DataField>ExpectedReceiptDate_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="LocationCode_InternalRequestHeader">
+          <DataField>LocationCode_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="PostingDate_InternalRequestHeader">
+          <DataField>PostingDate_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="CollectedBy_InternalRequestHeader">
+          <DataField>CollectedBy_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="RequestedBy_InternalRequestHeader">
+          <DataField>RequestedBy_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="PostedBy_InternalRequestHeader">
+          <DataField>PostedBy_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="OrderDate_InternalRequestHeader">
+          <DataField>OrderDate_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="ProcurementPlan_InternalRequestHeader">
+          <DataField>ProcurementPlan_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="EmployeeNo_InternalRequestHeader">
+          <DataField>EmployeeNo_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="EmployeeName_InternalRequestHeader">
+          <DataField>EmployeeName_InternalRequestHeader</DataField>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+        </Field>
+        <Field Name="CompanyLogo">
+          <DataField>CompanyLogo</DataField>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyAddress2">
+          <DataField>CompanyAddress2</DataField>
+        </Field>
+        <Field Name="CompanyPostCode">
+          <DataField>CompanyPostCode</DataField>
+        </Field>
+        <Field Name="CompanyCity">
+          <DataField>CompanyCity</DataField>
+        </Field>
+        <Field Name="CompanyPhone">
+          <DataField>CompanyPhone</DataField>
+        </Field>
+        <Field Name="CompanyFax">
+          <DataField>CompanyFax</DataField>
+        </Field>
+        <Field Name="CompanyEmail">
+          <DataField>CompanyEmail</DataField>
+        </Field>
+        <Field Name="CompanyWebsite">
+          <DataField>CompanyWebsite</DataField>
+        </Field>
+        <Field Name="Dim1">
+          <DataField>Dim1</DataField>
+        </Field>
+        <Field Name="Dim2">
+          <DataField>Dim2</DataField>
+        </Field>
+        <Field Name="Dim3">
+          <DataField>Dim3</DataField>
+        </Field>
+        <Field Name="Dim4">
+          <DataField>Dim4</DataField>
+        </Field>
+        <Field Name="Dim5">
+          <DataField>Dim5</DataField>
+        </Field>
+        <Field Name="Dim6">
+          <DataField>Dim6</DataField>
+        </Field>
+        <Field Name="Dim7">
+          <DataField>Dim7</DataField>
+        </Field>
+        <Field Name="PaymentTxt">
+          <DataField>PaymentTxt</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_1">
+          <DataField>HeaderDimValueName_1</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_2">
+          <DataField>HeaderDimValueName_2</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_3">
+          <DataField>HeaderDimValueName_3</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_4">
+          <DataField>HeaderDimValueName_4</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_5">
+          <DataField>HeaderDimValueName_5</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_6">
+          <DataField>HeaderDimValueName_6</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_7">
+          <DataField>HeaderDimValueName_7</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_8">
+          <DataField>HeaderDimValueName_8</DataField>
+        </Field>
+        <Field Name="PreparedBy">
+          <DataField>PreparedBy</DataField>
+        </Field>
+        <Field Name="DatePrepared">
+          <DataField>DatePrepared</DataField>
+        </Field>
+        <Field Name="PreparedBy_Signature">
+          <DataField>PreparedBy_Signature</DataField>
+        </Field>
+        <Field Name="ExaminedBy">
+          <DataField>ExaminedBy</DataField>
+        </Field>
+        <Field Name="DateApproved">
+          <DataField>DateApproved</DataField>
+        </Field>
+        <Field Name="ExaminedBy_Signature">
+          <DataField>ExaminedBy_Signature</DataField>
+        </Field>
+        <Field Name="VBC">
+          <DataField>VBC</DataField>
+        </Field>
+        <Field Name="VBCDate">
+          <DataField>VBCDate</DataField>
+        </Field>
+        <Field Name="VBC_Signature">
+          <DataField>VBC_Signature</DataField>
+        </Field>
+        <Field Name="Authorizer">
+          <DataField>Authorizer</DataField>
+        </Field>
+        <Field Name="DateAuthorized">
+          <DataField>DateAuthorized</DataField>
+        </Field>
+        <Field Name="Authorizer_Signature">
+          <DataField>Authorizer_Signature</DataField>
+        </Field>
+        <Field Name="ExecutiveDirector">
+          <DataField>ExecutiveDirector</DataField>
+        </Field>
+        <Field Name="ExecSignature">
+          <DataField>ExecSignature</DataField>
+        </Field>
+        <Field Name="ExecDate">
+          <DataField>ExecDate</DataField>
+        </Field>
+        <Field Name="IsExecutive">
+          <DataField>IsExecutive</DataField>
+        </Field>
+        <Field Name="TimePrepared">
+          <DataField>TimePrepared</DataField>
+        </Field>
+        <Field Name="TimeExamined">
+          <DataField>TimeExamined</DataField>
+        </Field>
+        <Field Name="TimeVBC">
+          <DataField>TimeVBC</DataField>
+        </Field>
+        <Field Name="TimeAuthorized">
+          <DataField>TimeAuthorized</DataField>
+        </Field>
+        <Field Name="TimeExecutiveDirector">
+          <DataField>TimeExecutiveDirector</DataField>
+        </Field>
+        <Field Name="ISO">
+          <DataField>ISO</DataField>
+        </Field>
+        <Field Name="No_InternalRequestLine">
+          <DataField>No_InternalRequestLine</DataField>
+        </Field>
+        <Field Name="Description_InternalRequestLine">
+          <DataField>Description_InternalRequestLine</DataField>
+        </Field>
+        <Field Name="UnitofMeasure_InternalRequestLine">
+          <DataField>UnitofMeasure_InternalRequestLine</DataField>
+        </Field>
+        <Field Name="Quantity_InternalRequestLine">
+          <DataField>Quantity_InternalRequestLine</DataField>
+        </Field>
+        <Field Name="Quantity_InternalRequestLineFormat">
+          <DataField>Quantity_InternalRequestLineFormat</DataField>
+        </Field>
+        <Field Name="QtytoIssue_InternalRequestLine">
+          <DataField>QtytoIssue_InternalRequestLine</DataField>
+        </Field>
+        <Field Name="QtytoIssue_InternalRequestLineFormat">
+          <DataField>QtytoIssue_InternalRequestLineFormat</DataField>
+        </Field>
+        <Field Name="DirectUnitCost_InternalRequestLine">
+          <DataField>DirectUnitCost_InternalRequestLine</DataField>
+        </Field>
+        <Field Name="DirectUnitCost_InternalRequestLineFormat">
+          <DataField>DirectUnitCost_InternalRequestLineFormat</DataField>
+        </Field>
+        <Field Name="Amount_InternalRequestLine">
+          <DataField>Amount_InternalRequestLine</DataField>
+        </Field>
+        <Field Name="Amount_InternalRequestLineFormat">
+          <DataField>Amount_InternalRequestLineFormat</DataField>
+        </Field>
+        <Field Name="LineAmount_InternalRequestLine">
+          <DataField>LineAmount_InternalRequestLine</DataField>
+        </Field>
+        <Field Name="LineAmount_InternalRequestLineFormat">
+          <DataField>LineAmount_InternalRequestLineFormat</DataField>
+        </Field>
+        <Field Name="ProcurementPlanItem_InternalRequestLine">
+          <DataField>ProcurementPlanItem_InternalRequestLine</DataField>
+        </Field>
+        <Field Name="Type_InternalRequestLine">
+          <DataField>Type_InternalRequestLine</DataField>
+        </Field>
+        <Field Name="Specifications_InternalRequestLine">
+          <DataField>Specifications_InternalRequestLine</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

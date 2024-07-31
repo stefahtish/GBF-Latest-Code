@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="QuoteText">
+          <DataField>QuoteText</DataField>
+        </Field>
+        <Field Name="TechnicalResponseText">
+          <DataField>TechnicalResponseText</DataField>
+        </Field>
+        <Field Name="ResponseText">
+          <DataField>ResponseText</DataField>
+        </Field>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="Title">
+          <DataField>Title</DataField>
+        </Field>
+        <Field Name="TenderClosingDate">
+          <DataField>TenderClosingDate</DataField>
+        </Field>
+        <Field Name="Expected_Closing_Time">
+          <DataField>Expected_Closing_Time</DataField>
+        </Field>
+        <Field Name="Introdcution">
+          <DataField>Introdcution</DataField>
+        </Field>
+        <Field Name="Company_Logo">
+          <DataField>Company_Logo</DataField>
+        </Field>
+        <Field Name="Company_Name">
+          <DataField>Company_Name</DataField>
+        </Field>
+        <Field Name="Recommendation">
+          <DataField>Recommendation</DataField>
+        </Field>
+        <Field Name="Supplier_Code">
+          <DataField>Supplier_Code</DataField>
+        </Field>
+        <Field Name="Supplier_Name">
+          <DataField>Supplier_Name</DataField>
+        </Field>
+        <Field Name="InvitedVendorsCount">
+          <DataField>InvitedVendorsCount</DataField>
+        </Field>
+        <Field Name="InvitedVendorCountText">
+          <DataField>InvitedVendorCountText</DataField>
+        </Field>
+        <Field Name="Tender_No_">
+          <DataField>Tender_No_</DataField>
+        </Field>
+        <Field Name="Title_Prospect_Supplier">
+          <DataField>Title_Prospect_Supplier</DataField>
+        </Field>
+        <Field Name="Passed_Financial">
+          <DataField>Passed_Financial</DataField>
+        </Field>
+        <Field Name="Passed_Preliminary">
+          <DataField>Passed_Preliminary</DataField>
+        </Field>
+        <Field Name="Prospect_No_">
+          <DataField>Prospect_No_</DataField>
+        </Field>
+        <Field Name="AppliedVendorsCount">
+          <DataField>AppliedVendorsCount</DataField>
+        </Field>
+        <Field Name="Applied_VendorName">
+          <DataField>Applied_VendorName</DataField>
+        </Field>
+        <Field Name="Supplier_Name_Docs">
+          <DataField>Supplier_Name_Docs</DataField>
+        </Field>
+        <Field Name="Document_Name">
+          <DataField>Document_Name</DataField>
+        </Field>
+        <Field Name="Document_Code">
+          <DataField>Document_Code</DataField>
+        </Field>
+        <Field Name="Submitted">
+          <DataField>Submitted</DataField>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+        </Field>
+        <Field Name="DocumentCount">
+          <DataField>DocumentCount</DataField>
+        </Field>
+        <Field Name="ResposiveNess">
+          <DataField>ResposiveNess</DataField>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="Specification2">
+          <DataField>Specification2</DataField>
+        </Field>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
+        </Field>
+        <Field Name="QuantityFormat">
+          <DataField>QuantityFormat</DataField>
+        </Field>
+        <Field Name="Unit_Price">
+          <DataField>Unit_Price</DataField>
+        </Field>
+        <Field Name="Unit_PriceFormat">
+          <DataField>Unit_PriceFormat</DataField>
+        </Field>
+        <Field Name="Passed_Technical">
+          <DataField>Passed_Technical</DataField>
+        </Field>
+        <Field Name="Prospect_No_Technical">
+          <DataField>Prospect_No_Technical</DataField>
+        </Field>
+        <Field Name="Supplier_Name_Technical">
+          <DataField>Supplier_Name_Technical</DataField>
+        </Field>
+        <Field Name="TechnicalResponsiveness">
+          <DataField>TechnicalResponsiveness</DataField>
+        </Field>
+        <Field Name="Description_Eval">
+          <DataField>Description_Eval</DataField>
+        </Field>
+        <Field Name="Quantity_Eval">
+          <DataField>Quantity_Eval</DataField>
+        </Field>
+        <Field Name="Unit_Amount">
+          <DataField>Unit_Amount</DataField>
+        </Field>
+        <Field Name="Unit_AmountFormat">
+          <DataField>Unit_AmountFormat</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="Amount_Inclusive_VAT">
+          <DataField>Amount_Inclusive_VAT</DataField>
+        </Field>
+        <Field Name="Amount_Inclusive_VATFormat">
+          <DataField>Amount_Inclusive_VATFormat</DataField>
+        </Field>
+        <Field Name="Vendor_Name">
+          <DataField>Vendor_Name</DataField>
+        </Field>
+        <Field Name="TotalCost">
+          <DataField>TotalCost</DataField>
+        </Field>
+        <Field Name="TotalCostFormat">
+          <DataField>TotalCostFormat</DataField>
+        </Field>
+        <Field Name="LineNo">
+          <DataField>LineNo</DataField>
+        </Field>
+        <Field Name="RecmondedAmount">
+          <DataField>RecmondedAmount</DataField>
+        </Field>
+        <Field Name="RecmondedAmountFormat">
+          <DataField>RecmondedAmountFormat</DataField>
+        </Field>
+        <Field Name="Role">
+          <DataField>Role</DataField>
+        </Field>
+        <Field Name="Employee_No">
+          <DataField>Employee_No</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="ComitteeCount">
+          <DataField>ComitteeCount</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+        </Field>
+        <Field Name="CompAddr">
+          <DataField>CompAddr</DataField>
+        </Field>
+        <Field Name="CompAddr2">
+          <DataField>CompAddr2</DataField>
+        </Field>
+        <Field Name="CompCity">
+          <DataField>CompCity</DataField>
+        </Field>
+        <Field Name="CompPhoneNo">
+          <DataField>CompPhoneNo</DataField>
+        </Field>
+        <Field Name="CompLogo">
+          <DataField>CompLogo</DataField>
+        </Field>
+        <Field Name="CompPostCode">
+          <DataField>CompPostCode</DataField>
+        </Field>
+        <Field Name="CompEmail">
+          <DataField>CompEmail</DataField>
+        </Field>
+        <Field Name="CompWebsite">
+          <DataField>CompWebsite</DataField>
+        </Field>
+        <Field Name="CompCountry">
+          <DataField>CompCountry</DataField>
+        </Field>
+        <Field Name="No_RiskHeader">
+          <DataField>No_RiskHeader</DataField>
+        </Field>
+        <Field Name="RiskDescription_RiskHeader">
+          <DataField>RiskDescription_RiskHeader</DataField>
+        </Field>
+        <Field Name="RiskLikelihood_RiskHeader">
+          <DataField>RiskLikelihood_RiskHeader</DataField>
+        </Field>
+        <Field Name="RiskImpact_RiskHeader">
+          <DataField>RiskImpact_RiskHeader</DataField>
+        </Field>
+        <Field Name="RiskLikelihoodValue_RiskHeader">
+          <DataField>RiskLikelihoodValue_RiskHeader</DataField>
+        </Field>
+        <Field Name="RiskLikelihoodValue_RiskHeaderFormat">
+          <DataField>RiskLikelihoodValue_RiskHeaderFormat</DataField>
+        </Field>
+        <Field Name="RiskImpactValue_RiskHeader">
+          <DataField>RiskImpactValue_RiskHeader</DataField>
+        </Field>
+        <Field Name="RiskImpactValue_RiskHeaderFormat">
+          <DataField>RiskImpactValue_RiskHeaderFormat</DataField>
+        </Field>
+        <Field Name="RiskLI_RiskHeader">
+          <DataField>RiskLI_RiskHeader</DataField>
+        </Field>
+        <Field Name="RiskLI_RiskHeaderFormat">
+          <DataField>RiskLI_RiskHeaderFormat</DataField>
+        </Field>
+        <Field Name="RiskCategory">
+          <DataField>RiskCategory</DataField>
+        </Field>
+        <Field Name="DocumentNo_RiskLine">
+          <DataField>DocumentNo_RiskLine</DataField>
+        </Field>
+        <Field Name="Type_RiskLine">
+          <DataField>Type_RiskLine</DataField>
+        </Field>
+        <Field Name="LineNo_RiskLine">
+          <DataField>LineNo_RiskLine</DataField>
+        </Field>
+        <Field Name="Description_RiskLine">
+          <DataField>Description_RiskLine</DataField>
+        </Field>
+        <Field Name="Target_RiskLine">
+          <DataField>Target_RiskLine</DataField>
+        </Field>
+        <Field Name="Target_RiskLineFormat">
+          <DataField>Target_RiskLineFormat</DataField>
+        </Field>
+        <Field Name="Tolerance_RiskLine">
+          <DataField>Tolerance_RiskLine</DataField>
+        </Field>
+        <Field Name="Tolerance_RiskLineFormat">
+          <DataField>Tolerance_RiskLineFormat</DataField>
+        </Field>
+        <Field Name="Appetite_RiskLine">
+          <DataField>Appetite_RiskLine</DataField>
+        </Field>
+        <Field Name="Appetite_RiskLineFormat">
+          <DataField>Appetite_RiskLineFormat</DataField>
+        </Field>
+        <Field Name="DateofCompletion_RiskLine">
+          <DataField>DateofCompletion_RiskLine</DataField>
+        </Field>
+        <Field Name="MitigationActions_RiskLine">
+          <DataField>MitigationActions_RiskLine</DataField>
+        </Field>
+        <Field Name="MitigationOwner_RiskLine">
+          <DataField>MitigationOwner_RiskLine</DataField>
+        </Field>
+        <Field Name="Timelines_RiskLine">
+          <DataField>Timelines_RiskLine</DataField>
+        </Field>
+        <Field Name="MitigationStatus_RiskLine">
+          <DataField>MitigationStatus_RiskLine</DataField>
+        </Field>
+        <Field Name="Comments_RiskLine">
+          <DataField>Comments_RiskLine</DataField>
+        </Field>
+        <Field Name="KRIsStatus_RiskLine">
+          <DataField>KRIsStatus_RiskLine</DataField>
+        </Field>
+        <Field Name="KRIsStatus_RiskLineFormat">
+          <DataField>KRIsStatus_RiskLineFormat</DataField>
+        </Field>
+        <Field Name="UpdateFrequency_RiskLine">
+          <DataField>UpdateFrequency_RiskLine</DataField>
+        </Field>
+        <Field Name="RiskCategory_RiskLine">
+          <DataField>RiskCategory_RiskLine</DataField>
+        </Field>
+        <Field Name="RiskCategoryDescription_RiskLine">
+          <DataField>RiskCategoryDescription_RiskLine</DataField>
+        </Field>
+        <Field Name="RiskOpportunityAssessment_RiskLine">
+          <DataField>RiskOpportunityAssessment_RiskLine</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

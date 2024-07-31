@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+        </Field>
+        <Field Name="GLSetupCustBalancesDue">
+          <DataField>GLSetupCustBalancesDue</DataField>
+        </Field>
+        <Field Name="GLSetupCustBalancesDueFormat">
+          <DataField>GLSetupCustBalancesDueFormat</DataField>
+        </Field>
+        <Field Name="GLSetupVenBalancesDue">
+          <DataField>GLSetupVenBalancesDue</DataField>
+        </Field>
+        <Field Name="GLSetupVenBalancesDueFormat">
+          <DataField>GLSetupVenBalancesDueFormat</DataField>
+        </Field>
+        <Field Name="NetBalancesDueLCY">
+          <DataField>NetBalancesDueLCY</DataField>
+        </Field>
+        <Field Name="NetBalancesDueLCYFormat">
+          <DataField>NetBalancesDueLCYFormat</DataField>
+        </Field>
+        <Field Name="GLSetupCustVenBalancesDue">
+          <DataField>GLSetupCustVenBalancesDue</DataField>
+        </Field>
+        <Field Name="GLSetupCustVenBalancesDueFormat">
+          <DataField>GLSetupCustVenBalancesDueFormat</DataField>
+        </Field>
+        <Field Name="BeforeCustBalanceLCY">
+          <DataField>BeforeCustBalanceLCY</DataField>
+        </Field>
+        <Field Name="BeforeCustBalanceLCYFormat">
+          <DataField>BeforeCustBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="BeforeVendorBalanceLCY">
+          <DataField>BeforeVendorBalanceLCY</DataField>
+        </Field>
+        <Field Name="BeforeVendorBalanceLCYFormat">
+          <DataField>BeforeVendorBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="VenBalancesDue_GLSetup">
+          <DataField>VenBalancesDue_GLSetup</DataField>
+        </Field>
+        <Field Name="VenBalancesDue_GLSetupFormat">
+          <DataField>VenBalancesDue_GLSetupFormat</DataField>
+        </Field>
+        <Field Name="CustBalancesDue_GLSetup">
+          <DataField>CustBalancesDue_GLSetup</DataField>
+        </Field>
+        <Field Name="CustBalancesDue_GLSetupFormat">
+          <DataField>CustBalancesDue_GLSetupFormat</DataField>
+        </Field>
+        <Field Name="CustVenBalancesDue_GLSetup">
+          <DataField>CustVenBalancesDue_GLSetup</DataField>
+        </Field>
+        <Field Name="CustVenBalancesDue_GLSetupFormat">
+          <DataField>CustVenBalancesDue_GLSetupFormat</DataField>
+        </Field>
+        <Field Name="PrimaryKey_GLSetup">
+          <DataField>PrimaryKey_GLSetup</DataField>
+        </Field>
+        <Field Name="ReceivablesPayablesCaption">
+          <DataField>ReceivablesPayablesCaption</DataField>
+        </Field>
+        <Field Name="PageCaption">
+          <DataField>PageCaption</DataField>
+        </Field>
+        <Field Name="DueDateCaption">
+          <DataField>DueDateCaption</DataField>
+        </Field>
+        <Field Name="CustBalDueCaption">
+          <DataField>CustBalDueCaption</DataField>
+        </Field>
+        <Field Name="VendBalDueCaption">
+          <DataField>VendBalDueCaption</DataField>
+        </Field>
+        <Field Name="BalDateLCYCaption">
+          <DataField>BalDateLCYCaption</DataField>
+        </Field>
+        <Field Name="NetChangeLCYCaption">
+          <DataField>NetChangeLCYCaption</DataField>
+        </Field>
+        <Field Name="BeforeCaption">
+          <DataField>BeforeCaption</DataField>
+        </Field>
+        <Field Name="AfterCaption">
+          <DataField>AfterCaption</DataField>
+        </Field>
+        <Field Name="TotalCaption">
+          <DataField>TotalCaption</DataField>
+        </Field>
+        <Field Name="GLSetupDateFilter">
+          <DataField>GLSetupDateFilter</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

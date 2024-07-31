@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Age_Applicants">
+          <DataField>Age_Applicants</DataField>
+        </Field>
+        <Field Name="Gender_Applicants">
+          <DataField>Gender_Applicants</DataField>
+        </Field>
+        <Field Name="ApplicantsNo">
+          <DataField>ApplicantsNo</DataField>
+        </Field>
+        <Field Name="FullName_Applicants">
+          <DataField>FullName_Applicants</DataField>
+        </Field>
+        <Field Name="AppID">
+          <DataField>AppID</DataField>
+        </Field>
+        <Field Name="AppEmail">
+          <DataField>AppEmail</DataField>
+        </Field>
+        <Field Name="AppPhoneNo">
+          <DataField>AppPhoneNo</DataField>
+        </Field>
+        <Field Name="ApplicationDate">
+          <DataField>ApplicationDate</DataField>
+        </Field>
+        <Field Name="Citizenship">
+          <DataField>Citizenship</DataField>
+        </Field>
+        <Field Name="CountryCode">
+          <DataField>CountryCode</DataField>
+        </Field>
+        <Field Name="MaritalStatus">
+          <DataField>MaritalStatus</DataField>
+        </Field>
+        <Field Name="PersonalStatus">
+          <DataField>PersonalStatus</DataField>
+        </Field>
+        <Field Name="EthnicOrigin">
+          <DataField>EthnicOrigin</DataField>
+        </Field>
+        <Field Name="Disabled">
+          <DataField>Disabled</DataField>
+        </Field>
+        <Field Name="DisablingDetails">
+          <DataField>DisablingDetails</DataField>
+        </Field>
+        <Field Name="Countyname">
+          <DataField>Countyname</DataField>
+        </Field>
+        <Field Name="DateOfBirth">
+          <DataField>DateOfBirth</DataField>
+        </Field>
+        <Field Name="Age">
+          <DataField>Age</DataField>
+        </Field>
+        <Field Name="PostalAddress">
+          <DataField>PostalAddress</DataField>
+        </Field>
+        <Field Name="Post_Code">
+          <DataField>Post_Code</DataField>
+        </Field>
+        <Field Name="ResidentialAddress">
+          <DataField>ResidentialAddress</DataField>
+        </Field>
+        <Field Name="CompanyLogo">
+          <DataField>CompanyLogo</DataField>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyAddress2">
+          <DataField>CompanyAddress2</DataField>
+        </Field>
+        <Field Name="CompanyPostCode">
+          <DataField>CompanyPostCode</DataField>
+        </Field>
+        <Field Name="CompanyCity">
+          <DataField>CompanyCity</DataField>
+        </Field>
+        <Field Name="CompanyPhone">
+          <DataField>CompanyPhone</DataField>
+        </Field>
+        <Field Name="CompanyFax">
+          <DataField>CompanyFax</DataField>
+        </Field>
+        <Field Name="CompanyEmail">
+          <DataField>CompanyEmail</DataField>
+        </Field>
+        <Field Name="CompanyWebsite">
+          <DataField>CompanyWebsite</DataField>
+        </Field>
+        <Field Name="CompanyCountry">
+          <DataField>CompanyCountry</DataField>
+        </Field>
+        <Field Name="AppTime">
+          <DataField>AppTime</DataField>
+        </Field>
+        <Field Name="Job_Applicantjobapplied">
+          <DataField>Job_Applicantjobapplied</DataField>
+        </Field>
+        <Field Name="JobID_Applicantjobapplied">
+          <DataField>JobID_Applicantjobapplied</DataField>
+        </Field>
+        <Field Name="NeedCode_Applicantjobapplied">
+          <DataField>NeedCode_Applicantjobapplied</DataField>
+        </Field>
+        <Field Name="SystemCreatedAt">
+          <DataField>SystemCreatedAt</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+        </Field>
+        <Field Name="EducationType">
+          <DataField>EducationType</DataField>
+        </Field>
+        <Field Name="EducationLevel">
+          <DataField>EducationLevel</DataField>
+        </Field>
+        <Field Name="FieldofStudy">
+          <DataField>FieldofStudy</DataField>
+        </Field>
+        <Field Name="QualificationCode">
+          <DataField>QualificationCode</DataField>
+        </Field>
+        <Field Name="QualificationName">
+          <DataField>QualificationName</DataField>
+        </Field>
+        <Field Name="Institution_Name">
+          <DataField>Institution_Name</DataField>
+        </Field>
+        <Field Name="ProficiencyLevel">
+          <DataField>ProficiencyLevel</DataField>
+        </Field>
+        <Field Name="Country">
+          <DataField>Country</DataField>
+        </Field>
+        <Field Name="Region">
+          <DataField>Region</DataField>
+        </Field>
+        <Field Name="Grade">
+          <DataField>Grade</DataField>
+        </Field>
+        <Field Name="Highest_Level">
+          <DataField>Highest_Level</DataField>
+        </Field>
+        <Field Name="Qualification_Code_Prof">
+          <DataField>Qualification_Code_Prof</DataField>
+        </Field>
+        <Field Name="Qualification_Name">
+          <DataField>Qualification_Name</DataField>
+        </Field>
+        <Field Name="Section_Level">
+          <DataField>Section_Level</DataField>
+        </Field>
+        <Field Name="Employer">
+          <DataField>Employer</DataField>
+        </Field>
+        <Field Name="Hierarchy_Level">
+          <DataField>Hierarchy_Level</DataField>
+        </Field>
+        <Field Name="Job_Title">
+          <DataField>Job_Title</DataField>
+        </Field>
+        <Field Name="Industry">
+          <DataField>Industry</DataField>
+        </Field>
+        <Field Name="No__of_Years">
+          <DataField>No__of_Years</DataField>
+        </Field>
+        <Field Name="No__of_YearsFormat">
+          <DataField>No__of_YearsFormat</DataField>
+        </Field>
+        <Field Name="ExpStartDate">
+          <DataField>ExpStartDate</DataField>
+        </Field>
+        <Field Name="ExpEndDate">
+          <DataField>ExpEndDate</DataField>
+        </Field>
+        <Field Name="Currentemployment">
+          <DataField>Currentemployment</DataField>
+        </Field>
+        <Field Name="FunctionalArea">
+          <DataField>FunctionalArea</DataField>
+        </Field>
+        <Field Name="ExpCountry">
+          <DataField>ExpCountry</DataField>
+        </Field>
+        <Field Name="Location">
+          <DataField>Location</DataField>
+        </Field>
+        <Field Name="EmployerEmailAddress">
+          <DataField>EmployerEmailAddress</DataField>
+        </Field>
+        <Field Name="Employer_Postal_Address">
+          <DataField>Employer_Postal_Address</DataField>
+        </Field>
+        <Field Name="Professional_Body">
+          <DataField>Professional_Body</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="MembershipNo">
+          <DataField>MembershipNo</DataField>
+        </Field>
+        <Field Name="YearofAttainment">
+          <DataField>YearofAttainment</DataField>
+        </Field>
+        <Field Name="Languageproficiency">
+          <DataField>Languageproficiency</DataField>
+        </Field>
+        <Field Name="LangNo">
+          <DataField>LangNo</DataField>
+        </Field>
+        <Field Name="Language">
+          <DataField>Language</DataField>
+        </Field>
+        <Field Name="Read">
+          <DataField>Read</DataField>
+        </Field>
+        <Field Name="Write">
+          <DataField>Write</DataField>
+        </Field>
+        <Field Name="Speak">
+          <DataField>Speak</DataField>
+        </Field>
+        <Field Name="Applicant_No_">
+          <DataField>Applicant_No_</DataField>
+        </Field>
+        <Field Name="Skill_Code">
+          <DataField>Skill_Code</DataField>
+        </Field>
+        <Field Name="SkillsDescription">
+          <DataField>SkillsDescription</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="RefNames">
+          <DataField>RefNames</DataField>
+        </Field>
+        <Field Name="RefCompany">
+          <DataField>RefCompany</DataField>
+        </Field>
+        <Field Name="RefAddress">
+          <DataField>RefAddress</DataField>
+        </Field>
+        <Field Name="RefTelephoneNo">
+          <DataField>RefTelephoneNo</DataField>
+        </Field>
+        <Field Name="RefEMail">
+          <DataField>RefEMail</DataField>
+        </Field>
+        <Field Name="HobbyNo">
+          <DataField>HobbyNo</DataField>
+        </Field>
+        <Field Name="Hobbies">
+          <DataField>Hobbies</DataField>
+        </Field>
+        <Field Name="HobbyLineNo">
+          <DataField>HobbyLineNo</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

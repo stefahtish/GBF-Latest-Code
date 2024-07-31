@@ -1,0 +1,71 @@
+page 51409 "Pending Contract suspensions"
+{
+    CardPageID = "Suspended Contract Card";
+    Caption = 'Pending Contracts Suspensions';
+    Editable = false;
+    PageType = List;
+    InsertAllowed = false;
+    SourceTable = "Project Header";
+    SourceTableView = WHERE(type = CONST("Suspension"), Status = const("Pending Approval"));
+    ApplicationArea = All;
+
+    layout
+    {
+        area(content)
+        {
+            repeater(Group)
+            {
+                field("No."; Rec."No.")
+                {
+                    ApplicationArea = all;
+                }
+                field("Project Name"; Rec."Project Name")
+                {
+                    Caption = 'Contract Name';
+                    ApplicationArea = all;
+                }
+                field("Project Date"; Rec."Project Date")
+                {
+                    Caption = 'Contract Date';
+                    ApplicationArea = all;
+                }
+                field("Estimated Start Date"; Rec."Estimated Start Date")
+                {
+                    ApplicationArea = all;
+                }
+                field("Estimated End Date"; Rec."Estimated End Date")
+                {
+                    ApplicationArea = all;
+                }
+                field("Estimated Duration"; Rec."Estimated Duration")
+                {
+                    ApplicationArea = all;
+                }
+                field("Actual Start Date"; Rec."Actual Start Date")
+                {
+                    ApplicationArea = all;
+                }
+                field("Actual End Date"; Rec."Actual End Date")
+                {
+                    ApplicationArea = all;
+                }
+                field("Actual Duration"; Rec."Actual Duration")
+                {
+                    ApplicationArea = all;
+                }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = all;
+                }
+                field("Suspension Status"; Rec."Suspension Status")
+                {
+                    ToolTip = 'Specifies the value of the Suspension Status field.';
+                    ApplicationArea = All;
+                }
+            }
+        }
+    }
+    actions
+    {
+    }
+}

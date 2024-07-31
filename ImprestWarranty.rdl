@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyLogo">
+          <DataField>CompanyLogo</DataField>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyAddress2">
+          <DataField>CompanyAddress2</DataField>
+        </Field>
+        <Field Name="CompanyPostCode">
+          <DataField>CompanyPostCode</DataField>
+        </Field>
+        <Field Name="CompanyCity">
+          <DataField>CompanyCity</DataField>
+        </Field>
+        <Field Name="CompanyPhone">
+          <DataField>CompanyPhone</DataField>
+        </Field>
+        <Field Name="CompanyFax">
+          <DataField>CompanyFax</DataField>
+        </Field>
+        <Field Name="CompanyEmail">
+          <DataField>CompanyEmail</DataField>
+        </Field>
+        <Field Name="CompanyWebsite">
+          <DataField>CompanyWebsite</DataField>
+        </Field>
+        <Field Name="No_Payments">
+          <DataField>No_Payments</DataField>
+        </Field>
+        <Field Name="DestinationName_Payments">
+          <DataField>DestinationName_Payments</DataField>
+        </Field>
+        <Field Name="Date_Payments">
+          <DataField>Date_Payments</DataField>
+        </Field>
+        <Field Name="PaymentsNarration">
+          <DataField>PaymentsNarration</DataField>
+        </Field>
+        <Field Name="BankName_Payments">
+          <DataField>BankName_Payments</DataField>
+        </Field>
+        <Field Name="PayMode_Payments">
+          <DataField>PayMode_Payments</DataField>
+        </Field>
+        <Field Name="ChequeNo_Payments">
+          <DataField>ChequeNo_Payments</DataField>
+        </Field>
+        <Field Name="ChequeDate_Payments">
+          <DataField>ChequeDate_Payments</DataField>
+        </Field>
+        <Field Name="Payee_Payments">
+          <DataField>Payee_Payments</DataField>
+        </Field>
+        <Field Name="Onbehalfof_Payments">
+          <DataField>Onbehalfof_Payments</DataField>
+        </Field>
+        <Field Name="CreatedBy_Payments">
+          <DataField>CreatedBy_Payments</DataField>
+        </Field>
+        <Field Name="Posted_Payments">
+          <DataField>Posted_Payments</DataField>
+        </Field>
+        <Field Name="PostedBy_Payments">
+          <DataField>PostedBy_Payments</DataField>
+        </Field>
+        <Field Name="PostedDate_Payments">
+          <DataField>PostedDate_Payments</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_Payments">
+          <DataField>GlobalDimension1Code_Payments</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code_Payments">
+          <DataField>GlobalDimension2Code_Payments</DataField>
+        </Field>
+        <Field Name="TimePosted_Payments">
+          <DataField>TimePosted_Payments</DataField>
+        </Field>
+        <Field Name="TotalAmount_Payments">
+          <DataField>TotalAmount_Payments</DataField>
+        </Field>
+        <Field Name="TotalAmount_PaymentsFormat">
+          <DataField>TotalAmount_PaymentsFormat</DataField>
+        </Field>
+        <Field Name="PayingBankAccount_Payments">
+          <DataField>PayingBankAccount_Payments</DataField>
+        </Field>
+        <Field Name="Status_Payments">
+          <DataField>Status_Payments</DataField>
+        </Field>
+        <Field Name="PaymentType_Payments">
+          <DataField>PaymentType_Payments</DataField>
+        </Field>
+        <Field Name="Currency_Payments">
+          <DataField>Currency_Payments</DataField>
+        </Field>
+        <Field Name="NoSeries_Payments">
+          <DataField>NoSeries_Payments</DataField>
+        </Field>
+        <Field Name="AccountType_Payments">
+          <DataField>AccountType_Payments</DataField>
+        </Field>
+        <Field Name="AccountNo_Payments">
+          <DataField>AccountNo_Payments</DataField>
+        </Field>
+        <Field Name="AccountName_Payments">
+          <DataField>AccountName_Payments</DataField>
+        </Field>
+        <Field Name="ImprestAmount_Payments">
+          <DataField>ImprestAmount_Payments</DataField>
+        </Field>
+        <Field Name="ImprestAmount_PaymentsFormat">
+          <DataField>ImprestAmount_PaymentsFormat</DataField>
+        </Field>
+        <Field Name="Surrendered_Payments">
+          <DataField>Surrendered_Payments</DataField>
+        </Field>
+        <Field Name="AppliesToDocNo_Payments">
+          <DataField>AppliesToDocNo_Payments</DataField>
+        </Field>
+        <Field Name="PettyCashAmount_Payments">
+          <DataField>PettyCashAmount_Payments</DataField>
+        </Field>
+        <Field Name="PettyCashAmount_PaymentsFormat">
+          <DataField>PettyCashAmount_PaymentsFormat</DataField>
+        </Field>
+        <Field Name="ImprestSurrenderDate_Payments">
+          <DataField>ImprestSurrenderDate_Payments</DataField>
+        </Field>
+        <Field Name="DateFilter_Payments">
+          <DataField>DateFilter_Payments</DataField>
+        </Field>
+        <Field Name="StaffNo_Payments">
+          <DataField>StaffNo_Payments</DataField>
+        </Field>
+        <Field Name="DateofProject_Payments">
+          <DataField>DateofProject_Payments</DataField>
+        </Field>
+        <Field Name="DateofCompletion_Payments">
+          <DataField>DateofCompletion_Payments</DataField>
+        </Field>
+        <Field Name="DueDate_Payments">
+          <DataField>DueDate_Payments</DataField>
+        </Field>
+        <Field Name="NoofDays_Payments">
+          <DataField>NoofDays_Payments</DataField>
+        </Field>
+        <Field Name="Destination_Payments">
+          <DataField>Destination_Payments</DataField>
+        </Field>
+        <Field Name="PreparedBy">
+          <DataField>PreparedBy</DataField>
+        </Field>
+        <Field Name="DatePrepared">
+          <DataField>DatePrepared</DataField>
+        </Field>
+        <Field Name="PreparedBy_Signature">
+          <DataField>PreparedBy_Signature</DataField>
+        </Field>
+        <Field Name="ExaminedBy">
+          <DataField>ExaminedBy</DataField>
+        </Field>
+        <Field Name="DateApproved">
+          <DataField>DateApproved</DataField>
+        </Field>
+        <Field Name="ExaminedBy_Signature">
+          <DataField>ExaminedBy_Signature</DataField>
+        </Field>
+        <Field Name="VBC">
+          <DataField>VBC</DataField>
+        </Field>
+        <Field Name="VBCDate">
+          <DataField>VBCDate</DataField>
+        </Field>
+        <Field Name="VBC_Signature">
+          <DataField>VBC_Signature</DataField>
+        </Field>
+        <Field Name="Authorizer">
+          <DataField>Authorizer</DataField>
+        </Field>
+        <Field Name="DateAuthorized">
+          <DataField>DateAuthorized</DataField>
+        </Field>
+        <Field Name="Authorizer_Signature">
+          <DataField>Authorizer_Signature</DataField>
+        </Field>
+        <Field Name="FinalAuthorizer">
+          <DataField>FinalAuthorizer</DataField>
+        </Field>
+        <Field Name="FinalDateAuthorized">
+          <DataField>FinalDateAuthorized</DataField>
+        </Field>
+        <Field Name="FinalAuthorizer_Signature">
+          <DataField>FinalAuthorizer_Signature</DataField>
+        </Field>
+        <Field Name="Number_In_Words">
+          <DataField>Number_In_Words</DataField>
+        </Field>
+        <Field Name="strCopyText">
+          <DataField>strCopyText</DataField>
+        </Field>
+        <Field Name="ImprestBankName_Payments">
+          <DataField>ImprestBankName_Payments</DataField>
+        </Field>
+        <Field Name="ImprestBankBranchName_Payments">
+          <DataField>ImprestBankBranchName_Payments</DataField>
+        </Field>
+        <Field Name="ImprestBankAccountNo_Payments">
+          <DataField>ImprestBankAccountNo_Payments</DataField>
+        </Field>
+        <Field Name="Imprest_Issue_Doc__No">
+          <DataField>Imprest_Issue_Doc__No</DataField>
+        </Field>
+        <Field Name="Dim1">
+          <DataField>Dim1</DataField>
+        </Field>
+        <Field Name="Dim2">
+          <DataField>Dim2</DataField>
+        </Field>
+        <Field Name="Dim3">
+          <DataField>Dim3</DataField>
+        </Field>
+        <Field Name="Dim4">
+          <DataField>Dim4</DataField>
+        </Field>
+        <Field Name="Dim5">
+          <DataField>Dim5</DataField>
+        </Field>
+        <Field Name="Dim6">
+          <DataField>Dim6</DataField>
+        </Field>
+        <Field Name="Dim7">
+          <DataField>Dim7</DataField>
+        </Field>
+        <Field Name="MultiDonor">
+          <DataField>MultiDonor</DataField>
+        </Field>
+        <Field Name="PaymentTxt">
+          <DataField>PaymentTxt</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_1">
+          <DataField>HeaderDimValueName_1</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_2">
+          <DataField>HeaderDimValueName_2</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_3">
+          <DataField>HeaderDimValueName_3</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_4">
+          <DataField>HeaderDimValueName_4</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_5">
+          <DataField>HeaderDimValueName_5</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_6">
+          <DataField>HeaderDimValueName_6</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_7">
+          <DataField>HeaderDimValueName_7</DataField>
+        </Field>
+        <Field Name="HeaderDimValueName_8">
+          <DataField>HeaderDimValueName_8</DataField>
+        </Field>
+        <Field Name="CurrencyCode">
+          <DataField>CurrencyCode</DataField>
+        </Field>
+        <Field Name="No_ImprestLines">
+          <DataField>No_ImprestLines</DataField>
+        </Field>
+        <Field Name="LineNo_ImprestLines">
+          <DataField>LineNo_ImprestLines</DataField>
+        </Field>
+        <Field Name="AccountType_ImprestLines">
+          <DataField>AccountType_ImprestLines</DataField>
+        </Field>
+        <Field Name="AccountNo_ImprestLines">
+          <DataField>AccountNo_ImprestLines</DataField>
+        </Field>
+        <Field Name="AccountName_ImprestLines">
+          <DataField>AccountName_ImprestLines</DataField>
+        </Field>
+        <Field Name="Description_ImprestLines">
+          <DataField>Description_ImprestLines</DataField>
+        </Field>
+        <Field Name="Amount_ImprestLines">
+          <DataField>Amount_ImprestLines</DataField>
+        </Field>
+        <Field Name="Amount_ImprestLinesFormat">
+          <DataField>Amount_ImprestLinesFormat</DataField>
+        </Field>
+        <Field Name="AppliestoDocNo_ImprestLines">
+          <DataField>AppliestoDocNo_ImprestLines</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_ImprestLines">
+          <DataField>GlobalDimension1Code_ImprestLines</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code_ImprestLines">
+          <DataField>GlobalDimension2Code_ImprestLines</DataField>
+        </Field>
+        <Field Name="ActualSpent_ImprestLines">
+          <DataField>ActualSpent_ImprestLines</DataField>
+        </Field>
+        <Field Name="ActualSpent_ImprestLinesFormat">
+          <DataField>ActualSpent_ImprestLinesFormat</DataField>
+        </Field>
+        <Field Name="RemainingAmount_ImprestLines">
+          <DataField>RemainingAmount_ImprestLines</DataField>
+        </Field>
+        <Field Name="RemainingAmount_ImprestLinesFormat">
+          <DataField>RemainingAmount_ImprestLinesFormat</DataField>
+        </Field>
+        <Field Name="Committed_ImprestLines">
+          <DataField>Committed_ImprestLines</DataField>
+        </Field>
+        <Field Name="AmountLCY_ImprestLines">
+          <DataField>AmountLCY_ImprestLines</DataField>
+        </Field>
+        <Field Name="AmountLCY_ImprestLinesFormat">
+          <DataField>AmountLCY_ImprestLinesFormat</DataField>
+        </Field>
+        <Field Name="Purpose_ImprestLines">
+          <DataField>Purpose_ImprestLines</DataField>
+        </Field>
+        <Field Name="ExpenditureType_PaymentLines">
+          <DataField>ExpenditureType_PaymentLines</DataField>
+        </Field>
+        <Field Name="DimValueName_1">
+          <DataField>DimValueName_1</DataField>
+        </Field>
+        <Field Name="DimValueName_2">
+          <DataField>DimValueName_2</DataField>
+        </Field>
+        <Field Name="DimValueName_3">
+          <DataField>DimValueName_3</DataField>
+        </Field>
+        <Field Name="DimValueName_4">
+          <DataField>DimValueName_4</DataField>
+        </Field>
+        <Field Name="DimValueName_5">
+          <DataField>DimValueName_5</DataField>
+        </Field>
+        <Field Name="DimValueName_6">
+          <DataField>DimValueName_6</DataField>
+        </Field>
+        <Field Name="DimValueName_7">
+          <DataField>DimValueName_7</DataField>
+        </Field>
+        <Field Name="DimValueName_8">
+          <DataField>DimValueName_8</DataField>
+        </Field>
+        <Field Name="MultiDonor_Fund">
+          <DataField>MultiDonor_Fund</DataField>
+        </Field>
+        <Field Name="MultiDonor_Theme">
+          <DataField>MultiDonor_Theme</DataField>
+        </Field>
+        <Field Name="DimValueCode_1">
+          <DataField>DimValueCode_1</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Comp_Name">
+          <DataField>Comp_Name</DataField>
+        </Field>
+        <Field Name="Address">
+          <DataField>Address</DataField>
+        </Field>
+        <Field Name="City">
+          <DataField>City</DataField>
+        </Field>
+        <Field Name="Tel_No">
+          <DataField>Tel_No</DataField>
+        </Field>
+        <Field Name="Logo">
+          <DataField>Logo</DataField>
+        </Field>
+        <Field Name="Post_Code">
+          <DataField>Post_Code</DataField>
+        </Field>
+        <Field Name="Email">
+          <DataField>Email</DataField>
+        </Field>
+        <Field Name="Website">
+          <DataField>Website</DataField>
+        </Field>
+        <Field Name="Country">
+          <DataField>Country</DataField>
+        </Field>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="UPPERCASE_FORMAT_DateSpecified_0___month_text___year4____">
+          <DataField>UPPERCASE_FORMAT_DateSpecified_0___month_text___year4____</DataField>
+        </Field>
+        <Field Name="TIME">
+          <DataField>TIME</DataField>
+        </Field>
+        <Field Name="EarnDesc_1_">
+          <DataField>EarnDesc_1_</DataField>
+        </Field>
+        <Field Name="EarnDesc_2_">
+          <DataField>EarnDesc_2_</DataField>
+        </Field>
+        <Field Name="EarnDesc_3_">
+          <DataField>EarnDesc_3_</DataField>
+        </Field>
+        <Field Name="DedDesc_1_">
+          <DataField>DedDesc_1_</DataField>
+        </Field>
+        <Field Name="DedDesc_2_">
+          <DataField>DedDesc_2_</DataField>
+        </Field>
+        <Field Name="DedDesc_3_">
+          <DataField>DedDesc_3_</DataField>
+        </Field>
+        <Field Name="DedDesc_4_">
+          <DataField>DedDesc_4_</DataField>
+        </Field>
+        <Field Name="Other_Deductions_">
+          <DataField>Other_Deductions_</DataField>
+        </Field>
+        <Field Name="Net_Pay_">
+          <DataField>Net_Pay_</DataField>
+        </Field>
+        <Field Name="PF_No__">
+          <DataField>PF_No__</DataField>
+        </Field>
+        <Field Name="Name_">
+          <DataField>Name_</DataField>
+        </Field>
+        <Field Name="EarnDesc_4_">
+          <DataField>EarnDesc_4_</DataField>
+        </Field>
+        <Field Name="EarnDesc_5_">
+          <DataField>EarnDesc_5_</DataField>
+        </Field>
+        <Field Name="EarnDesc_6_">
+          <DataField>EarnDesc_6_</DataField>
+        </Field>
+        <Field Name="EarnDesc_7_">
+          <DataField>EarnDesc_7_</DataField>
+        </Field>
+        <Field Name="Employee__No__">
+          <DataField>Employee__No__</DataField>
+        </Field>
+        <Field Name="PIN_Number">
+          <DataField>PIN_Number</DataField>
+        </Field>
+        <Field Name="Allowances_1_">
+          <DataField>Allowances_1_</DataField>
+        </Field>
+        <Field Name="Allowances_1_Format">
+          <DataField>Allowances_1_Format</DataField>
+        </Field>
+        <Field Name="Allowances_2_">
+          <DataField>Allowances_2_</DataField>
+        </Field>
+        <Field Name="Allowances_2_Format">
+          <DataField>Allowances_2_Format</DataField>
+        </Field>
+        <Field Name="Allowances_3_">
+          <DataField>Allowances_3_</DataField>
+        </Field>
+        <Field Name="Allowances_3_Format">
+          <DataField>Allowances_3_Format</DataField>
+        </Field>
+        <Field Name="Deductions_1_">
+          <DataField>Deductions_1_</DataField>
+        </Field>
+        <Field Name="Deductions_1_Format">
+          <DataField>Deductions_1_Format</DataField>
+        </Field>
+        <Field Name="Deductions_2_">
+          <DataField>Deductions_2_</DataField>
+        </Field>
+        <Field Name="Deductions_2_Format">
+          <DataField>Deductions_2_Format</DataField>
+        </Field>
+        <Field Name="Deductions_3_">
+          <DataField>Deductions_3_</DataField>
+        </Field>
+        <Field Name="Deductions_3_Format">
+          <DataField>Deductions_3_Format</DataField>
+        </Field>
+        <Field Name="Deductions_4_">
+          <DataField>Deductions_4_</DataField>
+        </Field>
+        <Field Name="Deductions_4_Format">
+          <DataField>Deductions_4_Format</DataField>
+        </Field>
+        <Field Name="OtherDeduct">
+          <DataField>OtherDeduct</DataField>
+        </Field>
+        <Field Name="OtherDeductFormat">
+          <DataField>OtherDeductFormat</DataField>
+        </Field>
+        <Field Name="NetPay">
+          <DataField>NetPay</DataField>
+        </Field>
+        <Field Name="NetPayFormat">
+          <DataField>NetPayFormat</DataField>
+        </Field>
+        <Field Name="First_Name_________Middle_Name_______Last_Name_">
+          <DataField>First_Name_________Middle_Name_______Last_Name_</DataField>
+        </Field>
+        <Field Name="Allowances_5_">
+          <DataField>Allowances_5_</DataField>
+        </Field>
+        <Field Name="Allowances_5_Format">
+          <DataField>Allowances_5_Format</DataField>
+        </Field>
+        <Field Name="Allowances_4_">
+          <DataField>Allowances_4_</DataField>
+        </Field>
+        <Field Name="Allowances_4_Format">
+          <DataField>Allowances_4_Format</DataField>
+        </Field>
+        <Field Name="Allowances_6_">
+          <DataField>Allowances_6_</DataField>
+        </Field>
+        <Field Name="Allowances_6_Format">
+          <DataField>Allowances_6_Format</DataField>
+        </Field>
+        <Field Name="Allowances_7_">
+          <DataField>Allowances_7_</DataField>
+        </Field>
+        <Field Name="Allowances_7_Format">
+          <DataField>Allowances_7_Format</DataField>
+        </Field>
+        <Field Name="Employee_Company">
+          <DataField>Employee_Company</DataField>
+        </Field>
+        <Field Name="Employee__Global_Dimension_1_Code_">
+          <DataField>Employee__Global_Dimension_1_Code_</DataField>
+        </Field>
+        <Field Name="Employee__Job_Title_">
+          <DataField>Employee__Job_Title_</DataField>
+        </Field>
+        <Field Name="Allowances_1__Control1000000009">
+          <DataField>Allowances_1__Control1000000009</DataField>
+        </Field>
+        <Field Name="Allowances_1__Control1000000009Format">
+          <DataField>Allowances_1__Control1000000009Format</DataField>
+        </Field>
+        <Field Name="Allowances_2__Control1000000018">
+          <DataField>Allowances_2__Control1000000018</DataField>
+        </Field>
+        <Field Name="Allowances_2__Control1000000018Format">
+          <DataField>Allowances_2__Control1000000018Format</DataField>
+        </Field>
+        <Field Name="Allowances_3__Control1000000032">
+          <DataField>Allowances_3__Control1000000032</DataField>
+        </Field>
+        <Field Name="Allowances_3__Control1000000032Format">
+          <DataField>Allowances_3__Control1000000032Format</DataField>
+        </Field>
+        <Field Name="Deductions_1__Control1000000034">
+          <DataField>Deductions_1__Control1000000034</DataField>
+        </Field>
+        <Field Name="Deductions_1__Control1000000034Format">
+          <DataField>Deductions_1__Control1000000034Format</DataField>
+        </Field>
+        <Field Name="Deductions_2__Control1000000035">
+          <DataField>Deductions_2__Control1000000035</DataField>
+        </Field>
+        <Field Name="Deductions_2__Control1000000035Format">
+          <DataField>Deductions_2__Control1000000035Format</DataField>
+        </Field>
+        <Field Name="Deductions_3__Control1000000036">
+          <DataField>Deductions_3__Control1000000036</DataField>
+        </Field>
+        <Field Name="Deductions_3__Control1000000036Format">
+          <DataField>Deductions_3__Control1000000036Format</DataField>
+        </Field>
+        <Field Name="Deductions_4__Control1000000037">
+          <DataField>Deductions_4__Control1000000037</DataField>
+        </Field>
+        <Field Name="Deductions_4__Control1000000037Format">
+          <DataField>Deductions_4__Control1000000037Format</DataField>
+        </Field>
+        <Field Name="OtherDeduct_Control1000000038">
+          <DataField>OtherDeduct_Control1000000038</DataField>
+        </Field>
+        <Field Name="OtherDeduct_Control1000000038Format">
+          <DataField>OtherDeduct_Control1000000038Format</DataField>
+        </Field>
+        <Field Name="NetPay_Control1000000039">
+          <DataField>NetPay_Control1000000039</DataField>
+        </Field>
+        <Field Name="NetPay_Control1000000039Format">
+          <DataField>NetPay_Control1000000039Format</DataField>
+        </Field>
+        <Field Name="STRSUBSTNO__Employees__1__counter_">
+          <DataField>STRSUBSTNO__Employees__1__counter_</DataField>
+        </Field>
+        <Field Name="Prepared_By______________________________________________________">
+          <DataField>Prepared_By______________________________________________________</DataField>
+        </Field>
+        <Field Name="Approved_By_____________________________________________________">
+          <DataField>Approved_By_____________________________________________________</DataField>
+        </Field>
+        <Field Name="Approved_By_____________________________________________">
+          <DataField>Approved_By_____________________________________________</DataField>
+        </Field>
+        <Field Name="Allowances_4__Control1000000054">
+          <DataField>Allowances_4__Control1000000054</DataField>
+        </Field>
+        <Field Name="Allowances_4__Control1000000054Format">
+          <DataField>Allowances_4__Control1000000054Format</DataField>
+        </Field>
+        <Field Name="Allowances_5__Control1000000055">
+          <DataField>Allowances_5__Control1000000055</DataField>
+        </Field>
+        <Field Name="Allowances_5__Control1000000055Format">
+          <DataField>Allowances_5__Control1000000055Format</DataField>
+        </Field>
+        <Field Name="Allowances_6__Control1000000056">
+          <DataField>Allowances_6__Control1000000056</DataField>
+        </Field>
+        <Field Name="Allowances_6__Control1000000056Format">
+          <DataField>Allowances_6__Control1000000056Format</DataField>
+        </Field>
+        <Field Name="MASTER_ROLLCaption">
+          <DataField>MASTER_ROLLCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Employee_CompanyCaption">
+          <DataField>Employee_CompanyCaption</DataField>
+        </Field>
+        <Field Name="Employee__Global_Dimension_1_Code_Caption">
+          <DataField>Employee__Global_Dimension_1_Code_Caption</DataField>
+        </Field>
+        <Field Name="Employee__Job_Title_Caption">
+          <DataField>Employee__Job_Title_Caption</DataField>
+        </Field>
+        <Field Name="Allowances_Number_">
+          <DataField>Allowances_Number_</DataField>
+        </Field>
+        <Field Name="Allowances_Number_Format">
+          <DataField>Allowances_Number_Format</DataField>
+        </Field>
+        <Field Name="EarnDesc_1__Control1000000060">
+          <DataField>EarnDesc_1__Control1000000060</DataField>
+        </Field>
+        <Field Name="Earncode_Number_">
+          <DataField>Earncode_Number_</DataField>
+        </Field>
+        <Field Name="Integer_Number">
+          <DataField>Integer_Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

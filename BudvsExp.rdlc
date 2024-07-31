@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="AnalysisViewCode_AnalysisViewBudgetEntry">
+          <DataField>AnalysisViewCode_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="BudgetName_AnalysisViewBudgetEntry">
+          <DataField>BudgetName_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="BusinessUnitCode_AnalysisViewBudgetEntry">
+          <DataField>BusinessUnitCode_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="GLAccountNo_AnalysisViewBudgetEntry">
+          <DataField>GLAccountNo_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="Dimension1ValueCode_AnalysisViewBudgetEntry">
+          <DataField>Dimension1ValueCode_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="Dimension2ValueCode_AnalysisViewBudgetEntry">
+          <DataField>Dimension2ValueCode_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="Dimension3ValueCode_AnalysisViewBudgetEntry">
+          <DataField>Dimension3ValueCode_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="Dimension4ValueCode_AnalysisViewBudgetEntry">
+          <DataField>Dimension4ValueCode_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="PostingDate_AnalysisViewBudgetEntry">
+          <DataField>PostingDate_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="EntryNo_AnalysisViewBudgetEntry">
+          <DataField>EntryNo_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="Amount_AnalysisViewBudgetEntry">
+          <DataField>Amount_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="Amount_AnalysisViewBudgetEntryFormat">
+          <DataField>Amount_AnalysisViewBudgetEntryFormat</DataField>
+        </Field>
+        <Field Name="Encumberance_AnalysisViewBudgetEntry">
+          <DataField>Encumberance_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="Encumberance_AnalysisViewBudgetEntryFormat">
+          <DataField>Encumberance_AnalysisViewBudgetEntryFormat</DataField>
+        </Field>
+        <Field Name="Commitments_AnalysisViewBudgetEntry">
+          <DataField>Commitments_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="Commitments_AnalysisViewBudgetEntryFormat">
+          <DataField>Commitments_AnalysisViewBudgetEntryFormat</DataField>
+        </Field>
+        <Field Name="Actuals_AnalysisViewBudgetEntry">
+          <DataField>Actuals_AnalysisViewBudgetEntry</DataField>
+        </Field>
+        <Field Name="Actuals_AnalysisViewBudgetEntryFormat">
+          <DataField>Actuals_AnalysisViewBudgetEntryFormat</DataField>
+        </Field>
+        <Field Name="GLName">
+          <DataField>GLName</DataField>
+        </Field>
+        <Field Name="ActivityName">
+          <DataField>ActivityName</DataField>
+        </Field>
+        <Field Name="SubActivityName">
+          <DataField>SubActivityName</DataField>
+        </Field>
+        <Field Name="ReportFilters">
+          <DataField>ReportFilters</DataField>
+        </Field>
+        <Field Name="CompanyPic">
+          <DataField>CompanyPic</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

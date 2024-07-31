@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CurrentValue_InvestmentLines">
+          <DataField>CurrentValue_InvestmentLines</DataField>
+        </Field>
+        <Field Name="CurrentValue_InvestmentLinesFormat">
+          <DataField>CurrentValue_InvestmentLinesFormat</DataField>
+        </Field>
+        <Field Name="No_InvestmentLines">
+          <DataField>No_InvestmentLines</DataField>
+        </Field>
+        <Field Name="TradeType">
+          <DataField>TradeType</DataField>
+        </Field>
+        <Field Name="FaceValue_InvestmentLines">
+          <DataField>FaceValue_InvestmentLines</DataField>
+        </Field>
+        <Field Name="FaceValue_InvestmentLinesFormat">
+          <DataField>FaceValue_InvestmentLinesFormat</DataField>
+        </Field>
+        <Field Name="InvestmentType_InvestmentLines">
+          <DataField>InvestmentType_InvestmentLines</DataField>
+        </Field>
+        <Field Name="AssetType_InvestmentLines">
+          <DataField>AssetType_InvestmentLines</DataField>
+        </Field>
+        <Field Name="AcquisitionCost_InvestmentLines">
+          <DataField>AcquisitionCost_InvestmentLines</DataField>
+        </Field>
+        <Field Name="AcquisitionCost_InvestmentLinesFormat">
+          <DataField>AcquisitionCost_InvestmentLinesFormat</DataField>
+        </Field>
+        <Field Name="AccruedInterest">
+          <DataField>AccruedInterest</DataField>
+        </Field>
+        <Field Name="AccruedInterestFormat">
+          <DataField>AccruedInterestFormat</DataField>
+        </Field>
+        <Field Name="DepositAmount_InvestmentLines">
+          <DataField>DepositAmount_InvestmentLines</DataField>
+        </Field>
+        <Field Name="DepositAmount_InvestmentLinesFormat">
+          <DataField>DepositAmount_InvestmentLinesFormat</DataField>
+        </Field>
+        <Field Name="AssetTotal">
+          <DataField>AssetTotal</DataField>
+        </Field>
+        <Field Name="AssetTotalFormat">
+          <DataField>AssetTotalFormat</DataField>
+        </Field>
+        <Field Name="NetAssetTotal">
+          <DataField>NetAssetTotal</DataField>
+        </Field>
+        <Field Name="NetAssetTotalFormat">
+          <DataField>NetAssetTotalFormat</DataField>
+        </Field>
+        <Field Name="EquityTotal">
+          <DataField>EquityTotal</DataField>
+        </Field>
+        <Field Name="EquityTotalFormat">
+          <DataField>EquityTotalFormat</DataField>
+        </Field>
+        <Field Name="InvestmentTypeName">
+          <DataField>InvestmentTypeName</DataField>
+        </Field>
+        <Field Name="LastCouponDate">
+          <DataField>LastCouponDate</DataField>
+        </Field>
+        <Field Name="NextCouponDate">
+          <DataField>NextCouponDate</DataField>
+        </Field>
+        <Field Name="UnearnedInterest">
+          <DataField>UnearnedInterest</DataField>
+        </Field>
+        <Field Name="UnearnedInterestFormat">
+          <DataField>UnearnedInterestFormat</DataField>
+        </Field>
+        <Field Name="PurchasePrice">
+          <DataField>PurchasePrice</DataField>
+        </Field>
+        <Field Name="PurchasePriceFormat">
+          <DataField>PurchasePriceFormat</DataField>
+        </Field>
+        <Field Name="Portfolio">
+          <DataField>Portfolio</DataField>
+        </Field>
+        <Field Name="DirtyPrice">
+          <DataField>DirtyPrice</DataField>
+        </Field>
+        <Field Name="DirtyPriceFormat">
+          <DataField>DirtyPriceFormat</DataField>
+        </Field>
+        <Field Name="CurrentYield">
+          <DataField>CurrentYield</DataField>
+        </Field>
+        <Field Name="CurrentYieldFormat">
+          <DataField>CurrentYieldFormat</DataField>
+        </Field>
+        <Field Name="PotfolioName">
+          <DataField>PotfolioName</DataField>
+        </Field>
+        <Field Name="CurrentValueFCY">
+          <DataField>CurrentValueFCY</DataField>
+        </Field>
+        <Field Name="CurrentValueFCYFormat">
+          <DataField>CurrentValueFCYFormat</DataField>
+        </Field>
+        <Field Name="AcquisitionCostFCY">
+          <DataField>AcquisitionCostFCY</DataField>
+        </Field>
+        <Field Name="AcquisitionCostFCYFormat">
+          <DataField>AcquisitionCostFCYFormat</DataField>
+        </Field>
+        <Field Name="AccruedInterestFCY">
+          <DataField>AccruedInterestFCY</DataField>
+        </Field>
+        <Field Name="AccruedInterestFCYFormat">
+          <DataField>AccruedInterestFCYFormat</DataField>
+        </Field>
+        <Field Name="FaceValueFCY">
+          <DataField>FaceValueFCY</DataField>
+        </Field>
+        <Field Name="FaceValueFCYFormat">
+          <DataField>FaceValueFCYFormat</DataField>
+        </Field>
+        <Field Name="SettlementAmtLCY">
+          <DataField>SettlementAmtLCY</DataField>
+        </Field>
+        <Field Name="SettlementAmtLCYFormat">
+          <DataField>SettlementAmtLCYFormat</DataField>
+        </Field>
+        <Field Name="ExchangeRate">
+          <DataField>ExchangeRate</DataField>
+        </Field>
+        <Field Name="ExchangeRateFormat">
+          <DataField>ExchangeRateFormat</DataField>
+        </Field>
+        <Field Name="CurrentValueLCY">
+          <DataField>CurrentValueLCY</DataField>
+        </Field>
+        <Field Name="CurrentValueLCYFormat">
+          <DataField>CurrentValueLCYFormat</DataField>
+        </Field>
+        <Field Name="Additions">
+          <DataField>Additions</DataField>
+        </Field>
+        <Field Name="AdditionsFormat">
+          <DataField>AdditionsFormat</DataField>
+        </Field>
+        <Field Name="Disposal">
+          <DataField>Disposal</DataField>
+        </Field>
+        <Field Name="DisposalFormat">
+          <DataField>DisposalFormat</DataField>
+        </Field>
+        <Field Name="InterestReceived">
+          <DataField>InterestReceived</DataField>
+        </Field>
+        <Field Name="InterestReceivedFormat">
+          <DataField>InterestReceivedFormat</DataField>
+        </Field>
+        <Field Name="AccruedInterest1">
+          <DataField>AccruedInterest1</DataField>
+        </Field>
+        <Field Name="AccruedInterest1Format">
+          <DataField>AccruedInterest1Format</DataField>
+        </Field>
+        <Field Name="OpeningBalance">
+          <DataField>OpeningBalance</DataField>
+        </Field>
+        <Field Name="OpeningBalanceFormat">
+          <DataField>OpeningBalanceFormat</DataField>
+        </Field>
+        <Field Name="SettlementAmt">
+          <DataField>SettlementAmt</DataField>
+        </Field>
+        <Field Name="SettlementAmtFormat">
+          <DataField>SettlementAmtFormat</DataField>
+        </Field>
+        <Field Name="Interest">
+          <DataField>Interest</DataField>
+        </Field>
+        <Field Name="InterestFormat">
+          <DataField>InterestFormat</DataField>
+        </Field>
+        <Field Name="Interest2">
+          <DataField>Interest2</DataField>
+        </Field>
+        <Field Name="Interest2Format">
+          <DataField>Interest2Format</DataField>
+        </Field>
+        <Field Name="Coupon">
+          <DataField>Coupon</DataField>
+        </Field>
+        <Field Name="CouponFormat">
+          <DataField>CouponFormat</DataField>
+        </Field>
+        <Field Name="Accrued_int">
+          <DataField>Accrued_int</DataField>
+        </Field>
+        <Field Name="Accrued_intFormat">
+          <DataField>Accrued_intFormat</DataField>
+        </Field>
+        <Field Name="Value">
+          <DataField>Value</DataField>
+        </Field>
+        <Field Name="ValueFormat">
+          <DataField>ValueFormat</DataField>
+        </Field>
+        <Field Name="OpeningDate">
+          <DataField>OpeningDate</DataField>
+        </Field>
+        <Field Name="ExchangeGainLoss">
+          <DataField>ExchangeGainLoss</DataField>
+        </Field>
+        <Field Name="ExchangeGainLossFormat">
+          <DataField>ExchangeGainLossFormat</DataField>
+        </Field>
+        <Field Name="FairValueGainLoss">
+          <DataField>FairValueGainLoss</DataField>
+        </Field>
+        <Field Name="FairValueGainLossFormat">
+          <DataField>FairValueGainLossFormat</DataField>
+        </Field>
+        <Field Name="AmortizedValue">
+          <DataField>AmortizedValue</DataField>
+        </Field>
+        <Field Name="AmortizedValueFormat">
+          <DataField>AmortizedValueFormat</DataField>
+        </Field>
+        <Field Name="RevisedValueDate">
+          <DataField>RevisedValueDate</DataField>
+        </Field>
+        <Field Name="IssueNo">
+          <DataField>IssueNo</DataField>
+        </Field>
+        <Field Name="CurrencyCode">
+          <DataField>CurrencyCode</DataField>
+        </Field>
+        <Field Name="OffshoreTransaction">
+          <DataField>OffshoreTransaction</DataField>
+        </Field>
+        <Field Name="ShowPortfolio">
+          <DataField>ShowPortfolio</DataField>
+        </Field>
+        <Field Name="ShowDetails">
+          <DataField>ShowDetails</DataField>
+        </Field>
+        <Field Name="AsAt">
+          <DataField>AsAt</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

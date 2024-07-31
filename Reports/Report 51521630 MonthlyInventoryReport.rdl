@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="BaseUnitofMeasure">
+          <DataField>BaseUnitofMeasure</DataField>
+        </Field>
+        <Field Name="ReorderPoint">
+          <DataField>ReorderPoint</DataField>
+        </Field>
+        <Field Name="ReorderPointFormat">
+          <DataField>ReorderPointFormat</DataField>
+        </Field>
+        <Field Name="Inventory">
+          <DataField>Inventory</DataField>
+        </Field>
+        <Field Name="InventoryFormat">
+          <DataField>InventoryFormat</DataField>
+        </Field>
+        <Field Name="UnitCost">
+          <DataField>UnitCost</DataField>
+        </Field>
+        <Field Name="UnitCostFormat">
+          <DataField>UnitCostFormat</DataField>
+        </Field>
+        <Field Name="UnitPrice">
+          <DataField>UnitPrice</DataField>
+        </Field>
+        <Field Name="UnitPriceFormat">
+          <DataField>UnitPriceFormat</DataField>
+        </Field>
+        <Field Name="NetInvoicedQty">
+          <DataField>NetInvoicedQty</DataField>
+        </Field>
+        <Field Name="NetInvoicedQtyFormat">
+          <DataField>NetInvoicedQtyFormat</DataField>
+        </Field>
+        <Field Name="NetChange">
+          <DataField>NetChange</DataField>
+        </Field>
+        <Field Name="NetChangeFormat">
+          <DataField>NetChangeFormat</DataField>
+        </Field>
+        <Field Name="PurchasesQty">
+          <DataField>PurchasesQty</DataField>
+        </Field>
+        <Field Name="PurchasesQtyFormat">
+          <DataField>PurchasesQtyFormat</DataField>
+        </Field>
+        <Field Name="SalesQty">
+          <DataField>SalesQty</DataField>
+        </Field>
+        <Field Name="SalesQtyFormat">
+          <DataField>SalesQtyFormat</DataField>
+        </Field>
+        <Field Name="PositiveAdjmtQty">
+          <DataField>PositiveAdjmtQty</DataField>
+        </Field>
+        <Field Name="PositiveAdjmtQtyFormat">
+          <DataField>PositiveAdjmtQtyFormat</DataField>
+        </Field>
+        <Field Name="NegativeAdjmtQty">
+          <DataField>NegativeAdjmtQty</DataField>
+        </Field>
+        <Field Name="NegativeAdjmtQtyFormat">
+          <DataField>NegativeAdjmtQtyFormat</DataField>
+        </Field>
+        <Field Name="PurchasesLCY">
+          <DataField>PurchasesLCY</DataField>
+        </Field>
+        <Field Name="PurchasesLCYFormat">
+          <DataField>PurchasesLCYFormat</DataField>
+        </Field>
+        <Field Name="SalesLCY">
+          <DataField>SalesLCY</DataField>
+        </Field>
+        <Field Name="SalesLCYFormat">
+          <DataField>SalesLCYFormat</DataField>
+        </Field>
+        <Field Name="PositiveAdjmtLCY">
+          <DataField>PositiveAdjmtLCY</DataField>
+        </Field>
+        <Field Name="PositiveAdjmtLCYFormat">
+          <DataField>PositiveAdjmtLCYFormat</DataField>
+        </Field>
+        <Field Name="NegativeAdjmtLCY">
+          <DataField>NegativeAdjmtLCY</DataField>
+        </Field>
+        <Field Name="NegativeAdjmtLCYFormat">
+          <DataField>NegativeAdjmtLCYFormat</DataField>
+        </Field>
+        <Field Name="QtyonPurchOrder">
+          <DataField>QtyonPurchOrder</DataField>
+        </Field>
+        <Field Name="QtyonPurchOrderFormat">
+          <DataField>QtyonPurchOrderFormat</DataField>
+        </Field>
+        <Field Name="QtyonSalesOrder">
+          <DataField>QtyonSalesOrder</DataField>
+        </Field>
+        <Field Name="QtyonSalesOrderFormat">
+          <DataField>QtyonSalesOrderFormat</DataField>
+        </Field>
+        <Field Name="Logo">
+          <DataField>Logo</DataField>
+        </Field>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+        </Field>
+        <Field Name="CompAddress">
+          <DataField>CompAddress</DataField>
+        </Field>
+        <Field Name="CompPostCode">
+          <DataField>CompPostCode</DataField>
+        </Field>
+        <Field Name="Website">
+          <DataField>Website</DataField>
+        </Field>
+        <Field Name="PhoneNumber">
+          <DataField>PhoneNumber</DataField>
+        </Field>
+        <Field Name="Email">
+          <DataField>Email</DataField>
+        </Field>
+        <Field Name="City">
+          <DataField>City</DataField>
+        </Field>
+        <Field Name="Datefilter">
+          <DataField>Datefilter</DataField>
+        </Field>
+        <Field Name="Totalvalue">
+          <DataField>Totalvalue</DataField>
+        </Field>
+        <Field Name="TotalvalueFormat">
+          <DataField>TotalvalueFormat</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+        </Field>
+        <Field Name="SalesAmt">
+          <DataField>SalesAmt</DataField>
+        </Field>
+        <Field Name="SalesAmtFormat">
+          <DataField>SalesAmtFormat</DataField>
+        </Field>
+        <Field Name="PurchAmt">
+          <DataField>PurchAmt</DataField>
+        </Field>
+        <Field Name="PurchAmtFormat">
+          <DataField>PurchAmtFormat</DataField>
+        </Field>
+        <Field Name="OpeningBals">
+          <DataField>OpeningBals</DataField>
+        </Field>
+        <Field Name="OpeningBalsFormat">
+          <DataField>OpeningBalsFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

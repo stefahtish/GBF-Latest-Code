@@ -16,6 +16,8 @@ page 50614 "Strategic Impl Initiative"
                 field("SNo."; Rec."SNo.")
                 {
                     ApplicationArea = All;
+                    Enabled = false;
+                    Visible = false;
                 }
                 field("Objective"; Rec.Initiatives)
                 {

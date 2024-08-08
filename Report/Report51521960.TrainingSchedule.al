@@ -44,7 +44,7 @@ report 50517 "Training Schedule"
             {
 
             }
-            column(Request_Date; "Request Date")
+            column(Request_Date; format("Request Date"))
             {
 
             }
@@ -72,11 +72,11 @@ report 50517 "Training Schedule"
             {
 
             }
-            column(Planned_Start_Date; "Planned Start Date")
+            column(Planned_Start_Date; Format("Planned Start Date"))
             {
 
             }
-            column(Planned_End_Date; "Planned End Date")
+            column(Planned_End_Date; format("Planned End Date"))
             {
 
             }

@@ -29,6 +29,7 @@ report 50504 "Modified Purchases Order"
             column(AmountCaption; AmountCaptionLbl)
             {
             }
+            column(Posting_Date; "Posting Date") { }
             column(PurchLineInvDiscAmtCaption; PurchLineInvDiscAmtCaptionLbl)
             {
             }

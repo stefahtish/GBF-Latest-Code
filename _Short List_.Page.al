@@ -254,6 +254,7 @@ page 50468 "Short List"
     var
         Applicants: Record Applicants2;
         JobsApplied: Record "Applicant job applied";
+        Job: record "Recruitment Needs";
         //FileSystem: Automation BC;
         FileManagement: Codeunit "File Management";
         EmailMessage: Codeunit "Email Message";
@@ -269,7 +270,9 @@ page 50468 "Short List"
         ErrorMsg: Text;
         CompanyInfo: Record "Company Information";
         Body: text;
-        NewBody: Label 'Dear %1, <br>This is to invite you for an Inteview for the job Position of <Strong>%2</Strong>.The Interview will be conducted at our office on %3, at %4.<br><br>Kind Regards, <br><br><Strong>%5 </Strong>.  ';
+        NewBody: Label 'Dear %1,<br>I trust youve been well.<br>Following the recent interviews, we are pleased to make you an offer to join GBF as a %2 in our Nairobi, Kenya, office with a gross monthly salary of Kes %6 Attached, please find the formal contract. This will be a  employment contract renewable based on performance and funding, with a 3-month initial probationary period. The contract details everything we offer in terms of compensation, pension, and health insurance, as well as all of our policies in regards to leave, roles, responsibilities, etc.<br>We would also like to provide some additional information with regard to the benefits enumerated in the contract (which are subject to change):<br>Bonus: Within each contract year, you are entitled to a bonus at the company discretion.<br>Medical insurance: You (and your dependents) have the right to medical insurance that covers inpatient, outpatient, maternity, dental, and optical care.<br>Airtime reimbursement: GBF offers airtime reimbursement to staff for business-related activities.<br>Pension plan: GBF offers its full-time employees the opportunity to participate in a pension plan on a voluntary basis. Each employee is able to contribute up to 25% of their gross annual base salary on a pre-tax basis. GBF will match up to the first 5% of that contribution. For example, if an employee contributes 3%, GBF would contribute 3%; if an employee contributes 8%, GBF would contribute only 5%.<br>Should you have any questions, please let me know, and we would be happy to schedule a call to go through any details you would like to discuss. If all is clear, please go ahead and sign the employment contract to signify your acceptance and send us a signed copy via email.<br>Best regards,<br>Noel';
+
+
     begin
         JobsApplied.Reset();
         JobsApplied.SetRange("Need Code", RecNeeds."No.");
@@ -289,7 +292,7 @@ page 50468 "Short List"
                     //MESSAGE(Receipient);
                     Subject := 'Interview Invite';
                     TimeNow := (Format(Time));
-                    EmailMessage.Create(Receipient, Subject, StrSubstNo(NewBody, Applicants."First Name", Applicants."Job Description", JobsApplied."Interview Date", JobsApplied."Interview Time", CompanyInfo.Name), true);
+                    EmailMessage.Create(Receipient, Subject, StrSubstNo(NewBody, Applicants."First Name", Applicants."Job Description", JobsApplied."Interview Date", JobsApplied."Interview Time", CompanyInfo.Name, JobsApplied."Maximum Salary"), true);
                     Email.Send(EmailMessage, Enum::"Email Scenario"::Default);
                 end;
             until JobsApplied.Next = 0;
@@ -302,8 +305,8 @@ page 50468 "Short List"
         JobsApplied: Record "Applicant job applied";
         //FileSystem: Automation BC;
         FileManagement: Codeunit "File Management";
-        // SMTP: Codeunit "SMTP Mail";
-        // SMTPSetup: Record "SMTP Mail Setup";
+        SMTP: Codeunit Email;
+        SMTPSetup: Record "Email Account";
         EmailMessage: Codeunit "Email Message";
         Email: Codeunit Email;
         SenderName: Text;
@@ -319,7 +322,7 @@ page 50468 "Short List"
         Emp: Record Employee;
         SenderFirstName: code[100];
         UserSetup: Record "User Setup";
-        NewBody: Label 'Dear %1, <br>We trust you are well and keeping safe.<br> We would like to thank you for expressing your interest for the position of %2 at %3.<br>Unfortunately, we regret to inform you that your application was unsuccessful on this occasion.<br>We would like to thank you for the time invested during this process and encourage you to regularly view our website for any other opportunities.<br>Once again, we thank you for your cooperation throughout this process and wish you the very best in your future endeavors.<br><br>Kind Regards, <br><br>%4';
+        NewBody: Label 'Dear %1,<br>Thank you for taking the time to apply for this position and for participating in the prescreening call, assessment exercise, and interviews. After careful consideration, we have decided to move forward with other candidates.<br>Thank you once again for your interest in our company. We wish you the best of luck in your future endeavors.<br><br>Best,<br>%4';
     begin
         UserSetup.Reset();
         UserSetup.SetRange("User ID", UserId);
@@ -346,7 +349,7 @@ page 50468 "Short List"
                     TimeNow := (Format(Time));
                     EmailMessage.Create(Receipient, Subject, StrSubstNo(NewBody, Applicants."First Name", Applicants."Job Description", CompanyInfo.Name), true);
                     Email.Send(EmailMessage, enum::"Email Scenario"::Default);
-                    // SMTP.Send;
+                    SMTP.Send(EmailMessage, enum::"Email Scenario"::Default);
                 end;
             until JobsApplied.Next = 0;
         end;

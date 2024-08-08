@@ -360,15 +360,16 @@ page 50509 "HR Role Center"
                     }
                     action("Incomplete Application Summury")
                     {
+                        Visible = false;
                         ApplicationArea = Basic, Suite;
                         RunObject = report "In-Complete Applicant Report";
                         Caption = 'In-Complete Applicant Report';
                     }
                     action("Qualification Report")
                     {
-                        // ApplicationArea = Basic, Suite;
-                        // RunObject = report applica
-                        // Caption = 'Applicant Report Summary';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = report "Qualification Report";
+                        Caption = 'Qualification Report';
                     }
                     action("Submitted Application Report")
                     {
@@ -743,6 +744,12 @@ page 50509 "HR Role Center"
                         ApplicationArea = Basic, Suite;
                         RunObject = page "Training Needs Open";
                     }
+                    action("Budget Comparision")
+                    {
+                        ApplicationArea = All;
+                        Image = Report;
+                        RunObject = REPORT 50516;
+                    }
 
                     action("On-Going Training Needs")
                     {
@@ -833,11 +840,36 @@ page 50509 "HR Role Center"
                         RunObject = page "Training Areas";
                     }
                 }
+                group("Training Reports")
+                {
+                    action("Training Shedule")
+                    {
+                        ApplicationArea = all;
+                        Image = Report;
+                        RunObject = report "Training Schedule";
+                    }
+                    action("Training Application Report")
+                    {
+                        Visible = false;
+                        ApplicationArea = Basic;
+                        Caption = 'Training Applications';
+                        RunObject = Report "HR Training Application";
+
+                    }
+                    action("HR Budget Comparision")
+                    {
+                        ApplicationArea = All;
+                        Image = Report;
+                        RunObject = REPORT 50516;
+                    }
+
+                }
 
             }
 
             group("Fleet Management")
             {
+                Visible = false;
                 group("Transport Management")
                 {
                     action("Fleet List")
@@ -1036,6 +1068,8 @@ page 50509 "HR Role Center"
             }
             group("Payroll Setups")
             {
+                Visible = false;
+
                 Image = Departments;
 
                 action("HR Setup")
@@ -1137,6 +1171,7 @@ page 50509 "HR Role Center"
             }
             group("Payroll Approval")
             {
+                Visible = false;
                 action("Open Payroll Approvals")
                 {
                     RunObject = page "Employee Payroll Approval";
@@ -1154,6 +1189,8 @@ page 50509 "HR Role Center"
             }
             group("Payroll Payment Vouchers")
             {
+                Visible = false;
+
                 action("Payment Voucher List")
                 {
                     ApplicationArea = "Basic,Suite";
@@ -1197,6 +1234,7 @@ page 50509 "HR Role Center"
             }
             group("Payroll EFTs")
             {
+                Visible = false;
                 action("Payroll EFT File Generations")
                 {
                     ApplicationArea = "Basic,Suite";
@@ -1227,26 +1265,30 @@ page 50509 "HR Role Center"
                 }
                 action("Committees")
                 {
+                    Visible = false;
                     ApplicationArea = All;
                     RunObject = Page "Committee";
                 }
                 action("Mail Bulk Payslips")
                 {
+                    Visible = false;
                     ApplicationArea = All;
                     RunObject = Report "Mail Bulk Payslips";
                 }
                 action("Mail Bulk p9")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                     RunObject = Report "Mail Bulk P9s";
                 }
                 group("Periodic Activities ")
                 {
-
+                    Visible = false;
                     action("Payroll Run ")
                     {
                         ApplicationArea = Basic, Suite;
                         Image = Column;
+                        Visible = false;
                         RunObject = Report "Payroll Run1";
                     }
 
@@ -1275,11 +1317,13 @@ page 50509 "HR Role Center"
                     // }
                     action("Export To Bank-Employees")
                     {
+                        Visible = false;
                         ApplicationArea = Basic, Suite;
                         RunObject = xmlport "Payroll Export To Bank";
                     }
                     action("Update Assn Matrix")
                     {
+                        Visible = false;
                         ApplicationArea = Basic, Suite;
                         RunObject = report "Validate Payroll Run";
                     }
@@ -1288,6 +1332,7 @@ page 50509 "HR Role Center"
 
                 group("Employee Reports")
                 {
+                    Visible = false;
                     group("Bank Details")
                     {
                         action("Employee Bank Details")
@@ -1366,6 +1411,7 @@ page 50509 "HR Role Center"
                     }
                     group("Statutory Reports")
                     {
+                        Visible = false;
                         Caption = 'Statutory Reports';
                         action("Monthly Payee Report ")
                         {
@@ -1408,6 +1454,7 @@ page 50509 "HR Role Center"
                     }
                     group("Annual Statutory Reports")
                     {
+                        Visible = false;
                         Caption = 'Annual Statutory Reports';
                         action("P9A Report ")
                         {
@@ -1425,6 +1472,7 @@ page 50509 "HR Role Center"
                     }
                     group("Reconciliation Reports")
                     {
+                        Visible = false;
                         Caption = 'Reconciliation Reports';
                         action("Monthly Difference Report")
                         {
@@ -1477,6 +1525,7 @@ page 50509 "HR Role Center"
                     }
                     group("Loan reports")
                     {
+                        Visible = false;
                         action("Coop loan I Report")
                         {
                             RunObject = report "Coop loan I Report";
@@ -1519,6 +1568,7 @@ page 50509 "HR Role Center"
             }
             group(Trustees)
             {
+                Visible = false;
                 Caption = 'Board Members';
                 Image = HumanResources;
                 action("Trustee Employees")
@@ -1557,6 +1607,7 @@ page 50509 "HR Role Center"
                 }
                 group("Board Committees")
                 {
+                    Visible = false;
                     action("Open board committees")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1567,6 +1618,7 @@ page 50509 "HR Role Center"
 
                 group("Periodic Activities")
                 {
+                    Visible = false;
                     action("Payroll Run-Trustees")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1613,6 +1665,7 @@ page 50509 "HR Role Center"
 
                 group(Reports)
                 {
+                    Visible = false;
                     group("Bank-Details")
                     {
                         action("Board Bank Details")
@@ -1625,6 +1678,7 @@ page 50509 "HR Role Center"
                     }
                     group("Management-Reports ")
                     {
+                        Visible = false;
                         Caption = 'Management Reports';
 
                         action("Board Payslips ")
@@ -1681,6 +1735,7 @@ page 50509 "HR Role Center"
                     }
                     group("Statutory-Reports")
                     {
+                        Visible = false;
                         Caption = 'Statutory Reports';
                         action("Monthly Payee - Report ")
                         {
@@ -1726,6 +1781,7 @@ page 50509 "HR Role Center"
                     }
                     group("Annual-Statutory Reports")
                     {
+                        Visible = false;
                         Caption = 'Annual Statutory Reports';
                         action("P9A-Report ")
                         {
@@ -1744,6 +1800,7 @@ page 50509 "HR Role Center"
                     }
                     group("Reconciliation-Reports")
                     {
+                        Visible = false;
                         Caption = 'Reconciliation Reports';
                         action("Monthly-Difference Report")
                         {
@@ -1781,6 +1838,7 @@ page 50509 "HR Role Center"
 
                     action("PAYE Report-Trustees")
                     {
+                        Visible = false;
                         Caption = 'PAYE Report - Board Members';
                         RunObject = report "PAYE Report - Primary";
                     }
@@ -1806,6 +1864,7 @@ page 50509 "HR Role Center"
 
             group("Loan ")
             {
+                Visible = false;
                 Image = Calculator;
                 group("Loan Applications")
                 {
@@ -1850,6 +1909,7 @@ page 50509 "HR Role Center"
             }
             group("Periodic Activity")
             {
+                Visible = false;
                 Image = History;
                 action("Import Earnings & Deductions")
                 {
@@ -1968,22 +2028,30 @@ page 50509 "HR Role Center"
                         ApplicationArea = all;
                         RunObject = page "Post Training List";
                     }
+
                 }
-                group("Training Reports")
-                {
-                    action("Training Shedule")
-                    {
-                        RunObject = report "Training Schedule";
-                    }
-                    // action("Post Training Evaluation ")
-                    // {
-                    //     ApplicationArea = all;
-                    //     RunObject = page "Post Training List";
-                    // }
-                }
+                // group("Training Reports")
+                // {
+                //     action("Training Shedule")
+                //     {
+                //         RunObject = report "Training Schedule";
+                //     }
+                //     // action("Post Training Evaluation ")
+                //     // {
+                //     //     ApplicationArea = all;
+                //     //     RunObject = page "Post Training List";
+                //     // }
+                //     action("Training Application")
+                //     {
+                //         ApplicationArea = Basic;
+                //         Caption = 'Training Applications';
+                //         RunObject = Report "HR Training Application";
+                //     }
+                // }
 
                 group("Reports ")
                 {
+                    Visible = false;
                     action(Payslip)
                     {
                         Caption = 'My Payslip';

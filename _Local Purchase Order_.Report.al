@@ -1,7 +1,7 @@
 report 50308 "Local Purchase Order"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './LocalPurchaseOrder.rdlc';
+    RDLCLayout = './ReportCustLPOReport.rdl';
     Caption = 'LPO';
     PreviewMode = PrintLayout;
     ApplicationArea = All;
@@ -26,6 +26,10 @@ report 50308 "Local Purchase Order"
             column(No_PurchHeader; "No.")
             {
             }
+            column(Currency_Code; "Currency Code")
+            {
+            }
+
             column(AmountCaption; AmountCaptionLbl)
             {
             }
@@ -36,6 +40,9 @@ report 50308 "Local Purchase Order"
             {
             }
             column(VATAmtLineVATCaption; VATAmtLineVATCaptionLbl)
+            {
+            }
+            column(Posting_Date; "Posting Date")
             {
             }
             column(VATAmtLineVATAmtCaption; VATAmtLineVATAmtCaptionLbl)
@@ -481,6 +488,8 @@ report 50308 "Local Purchase Order"
                         column(EMail; CompanyInfo."E-Mail")
                         {
                         }
+                        column(MAIL2; Companyinfo."E-Mail") { }
+
                         column(VATIdentifier_PurchLine; "Purchase Line"."VAT Identifier")
                         {
                         }
@@ -1013,7 +1022,9 @@ report 50308 "Local Purchase Order"
             begin
                 // CurrReport.Language := Lang.GetLanguageID("Language Code");
                 Clear(TotaTXT);
-                if "Purchase Header"."Currency Code" = '' then
+
+                if "Purchase Header"."Currency Code" = ''
+                then
                     TotaTXT := 'Total' + '(' + 'KES' + ')'
                 else
                     TotaTXT := 'Total' + '(' + "Purchase Header"."Currency Code" + ')';

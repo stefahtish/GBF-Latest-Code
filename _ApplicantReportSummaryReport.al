@@ -47,6 +47,45 @@ report 50439 "Applicant Report Summary"
             column(IDNumber; IDNo)
             {
             }
+            dataitem(Applicants2; Applicants2)
+            {
+                DataItemLink = "No." = field("Application No.");
+                column(CellularPhoneNumber_Applicants2; "Cellular Phone Number")
+                {
+                }
+                column(ApplicationDate_Applicants2; "Application Date")
+                {
+                }
+                column(DateOfBirth_Applicants2; "Date Of Birth")
+                {
+                }
+                column(Gender_Applicants2; Gender)
+                {
+                }
+                column(IDNumber_Applicants2; "ID Number")
+                {
+                }
+                column(JobAppliedFor_Applicants2; "Job Applied For")
+                {
+                }
+                column(JobDescription_Applicants2; "Job Description")
+                {
+                }
+                column(No_Applicants2; "No.")
+                {
+                }
+            }
+            dataitem("Applicant Job Education2"; "Applicant Job Education2")
+            {
+                DataItemLink = "Applicant No." = field("Application No.");
+
+                column(EducationLevel_ApplicantJobEducation2; "Education Level")
+                {
+                }
+                column(FieldofStudy_ApplicantJobEducation2; "Field of Study")
+                {
+                }
+            }
             trigger OnAfterGetRecord()
             var
                 myInt: Integer;
@@ -71,7 +110,10 @@ report 50439 "Applicant Report Summary"
                 else
                     SetRange("Application Date", SDate, EDate);
             end;
+
+
         }
+
     }
     requestpage
     {

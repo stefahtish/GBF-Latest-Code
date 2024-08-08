@@ -8,7 +8,7 @@ report 50493 "Recruitment Listing"
     {
         dataitem("Applicants"; Applicants2)
         {
-            //  DataItemTableView = Where(Applied = const(true));
+            DataItemTableView = Where(Applied = const(true));
             RequestFilterFields = "No.";
 
             column(Age_Applicants; "Applicants".Age)

@@ -189,7 +189,7 @@ report 50465 "Staff Appraisal Report"
             // }
             dataitem("Target Setup Lines"; "Target Setup Lines")
             {
-                DataItemLink = "Target No"=field("Target No");
+                DataItemLink = "Target No" = field("Target No");
                 DataItemTableView = SORTING("SNo.");
 
                 column(SNo_TargetSetupLines; "SNo.")
@@ -209,7 +209,7 @@ report 50465 "Staff Appraisal Report"
                 }
                 dataitem("Performance Indicators"; "Strategic Imp Initiatives")
                 {
-                    DataItemLink = "Target No."=field("Target No"), ObjectiveCode=field("SNo.");
+                    DataItemLink = "Target No." = field("Target No"), ObjectiveCode = field("SNo.");
 
                     column(SNo_PerformanceIndicators; "SNo.")
                     {
@@ -241,23 +241,21 @@ report 50465 "Staff Appraisal Report"
                 }
                 trigger OnAfterGetRecord()
                 var
-                    TargetLines: Record "Target Setup Lines";
                     PerformanceIndicators: Record "Strategic Imp Initiatives";
                 begin
-                    TotalTargetScore:=0;
-                    PerformanceIndicators.Reset();
-                    PerformanceIndicators.SetRange("Target No.", TargetLines."Target No");
-                    if PerformanceIndicators.Find('-')then begin
-                        //PerformanceIndicators.CalcFields("Moderated Score");
-                        repeat TotalTargetScore:=PerformanceIndicators."Moderated Score";
-                        //Message(Format(TotalTargetScore));
+                    TotalTargetScore := 0;
+                    PerformanceIndicators.SetRange("Target No.", "Target No");
+                    //PerformanceIndicators.SetRange(ObjectiveCode, "SNo.");
+                    if PerformanceIndicators.FindSet then begin
+                        repeat
+                            TotalTargetScore += PerformanceIndicators."Moderated Score";
                         until PerformanceIndicators.Next() = 0;
                     end;
                 end;
             }
             dataitem("Appraisee Additional Assign."; "Appraisee Additional Assign.")
             {
-                DataItemLink = "Appraisal No"=field("Appraisal No");
+                DataItemLink = "Appraisal No" = field("Appraisal No");
 
                 column(AppraisalNo_AppraiseeAdditionalAssign; "Appraisal No")
                 {
@@ -310,8 +308,8 @@ report 50465 "Staff Appraisal Report"
             }
             dataitem("Appraisal Competences"; "Appraisal Competences")
             {
-                DataItemLink = "Appraisal No."=field("Appraisal No");
-                DataItemTableView = where("Core Value/Competence"=filter("Core Values/Competences"));
+                DataItemLink = "Appraisal No." = field("Appraisal No");
+                DataItemTableView = where("Core Value/Competence" = filter("Core Values/Competences"));
 
                 column(SNo_AppraisalCompetences; "SNo.")
                 {
@@ -343,8 +341,8 @@ report 50465 "Staff Appraisal Report"
             }
             dataitem("Managerial Appraisal Competences"; "Appraisal Competences")
             {
-                DataItemLink = "Appraisal No."=field("Appraisal No");
-                DataItemTableView = where("Core Value/Competence"=filter("Core Managerial Values/Competence"));
+                DataItemLink = "Appraisal No." = field("Appraisal No");
+                DataItemTableView = where("Core Value/Competence" = filter("Core Managerial Values/Competence"));
 
                 column(Mg_SNo_AppraisalCompetences; "SNo.")
                 {
@@ -376,7 +374,7 @@ report 50465 "Staff Appraisal Report"
             }
             dataitem("Appraisal Comments"; "Appraisal Comments")
             {
-                DataItemLink = "Appraisal No."=field("Appraisal No");
+                DataItemLink = "Appraisal No." = field("Appraisal No");
 
                 column(AnnualIncrement_AppraisalComments; "Annual Increment")
                 {
@@ -518,7 +516,7 @@ report 50465 "Staff Appraisal Report"
             }
             dataitem("Appraisal Recommendations"; "Appraisal Recommendations")
             {
-                DataItemLink = "Appraisal No."=field("Appraisal No");
+                DataItemLink = "Appraisal No." = field("Appraisal No");
 
                 column(AppraisalNo_AppraisalRecommendations; "Appraisal No.")
                 {
@@ -556,29 +554,30 @@ report 50465 "Staff Appraisal Report"
             }
             trigger OnAfterGetRecord()
             begin
-                Approver[1]:=EmployeeAppraisal."Appraisee ID";
-                ApproverDate[1]:=CreateDateTime(EmployeeAppraisal."Period Start", EmployeeAppraisal."Time Inserted");
+                Approver[1] := EmployeeAppraisal."Appraisee ID";
+                ApproverDate[1] := CreateDateTime(EmployeeAppraisal."Period Start", EmployeeAppraisal."Time Inserted");
                 UserSetup1.CalcFields(Signature);
                 ApprovalEntries.Reset;
                 ApprovalEntries.SetCurrentKey("Sequence No.");
                 ApprovalEntries.SetRange("Table ID", 51521582);
                 ApprovalEntries.SetRange("Document No.", EmployeeAppraisal."Target No");
                 ApprovalEntries.SetRange(Status, ApprovalEntries.Status::Approved);
-                if ApprovalEntries.Find('-')then begin
-                    repeat if ApprovalEntries."Sequence No." = 1 then begin
+                if ApprovalEntries.Find('-') then begin
+                    repeat
+                        if ApprovalEntries."Sequence No." = 1 then begin
                             UserSetup2.CalcFields(Signature);
-                            Approver[2]:=ApprovalEntries."Last Modified By User ID";
-                            ApproverDate[2]:=ApprovalEntries."Last Date-Time Modified";
+                            Approver[2] := ApprovalEntries."Last Modified By User ID";
+                            ApproverDate[2] := ApprovalEntries."Last Date-Time Modified";
                         end;
                         if ApprovalEntries."Sequence No." = 2 then begin
                             UserSetup3.CalcFields(Signature);
-                            Approver[3]:=ApprovalEntries."Last Modified By User ID";
-                            ApproverDate[3]:=ApprovalEntries."Last Date-Time Modified";
+                            Approver[3] := ApprovalEntries."Last Modified By User ID";
+                            ApproverDate[3] := ApprovalEntries."Last Date-Time Modified";
                         end;
                         if ApprovalEntries."Sequence No." = 3 then begin
                             UserSetup3.CalcFields(Signature);
-                            Approver[4]:=ApprovalEntries."Last Modified By User ID";
-                            ApproverDate[4]:=ApprovalEntries."Last Date-Time Modified";
+                            Approver[4] := ApprovalEntries."Last Modified By User ID";
+                            ApproverDate[4] := ApprovalEntries."Last Date-Time Modified";
                         end;
                     until ApprovalEntries.Next = 0;
                 end;
@@ -629,21 +628,25 @@ report 50465 "Staff Appraisal Report"
         CompanyInfo.Get;
         CompanyInfo.CalcFields(Picture);
     end;
-    var CompanyInfo: Record "Company Information";
-    Title: Label 'STAFF PERFORMANCE APPRAISAL REPORT';
-    ApprovalEntries: Record "Approval Entry";
-    Approver: array[50]of Code[50];
-    ApproverDate: array[10]of DateTime;
-    UserSetup: Record "User Setup";
-    UserSetup1: Record "User Setup";
-    UserSetup2: Record "User Setup";
-    UserSetup3: Record "User Setup";
-    TotalTargetScore: Decimal;
-    procedure GetApproverName(ApproverID: code[50]): Text var
+
+    var
+        CompanyInfo: Record "Company Information";
+        Title: Label 'STAFF PERFORMANCE APPRAISAL REPORT';
+        ApprovalEntries: Record "Approval Entry";
+        Approver: array[50] of Code[50];
+        ApproverDate: array[10] of DateTime;
+        UserSetup: Record "User Setup";
+        UserSetup1: Record "User Setup";
+        UserSetup2: Record "User Setup";
+        UserSetup3: Record "User Setup";
+        TotalTargetScore: Decimal;
+
+    procedure GetApproverName(ApproverID: code[50]): Text
+    var
         User: Record User;
     begin
         User.Reset();
         User.SetRange("User Name", ApproverID);
-        if User.FindFirst()then exit(User."Full Name");
+        if User.FindFirst() then exit(User."Full Name");
     end;
 }

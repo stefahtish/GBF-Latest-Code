@@ -6,6 +6,7 @@ pageextension 50108 PurchaseOrderCardPageExt extends "Purchase Order"
         {
             Visible = true;
         }
+
         modify("Buy-from Vendor No.")
         {
             trigger OnLookup(var Text: Text): Boolean
@@ -194,8 +195,8 @@ pageextension 50108 PurchaseOrderCardPageExt extends "Purchase Order"
                     Commit();
                     PurchHeader.Reset();
                     PurchHeader.SetRange(PurchHeader."No.", Rec."No.");
-                    if PurchHeader.FindFirst then // Report.Run(Report::"Local Purchase Order", true, false, PurchHeader);
-                        Report.Run(Report::"Modified Purchases Order", true, false, PurchHeader);
+                    if PurchHeader.FindFirst then Report.Run(Report::"Local Purchase Order", true, false, PurchHeader);
+                    //Report.Run(Report::"Modified Purchases Order", true, false, PurchHeader);
                 end;
             }
             action("Good Received Note")

@@ -75,6 +75,8 @@ page 50717 "Performance Indicators"
                         if Rec."Moderated Score" > 16 then Error('Moderated Score Should be less than 16');
                     end;
                 }
+                field(Score; Rec.Score)
+                { }
                 field(Remarks; Rec.Remarks)
                 {
                     ToolTip = 'Specifies the value of the Remarks field.';

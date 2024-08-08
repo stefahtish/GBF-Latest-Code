@@ -4,7 +4,7 @@ report 50489 "Custom Sales Invoice"
     UsageCategory = Administration;
     ApplicationArea = All;
     DefaultLayout = RDLC;
-    RDLCLayout = './Reports/Report 51521620 Customized Sales Invoice.rdl';
+    RDLCLayout = './ReportCustomSalesinvoice.rdl';
 
     dataset
     {
@@ -211,7 +211,7 @@ report 50489 "Custom Sales Invoice"
             }
             dataitem(SalesInvoiceLine; "Sales Invoice Line")
             {
-                DataItemLink = "Document No."=FIELD("No.");
+                DataItemLink = "Document No." = FIELD("No.");
                 DataItemLinkReference = SalesInvoiceHeader;
                 DataItemTableView = SORTING("Document No.", "Line No.");
 
@@ -288,23 +288,31 @@ report 50489 "Custom Sales Invoice"
             trigger OnAfterGetRecord()
             begin
                 GetInvoicedFullName();
+                SalesInvoiceHeader.reset;
+                SalesInvoiceHeader.SetRange("Currency Code", "Currency Code");
+                if SalesInvoiceHeader."Currency Code" = '' then
+                    SalesInvoiceHeader."Currency Code" := 'KES'
+
             end;
         }
     }
-    var CompanyInformation: Record "Company Information";
-    UserSetup: Record "User Setup";
-    PreparedBy: Text;
+    var
+        CompanyInformation: Record "Company Information";
+        UserSetup: Record "User Setup";
+        PreparedBy: Text;
+
     trigger OnPreReport()
     begin
         CompanyInformation.Get();
         CompanyInformation.CalcFields(Picture);
     end;
+
     procedure GetInvoicedFullName()
     var
         Users: Record User;
     begin
         Users.Reset();
         Users.SetRange("User Name", SalesInvoiceHeader."User ID");
-        if Users.FindFirst()then PreparedBy:=Users."Full Name";
+        if Users.FindFirst() then PreparedBy := Users."Full Name";
     end;
 }

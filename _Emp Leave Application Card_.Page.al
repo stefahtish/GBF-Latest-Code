@@ -48,6 +48,7 @@ page 50417 "Emp Leave Application Card"
                 {
                     ToolTip = 'Specifies the value of the Employment Type field';
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Responsibility Center"; Rec."Responsibility Center")
                 {
@@ -444,7 +445,7 @@ page 50417 "Emp Leave Application Card"
                 Image = AssessFinanceCharges;
                 Promoted = true;
                 PromotedCategory = Process;
-                //Visible = "Leave Allowance Payable";
+                Visible = false;
                 PromotedIsBig = true;
                 ToolTip = 'Assign leave commutation to employee.';
 

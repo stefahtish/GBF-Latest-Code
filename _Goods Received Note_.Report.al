@@ -1,7 +1,7 @@
 report 50307 "Goods Received Note"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Reports/Report 51519806 GRN Report.rdl';
+    RDLCLayout = './ReportGRNReport.rdl';
     ApplicationArea = All;
 
     // RDLCLayout = './GoodsReceivedNote.rdl';

@@ -144,7 +144,7 @@ codeunit 50104 "Payments Management"
         if Confirm('Are you sure you want to post the Payment Voucher No. ' + PV."No." + ' ?') = true then begin
             Temp.Get(UserId);
             JTemplate := Temp."Payment Journal Template";
-            JBatch := pv."No."; // Temp."Payment Journal Batch";
+            JBatch := Temp."Payment Journal Batch";
             if JTemplate = '' then begin
                 Error('Ensure the PV Template is set up in Cash Office Setup');
             end;

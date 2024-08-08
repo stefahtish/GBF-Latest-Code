@@ -240,10 +240,11 @@ page 50465 "Applicant Card"
         }
         area(FactBoxes)
         {
-            part("Document Attachment Factbox"; "Document Attachment Factbox")
+            part("Attached Documents"; "Document Attachment Factbox")
             {
                 ApplicationArea = All;
-                SubPageLink = "No." = FIELD("No.");
+                Caption = 'Attachments';
+                SubPageLink = "Table ID" = CONST(50745), "No." = FIELD("No.");
             }
             // systempart(Control53; Links)
             // {

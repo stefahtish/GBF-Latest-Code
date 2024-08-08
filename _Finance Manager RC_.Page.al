@@ -740,6 +740,20 @@ page 51261 "Finance Manager RC"
                         Caption = 'Cash Flow Dimensions - Detail';
                         RunObject = report "Cash Flow Dimensions - Detail";
                     }
+                    action("Dimensions -wwDetail1")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Intact Report';
+                        RunObject = report "Intact report";
+                        Image = Report;
+                    }
+                    action("weekly cashflow report")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Weekly cashflow report';
+                        RunObject = report "Weekly cashflow Report";
+                        Image = Report;
+                    }
                 }
                 group("Group19")
                 {

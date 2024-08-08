@@ -8,6 +8,7 @@ report 50516 " Training Cost Comparision"
     {
         dataitem(TrainingRequest; "Training Request")
         {
+            RequestFilterFields = "Request No.", "Employee No";
             column(RequestNo; "Request No.")
             {
             }

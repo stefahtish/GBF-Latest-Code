@@ -1,7 +1,8 @@
-report 50169 "Notification Email Extension"   
+report 50169 "Notification Email Extension"
 {
     WordLayout = './NotificationEmail2.docx';
-    RDLCLayout = './NotificationEmail2.rdl';
+    // WordLayout = './NotificationEmail.docx';
+    // RDLCLayout = './NotificationEmail2.rdl';
     Caption = 'Notification Email';
     DefaultLayout = Word;
     ApplicationArea = All;
@@ -346,7 +347,7 @@ report 50169 "Notification Email Extension"
                     DocumentNo := Format(FieldRef.Value);
                     Field1Label := LeaveApp.FieldCaption("Days Applied");
                     FieldRef := RecRef.Field(LeaveApp.FieldNo("Days Applied"));
-                    Field1Value := Format(FieldRef.Value); 
+                    Field1Value := Format(FieldRef.Value);
                     Field2Label := LeaveApp.FieldCaption("Start Date");
                     FieldRef := RecRef.Field(LeaveApp.FieldNo("Start Date"));
                     Field2Value := Format(FieldRef.Value);

@@ -129,10 +129,12 @@ page 50244 "Approved/Post Imp Surr. Card"
                     field("Date of Project"; Rec."Date of Project")
                     {
                         ApplicationArea = basic, suite;
+                        Visible = false;
                     }
                     field("Date of Completion"; Rec."Date of Completion")
                     {
                         ApplicationArea = basic, suite;
+                        Visible = false;
                     }
                     field("Due Date"; Rec."Due Date")
                     {
@@ -169,11 +171,13 @@ page 50244 "Approved/Post Imp Surr. Card"
                     {
                         ApplicationArea = basic, suite;
                         Caption = 'No';
+                        Visible = false;
                     }
                     field(Apportion; Rec.Apportion)
                     {
                         ApplicationArea = basic, suite;
                         Caption = 'Yes';
+                        Visible = false;
                     }
                 }
             }
@@ -188,6 +192,7 @@ page 50244 "Approved/Post Imp Surr. Card"
                 Caption = 'External Imprest Surrender Lines';
                 ApplicationArea = basic, suite;
                 // Visible = ActivityImp;
+                Visible = false;
                 SubPageLink = No = FIELD("No."), "Payment Type" = FIELD("Payment Type");
             }
             part(Control20; "Imprest Surrender Lines2")
@@ -212,6 +217,7 @@ page 50244 "Approved/Post Imp Surr. Card"
                 Editable = NOT Rec.Posted;
                 SubPageLink = "Document No." = FIELD("No.");
                 Visible = Rec.Apportion;
+
             }
         }
         area(factboxes)

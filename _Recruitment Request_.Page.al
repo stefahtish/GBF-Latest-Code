@@ -197,6 +197,20 @@ page 50460 "Recruitment Request"
                         end;
                     end;
                 }
+                action(Test)
+                {
+                    ApplicationArea = All;
+                    Promoted = true;
+                    Visible = false;
+                    PromotedCategory = Category5;
+                    PromotedIsBig = true;
+                    Image = RemoveContacts;
+
+                    trigger OnAction()
+                    begin
+                        codeunit.Run(50153);
+                    end;
+                }
             }
         }
     }

@@ -4,7 +4,19 @@ pageextension 50108 PurchaseOrderCardPageExt extends "Purchase Order"
     {
         modify("Posting Description")
         {
-            Visible = true;
+            Visible = false;
+        }
+        modify("Pay-to Address 2")
+        {
+            Visible = false;
+        }
+        modify("Your Reference")
+        {
+            Visible = false;
+        }
+        modify("Purchaser Code")
+        {
+            Visible = false;
         }
 
         modify("Buy-from Vendor No.")
@@ -52,6 +64,7 @@ pageextension 50108 PurchaseOrderCardPageExt extends "Purchase Order"
             {
                 ApplicationArea = All;
                 Enabled = false;
+                Visible = false;
             }
             field("Tender/Quotation ref no"; Rec."Tender/Quotation ref no")
             {
@@ -68,12 +81,14 @@ pageextension 50108 PurchaseOrderCardPageExt extends "Purchase Order"
             field(Acknowledged; Rec.Acknowledged)
             {
                 ApplicationArea = All;
-                Enabled = false;
+
+                Visible = false;
             }
             field("Sent for Inspection"; Rec."Sent for Inspection")
             {
-                Enabled = false;
+                //Enabled = false;
                 ApplicationArea = All;
+                Visible = false;
             }
         }
         addlast(factboxes)
@@ -118,9 +133,11 @@ pageextension 50108 PurchaseOrderCardPageExt extends "Purchase Order"
             {
                 Image = Attach;
                 Promoted = true;
+
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                Visible = not Rec."Sent for Inspection";
+                // Visible = not Rec."Sent for Inspection";
+                Visible = false;
                 ApplicationArea = All;
 
                 trigger OnAction()
@@ -138,7 +155,7 @@ pageextension 50108 PurchaseOrderCardPageExt extends "Purchase Order"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
                 ApplicationArea = All;
-
+                Visible = false;
                 // Visible = not "Sent for Inspection";
                 trigger OnAction()
                 var

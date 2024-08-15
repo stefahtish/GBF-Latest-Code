@@ -240,6 +240,12 @@ page 50509 "HR Role Center"
                         RunObject = page "Applicants List";
                         RunPageLink = Applied = const(true);
                     }
+                    action("Qualified Applicants")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "Qualified Applicants";
+                        RunPageLink = Applied = const(true), Qualified = const(true);
+                    }
                     action("Job Applications List")
                     {
                         Visible = false;

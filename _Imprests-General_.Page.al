@@ -1,11 +1,11 @@
 page 50183 "Imprests-General"
 {
-    ApplicationArea = all;
-    UsageCategory = Lists;
+    ApplicationArea = None;
+    UsageCategory = None;
     CardPageID = Imprest;
     PageType = List;
     SourceTable = Payments;
-    SourceTableView = WHERE("Payment Type"=CONST(Imprest));
+    SourceTableView = WHERE("Payment Type" = CONST(Imprest));
     DeleteAllowed = false;
 
     layout
@@ -63,12 +63,12 @@ page 50183 "Imprests-General"
             part(Control26; "Pending Approval FactBox")
             {
                 ApplicationArea = All;
-                SubPageLink = "Table ID"=CONST(50000), "Document No."=FIELD("No.");
+                SubPageLink = "Table ID" = CONST(50000), "Document No." = FIELD("No.");
                 Visible = OpenApprovalEntriesExistForCurrUser;
             }
             part(Control25; "Approval FactBox")
             {
-                SubPageLink = "Table ID"=CONST(50000), "Document No."=FIELD("No.");
+                SubPageLink = "Table ID" = CONST(50000), "Document No." = FIELD("No.");
                 Visible = false;
             }
             part(IncomingDocAttachFactBox; "Incoming Doc. Attach. FactBox")
@@ -91,7 +91,7 @@ page 50183 "Imprests-General"
             part("FactBox"; "Payments FactBox Test")
             {
                 ApplicationArea = All;
-                SubPageLink = "No."=FIELD("No.");
+                SubPageLink = "No." = FIELD("No.");
             }
             systempart(Control16; Notes)
             {
@@ -104,14 +104,15 @@ page 50183 "Imprests-General"
     trigger OnAfterGetRecord()
     begin
         Rec.CalcFields("Impress Amount 1", "Impress Amount 2");
-        Rec."Imprest Amount":=Rec."Impress Amount 1" + Rec."Impress Amount 2";
+        Rec."Imprest Amount" := Rec."Impress Amount 1" + Rec."Impress Amount 2";
         Rec.Modify();
-    // DocStatus:=FormatStatus(Status);
+        // DocStatus:=FormatStatus(Status);
     end;
+
     trigger OnOpenPage()
     begin
         if GuiAllowed then begin
-            if UserSetup.Get(UserId)then begin
+            if UserSetup.Get(UserId) then begin
                 if not UserSetup."Show All" then begin
                     Rec.FilterGroup(2);
                     Rec.SetRange("Created By", UserId);
@@ -125,21 +126,22 @@ page 50183 "Imprests-General"
     // begin
     //     Error('Delete is not allowed!');
     // end;
-    var DocStatus: Option New, "HOD Approved", "Finance Approved", "Approval Pending", Rejected, "DED/DFA Approved";
-    UserSetup: Record "User Setup";
-    HasIncomingDocument: Boolean;
-    DocNoVisible: Boolean;
-    VendorInvoiceNoMandatory: Boolean;
-    OpenApprovalEntriesExist: Boolean;
-    OpenApprovalEntriesExistForCurrUser: Boolean;
-    ShowWorkflowStatus: Boolean;
-    JobQueuesUsed: Boolean;
-    IsOfficeAddin: Boolean;
-    CanCancelApprovalForRecord: Boolean;
-    DocumentIsPosted: Boolean;
-    CreateIncomingDocumentEnabled: Boolean;
-    CreateIncomingDocumentVisible: Boolean;
-    CreateIncomingDocFromEmailAttachment: Boolean;
-    IncomingDocEmailAttachmentEnabled: Boolean;
-    UserPersonalization: Record "User Personalization";
+    var
+        DocStatus: Option New,"HOD Approved","Finance Approved","Approval Pending",Rejected,"DED/DFA Approved";
+        UserSetup: Record "User Setup";
+        HasIncomingDocument: Boolean;
+        DocNoVisible: Boolean;
+        VendorInvoiceNoMandatory: Boolean;
+        OpenApprovalEntriesExist: Boolean;
+        OpenApprovalEntriesExistForCurrUser: Boolean;
+        ShowWorkflowStatus: Boolean;
+        JobQueuesUsed: Boolean;
+        IsOfficeAddin: Boolean;
+        CanCancelApprovalForRecord: Boolean;
+        DocumentIsPosted: Boolean;
+        CreateIncomingDocumentEnabled: Boolean;
+        CreateIncomingDocumentVisible: Boolean;
+        CreateIncomingDocFromEmailAttachment: Boolean;
+        IncomingDocEmailAttachmentEnabled: Boolean;
+        UserPersonalization: Record "User Personalization";
 }

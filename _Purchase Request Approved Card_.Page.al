@@ -170,12 +170,15 @@ page 50779 "Purchase Request Approved Card"
                 Visible = false;
 
                 trigger OnAction()
+                var
+                    irLine: record "Internal Request Line";
                 begin
                     //BudgetControl.CheckBudgetPurchase(Rec);
                     // Committment.CheckPurchReqCommittment(Rec);
                     // Committment.PurchReqCommittment(Rec,ErrorMsg);
                     // IF ErrorMsg<>'' THEN
                     //   ERROR(ErrorMsg);
+
                     if ApprovalsMgmt.CheckReqWorkflowEnabled(Rec) then ApprovalsMgmt.OnSendReqRequestforApproval(Rec);
                     Commit;
                     //Check HOD approver
@@ -255,8 +258,12 @@ page 50779 "Purchase Request Approved Card"
                 Visible = Rec."Status" = Rec."Status"::"Released";
 
                 trigger OnAction()
+                var
+                    irLine: record "Internal Request Line";
                 begin
                     Rec.TestField(Status, Rec.Status::Released);
+                    // irLine.TestField(Type2);
+                    // irLine.TestField("Charge to No.");
                     if Confirm('Are you sure you want to approve PFR No. %1 and send it to Request For Quotation?', false, Rec."No.") = true then begin
                         Rec."Cleared For RFQ" := true;
                         Rec.Modify;
@@ -289,6 +296,31 @@ page 50779 "Purchase Request Approved Card"
                         exit;
                 end;
             }
+            action("Make Order")
+            {
+                Caption = 'Create &LPO';
+                Image = MakeOrder;
+                Promoted = true;
+                PromotedCategory = Process;
+                Visible = true;
+                trigger OnAction()
+                var
+                    ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                begin
+                    //ApprovalsMgmt.Check(Rec) THEN
+                    //DocManager.MakeOrder(Rec);
+                    /*
+                    OpenApprovalEntriesExist := ApprovalsMgmt.HasApprovalEntries(RECORDID);
+                    IF OpenApprovalEntriesExist=TRUE THEN
+                      ERROR(Text002)
+                    ELSE
+                      */
+                    if Rec.Status <> Rec.Status::Released then Error('This requisition must be fully approved before ordering');
+                    if Rec.Status = Rec.Status::Released then ProcurementMgt.MakeOrder(Rec);
+                    Commit;
+                    CurrPage.Close;
+                end;
+            }
             group(Action10)
             {
                 Visible = false;
@@ -310,32 +342,7 @@ page 50779 "Purchase Request Approved Card"
                             */
                     end;
                 }
-                action("Make Order")
-                {
-                    Caption = 'Create &LPO';
-                    Image = MakeOrder;
-                    Promoted = true;
-                    PromotedCategory = Process;
 
-                    //Visible = false;
-                    trigger OnAction()
-                    var
-                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
-                    begin
-                        //ApprovalsMgmt.Check(Rec) THEN
-                        //DocManager.MakeOrder(Rec);
-                        /*
-                        OpenApprovalEntriesExist := ApprovalsMgmt.HasApprovalEntries(RECORDID);
-                        IF OpenApprovalEntriesExist=TRUE THEN
-                          ERROR(Text002)
-                        ELSE
-                          */
-                        if Rec.Status <> Rec.Status::Released then Error('This requisition must be fully approved before ordering');
-                        if Rec.Status = Rec.Status::Released then ProcurementMgt.MakeOrder(Rec);
-                        Commit;
-                        CurrPage.Close;
-                    end;
-                }
                 action("Create RFQ")
                 {
                     Image = MakeOrder;
@@ -364,14 +371,13 @@ page 50779 "Purchase Request Approved Card"
 
                     trigger OnAction()
                     begin
-                        // IF CONFIRM('Are you sure you want to create an RFQ for this requisition?',FALSE)=TRUE THEN
-                        //  BEGIN
-                        //    TESTFIELD(Status,Status::Released);
-                        //    ProcurementMgt.CreateRFQ(Rec);
-                        //  END;
-                        //
-                        // COMMIT;
-                        // CurrPage.CLOSE;
+                        IF CONFIRM('Are you sure you want to create an RFQ for this requisition?', FALSE) = TRUE THEN BEGIN
+                            rec.TESTFIELD(Status, rec.Status::Released);
+                            ProcurementMgt.CreateRFQ(Rec);
+                        END;
+
+                        COMMIT;
+                        CurrPage.CLOSE;
                     end;
                 }
                 action("Raise RFP")

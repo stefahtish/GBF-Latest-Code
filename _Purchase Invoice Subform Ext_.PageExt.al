@@ -12,14 +12,14 @@ pageextension 50117 "Purchase Invoice Subform Ext" extends "Purch. Invoice Subfo
             {
                 Caption = 'Specifications';
                 ApplicationArea = All;
-                MultiLine = true;
+                //MultiLine = true;
 
                 trigger OnValidate()
                 begin
                     Rec.CalcFields(Specification2);
                     rec.Specification2.CreateInStream(Instr);
                     SpecificationsBigTxt.Read(Instr);
-                    if SpecificationsTxt <> format(SpecificationsBigTxt)then begin
+                    if SpecificationsTxt <> format(SpecificationsBigTxt) then begin
                         clear(Rec.Specification2);
                         clear(SpecificationsBigTxt);
                         SpecificationsBigTxt.AddText(SpecificationsTxt);
@@ -64,18 +64,24 @@ pageextension 50117 "Purchase Invoice Subform Ext" extends "Purch. Invoice Subfo
         Rec.CalcFields(Specification2);
         rec.Specification2.CreateInStream(Instr);
         SpecificationsBigTxt.Read(Instr);
-        SpecificationsTxt:=Format(SpecificationsBigTxt);
+        SpecificationsTxt := Format(SpecificationsBigTxt);
     end;
-    trigger OnInsertRecord(BelowxRec: Boolean): Boolean begin
+
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    begin
         Rec.SuspendStatusCheck(true);
     end;
-    trigger OnModifyRecord(): boolean var
+
+    trigger OnModifyRecord(): boolean
+    var
         myInt: Integer;
     begin
         Rec.SuspendStatusCheck(true);
     end;
-    var Instr: InStream;
-    OutStr: OutStream;
-    SpecificationsTxt: Text;
-    SpecificationsBigTxt: BigText;
+
+    var
+        Instr: InStream;
+        OutStr: OutStream;
+        SpecificationsTxt: Text;
+        SpecificationsBigTxt: BigText;
 }

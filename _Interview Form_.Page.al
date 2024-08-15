@@ -21,6 +21,12 @@ page 50472 "Interview Form"
                     ToolTip = 'Specifies the value of the Panel Member Code field';
                     ApplicationArea = All;
                 }
+                field("Panel Name"; Rec."Panel Name")
+                {
+                    ToolTip = 'Specifies the value of the Panel Name field.';
+                    Caption = 'Panel Member Name';
+                }
+
                 field(Remarks; Rec.Remarks)
                 {
                     ToolTip = 'Specifies the value of the Remarks field';

@@ -66,6 +66,7 @@ page 50138 "Imprest Surrender"
                             Rec."Imprest Issue Doc. No" := ImprestRec."No.";
                             Rec.Validate("Imprest Issue Doc. No");
                         end;
+                        Insertlines()
                     end;
                 }
                 group(Control52)
@@ -222,6 +223,7 @@ page 50138 "Imprest Surrender"
                 Enabled = Rec.Status = Rec.Status::Open;
                 SubPageLink = "Surrender No." = field("No.");
                 UpdatePropagation = both;
+                Visible = false;
             }
         }
         area(factboxes)
@@ -813,4 +815,85 @@ page 50138 "Imprest Surrender"
         if Rec.Status = Rec.Status::Released then DocReleased := true;
         PageEnabled := false;
     end;
+
+    procedure Insertlines()
+    var
+        PaymentLine: Record "Payment Lines";
+        PaymentRec: Record Payments;
+        ImpSurrLines: Record "Payment Lines";
+        ExtPaymentLine: Record "Ext Payment Lines";
+        ExtInsurrLines: Record "Ext Payment Lines";
+        Text001: Label 'The imprest %1 has been fully surrendered';
+    begin
+        if PaymentRec.Get(Rec."Imprest Issue Doc. No") then begin
+            if Rec."Payment Type" = Rec."Payment Type"::"Imprest Surrender" then begin
+                if PaymentRec.Surrendered then Error(Text001, Rec."Imprest Issue Doc. No");
+                Rec."Account Type" := PaymentRec."Account Type";
+                Rec."Account No." := PaymentRec."Account No.";
+                Rec.Validate("Account No.");
+                Rec."Pay Mode" := PaymentRec."Pay Mode";
+                Rec."Cheque No" := PaymentRec."Cheque No";
+                Rec."Cheque Date" := PaymentRec."Cheque Date";
+                Rec."Paying Bank Account" := PaymentRec."Paying Bank Account";
+                Rec.Currency := PaymentRec.Currency;
+                Rec."Payment Narration" := PaymentRec."Payment Narration";
+                Rec."Multi-Donor" := PaymentRec."Multi-Donor";
+                Rec."Staff No." := PaymentRec."Staff No.";
+                Rec."Payment Narration" := PaymentRec."Payment Narration";
+                Rec.Destination := PaymentRec.Destination;
+                Rec."No of Days" := PaymentRec."No of Days";
+                Rec."Date of Project" := PaymentRec."Date of Project";
+                Rec."Date of Completion" := PaymentRec."Date of Completion";
+                Rec."Due Date" := PaymentRec."Due Date";
+                Rec."Posted Date" := PaymentRec."Posted Date";
+                Rec."Shortcut Dimension 1 Code" := PaymentRec."Shortcut Dimension 1 Code";
+                Rec.Validate("Shortcut Dimension 1 Code");
+                Rec."Shortcut Dimension 2 Code" := PaymentRec."Shortcut Dimension 2 Code";
+                Rec.Validate("Shortcut Dimension 2 Code");
+                Rec."Dimension Set ID" := PaymentRec."Dimension Set ID";
+                Rec."Shortcut Dimension 3 Code" := PaymentRec."Shortcut Dimension 3 Code";
+                Rec.Validate("Shortcut Dimension 3 Code");
+                Rec.Validate("Dimension Set ID");
+                PaymentLine.Reset;
+                PaymentLine.SetRange(No, PaymentRec."No.");
+                if PaymentLine.Find('-') then begin
+                    PaymentLines.Reset;
+                    PaymentLines.SetRange(No, Rec."No.");
+                    PaymentLines.DeleteAll();
+                    repeat
+                        ImpSurrLines.Init;
+                        ImpSurrLines.TransferFields(PaymentLine);
+                        ImpSurrLines."Payment Type" := ImpSurrLines."Payment Type"::"Imprest Surrender";
+                        ImpSurrLines."Shortcut Dimension 1 Code" := PaymentRec."Shortcut Dimension 1 Code";
+                        ImpSurrLines."Shortcut Dimension 2 Code" := PaymentRec."Shortcut Dimension 2 Code";
+                        ImpSurrLines."Shortcut Dimension 3 Code" := PaymentRec."Shortcut Dimension 3 Code";
+                        ImpSurrLines."Shortcut Dimension 4 Code" := PaymentRec."Shortcut Dimension 4 Code";
+                        ImpSurrLines.No := Rec."No.";
+                        ImpSurrLines."Line No" := Rec.GetNextLineNo();
+                        ImpSurrLines."Actual Spent" := PaymentLine.Amount;
+                        ImpSurrLines.Purpose := PaymentRec."Payment Narration";
+                        ImpSurrLines.Insert;
+                    until PaymentLine.Next = 0;
+                end;
+                ExtPaymentLine.Reset();
+                ExtPaymentLine.SetRange(No, PaymentRec."No.");
+                if ExtPaymentLine.FindSet() then begin
+                    ExtPaymentLines.Reset();
+                    ExtPaymentLines.SetRange(No, Rec."No.");
+                    ExtPaymentLines.DeleteAll();
+                    repeat
+                        ExtInsurrLines.Init;
+                        ExtInsurrLines.TransferFields(ExtPaymentLine);
+                        ExtInsurrLines."Payment Type" := ExtInsurrLines."Payment Type"::"Imprest Surrender"; //Carol
+                        ExtInsurrLines.No := Rec."No.";
+                        ExtInsurrLines."Line No" := Rec.GetExtNextLineNo();
+                        ExtInsurrLines."Actual Spent" := ExtPaymentLine.Amount;
+                        ExtInsurrLines.Purpose := PaymentRec."Payment Narration";
+                        ExtInsurrLines.Insert;
+                    until ExtPaymentLine.Next() = 0;
+                end;
+            end;
+        end;
+    end;
 }
+

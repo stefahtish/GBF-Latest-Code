@@ -1,12 +1,12 @@
 page 50136 Imprests
 {
-    ApplicationArea = Basic, Suite;
+    ApplicationArea = None;
     CardPageID = Imprest;
     DeleteAllowed = false;
     PageType = List;
     SourceTable = Payments;
-    SourceTableView = WHERE("Payment Type"=CONST(Imprest), Status=FILTER(Open|"Pending Approval"), Posted=CONST(false));
-    UsageCategory = Lists;
+    SourceTableView = WHERE("Payment Type" = CONST(Imprest), Status = FILTER(Open | "Pending Approval"), Posted = CONST(false));
+    UsageCategory = None;
 
     layout
     {
@@ -53,12 +53,12 @@ page 50136 Imprests
             part(Control26; "Pending Approval FactBox")
             {
                 ApplicationArea = All;
-                SubPageLink = "Table ID"=CONST(50000), "Document No."=FIELD("No.");
+                SubPageLink = "Table ID" = CONST(50000), "Document No." = FIELD("No.");
                 Visible = OpenApprovalEntriesExistForCurrUser;
             }
             part(Control25; "Approval FactBox")
             {
-                SubPageLink = "Table ID"=CONST(50000), "Document No."=FIELD("No.");
+                SubPageLink = "Table ID" = CONST(50000), "Document No." = FIELD("No.");
                 Visible = false;
             }
             part(IncomingDocAttachFactBox; "Incoming Doc. Attach. FactBox")
@@ -88,11 +88,12 @@ page 50136 Imprests
     }
     trigger OnAfterGetRecord()
     begin
-    // DocStatus:=FormatStatus(Status);
+        // DocStatus:=FormatStatus(Status);
     end;
+
     trigger OnOpenPage()
     begin
-        if UserSetup.Get(UserId)then begin
+        if UserSetup.Get(UserId) then begin
             if not UserSetup."Show All" then begin
                 Rec.FilterGroup(2);
                 Rec.SetRange("Created By", UserId);
@@ -101,21 +102,23 @@ page 50136 Imprests
         else
             Error('%1 does not exist in the Users Setup', UserId);
     end;
-    var DocStatus: Option New, "HOD Approved", "Finance Approved", "Approval Pending", Rejected, "DED/DFA Approved";
-    UserSetup: Record "User Setup";
-    HasIncomingDocument: Boolean;
-    DocNoVisible: Boolean;
-    VendorInvoiceNoMandatory: Boolean;
-    OpenApprovalEntriesExist: Boolean;
-    OpenApprovalEntriesExistForCurrUser: Boolean;
-    ShowWorkflowStatus: Boolean;
-    JobQueuesUsed: Boolean;
-    IsOfficeAddin: Boolean;
-    CanCancelApprovalForRecord: Boolean;
-    DocumentIsPosted: Boolean;
-    CreateIncomingDocumentEnabled: Boolean;
-    CreateIncomingDocumentVisible: Boolean;
-    CreateIncomingDocFromEmailAttachment: Boolean;
-    IncomingDocEmailAttachmentEnabled: Boolean;
-    UserPersonalization: Record "User Personalization";
+
+    var
+        DocStatus: Option New,"HOD Approved","Finance Approved","Approval Pending",Rejected,"DED/DFA Approved";
+        UserSetup: Record "User Setup";
+        HasIncomingDocument: Boolean;
+        DocNoVisible: Boolean;
+        VendorInvoiceNoMandatory: Boolean;
+        OpenApprovalEntriesExist: Boolean;
+        OpenApprovalEntriesExistForCurrUser: Boolean;
+        ShowWorkflowStatus: Boolean;
+        JobQueuesUsed: Boolean;
+        IsOfficeAddin: Boolean;
+        CanCancelApprovalForRecord: Boolean;
+        DocumentIsPosted: Boolean;
+        CreateIncomingDocumentEnabled: Boolean;
+        CreateIncomingDocumentVisible: Boolean;
+        CreateIncomingDocFromEmailAttachment: Boolean;
+        IncomingDocEmailAttachmentEnabled: Boolean;
+        UserPersonalization: Record "User Personalization";
 }

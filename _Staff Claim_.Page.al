@@ -357,6 +357,25 @@ page 50152 "Staff Claim"
                         CurrPage.Close;
                     end;
                 }
+                action("Re&open")
+                {
+                    Caption = 'Re&open';
+                    Image = ReOpen;
+                    Visible = NOT OpenApprovalEntriesExist;
+
+                    trigger OnAction()
+                    var
+                        ReleasePurchDoc: Codeunit "Release Purchase Document";
+                    begin
+                        REC.Reset();
+                        Rec.SetRange("No.", rec."No.");
+                        if rec.FindSet() then begin
+                            rec.Status := rec.Status::Open;
+                            rec.Modify()
+                        end;
+                        //ReleasePurchDoc.ReopenPV(Rec);
+                    end;
+                }
                 action("Mass Commit")
                 {
                     Caption = 'Mass Commit';
@@ -448,25 +467,7 @@ page 50152 "Staff Claim"
                         //ReleasePurchDoc.PerformManualRelease(Rec);
                     end;
                 }
-                action("Re&open")
-                {
-                    Caption = 'Re&open';
-                    Image = ReOpen;
-                    Visible = NOT OpenApprovalEntriesExist;
 
-                    trigger OnAction()
-                    var
-                        ReleasePurchDoc: Codeunit "Release Purchase Document";
-                    begin
-                        REC.Reset();
-                        Rec.SetRange("No.", rec."No.");
-                        if rec.FindSet() then begin
-                            rec.Status := rec.Status::Open;
-                            rec.Modify()
-                        end;
-                        //ReleasePurchDoc.ReopenPV(Rec);
-                    end;
-                }
                 separator(Action27)
                 {
                 }
@@ -489,8 +490,15 @@ page 50152 "Staff Claim"
 
                     // Visible = false;
                     trigger OnAction()
+                    var
+
                     begin
-                        PaymentsPost.PostStaffClaim(Rec);
+                        //PaymentsPost.PostStaffClaim(Rec);
+                        rec.Posted := true;
+                        Rec."Posted By" := UserId;
+                        Rec."Posted Date" := rec."Posting Date";
+                        Rec."Time Posted" := Time;
+                        Rec.Modify;
                         Commit;
                         CurrPage.Close();
                     end;

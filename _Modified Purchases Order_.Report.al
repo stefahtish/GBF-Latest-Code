@@ -60,6 +60,9 @@ report 50504 "Modified Purchases Order"
             column(TotalCaption; TotalCaptionLbl)
             {
             }
+            column(Currency_Code; "Currency Code")
+            {
+            }
             column(PaymentTermsDescCaption; PaymentTermsDescCaptionLbl)
             {
             }
@@ -73,6 +76,9 @@ report 50504 "Modified Purchases Order"
             {
             }
             column(EmailIDCaption; EmailIDCaptionLbl)
+            {
+            }
+            column(Vendor_Invoice_No_; "Vendor Invoice No.")
             {
             }
             column(AllowInvoiceDiscCaption; AllowInvoiceDiscCaptionLbl)
@@ -228,6 +234,9 @@ report 50504 "Modified Purchases Order"
                     {
                     }
                     column(CompanyInfoVATRegNo; CompanyInfo."VAT Registration No.")
+                    {
+                    }
+                    column(Cemail; CompanyInfo."E-Mail")
                     {
                     }
                     column(CompanyInfoGiroNo; CompanyInfo."Giro No.")
@@ -1000,6 +1009,7 @@ report 50504 "Modified Purchases Order"
                     OutputNo := OutputNo + 1;
                     TotalSubTotal := 0;
                     TotalAmount := 0;
+
                 end;
 
                 trigger OnPostDataItem()
@@ -1023,6 +1033,7 @@ report 50504 "Modified Purchases Order"
             begin
                 // CurrReport.Language := Lang.GetLanguageID("Language Code");
                 Clear(TotaTXT);
+                // if "Purchase Header"."Currency Code" = '' then "Purchase Header"."Currency Code" := 'KES';
                 if "Purchase Header"."Currency Code" = '' then
                     TotaTXT := 'Total' + '(' + 'KES' + ')'
                 else

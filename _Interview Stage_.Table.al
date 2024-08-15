@@ -14,6 +14,17 @@ table 50248 "Interview Stage"
         {
             DataClassification = ToBeClassified;
             TableRelation = "Interview Panel Members"."Panel Member Code";
+            trigger OnValidate()
+            var
+                PanelMemberRecord: Record "Interview Panel Members";
+            begin
+                PanelMemberRecord.SetRange("Panel Member Code", Panel);
+                if PanelMemberRecord.FindFirst() then
+                    "Panel Name" := PanelMemberRecord."Panel Member Name"
+
+                else
+                    "Panel Name" := '';
+            end;
         }
         field(4; Remarks; Text[250])
         {
@@ -39,9 +50,9 @@ table 50248 "Interview Stage"
             begin
                 Parameters.Reset;
                 Parameters.SetRange(code, "Test Parameter");
-                if Parameters.Find('-')then begin
-                    "Maximum Marks":=Parameters."Max Marks";
-                    "Pass Mark":=Parameters."Pass Mark";
+                if Parameters.Find('-') then begin
+                    "Maximum Marks" := Parameters."Max Marks";
+                    "Pass Mark" := Parameters."Pass Mark";
                 end;
             end;
         }
@@ -59,7 +70,7 @@ table 50248 "Interview Stage"
         {
             DataClassification = ToBeClassified;
             OptionCaption = 'Oral 1,Oral 2,Oral 3,Practical';
-            OptionMembers = "Oral 1", "Oral 2", "Oral 3", Practical;
+            OptionMembers = "Oral 1","Oral 2","Oral 3",Practical;
         }
         field(10; Description; Text[250])
         {
@@ -77,6 +88,12 @@ table 50248 "Interview Stage"
         {
             DataClassification = ToBeClassified;
         }
+        field(14; "Panel Name"; Text[250])
+        {
+            DataClassification = ToBeClassified;
+            Editable = false; // Ensuring the field is not editable
+        }
+
     }
     keys
     {
@@ -88,5 +105,6 @@ table 50248 "Interview Stage"
     fieldgroups
     {
     }
-    var Parameters: Record "Test Parameters";
+    var
+        Parameters: Record "Test Parameters";
 }

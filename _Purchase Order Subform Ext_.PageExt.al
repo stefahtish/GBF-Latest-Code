@@ -23,7 +23,7 @@ pageextension 50116 "Purchase Order Subform Ext" extends "Purchase Order Subform
                     Rec.CalcFields(Specification2);
                     rec.Specification2.CreateInStream(Instr);
                     SpecificationsBigTxt.Read(Instr);
-                    if SpecificationsTxt <> format(SpecificationsBigTxt)then begin
+                    if SpecificationsTxt <> format(SpecificationsBigTxt) then begin
                         clear(Rec.Specification2);
                         clear(SpecificationsBigTxt);
                         SpecificationsBigTxt.AddText(SpecificationsTxt);
@@ -40,12 +40,14 @@ pageextension 50116 "Purchase Order Subform Ext" extends "Purchase Order Subform
             field("General expense Code"; Rec."General expense Codes")
             {
                 Caption = 'General expense Code';
+                Visible = false;
                 ApplicationArea = All;
             }
             field("Inspection Decision"; Rec."Inspection Decisions")
             {
                 Caption = 'Inspection Decision';
                 Enabled = false;
+                Visible = false;
                 ApplicationArea = All;
             }
         }
@@ -75,21 +77,25 @@ pageextension 50116 "Purchase Order Subform Ext" extends "Purchase Order Subform
         Rec.CalcFields(Specification2);
         rec.Specification2.CreateInStream(Instr);
         SpecificationsBigTxt.Read(Instr);
-        SpecificationsTxt:=Format(SpecificationsBigTxt);
+        SpecificationsTxt := Format(SpecificationsBigTxt);
         //  ProcMgmt.GetInspectionDecision(Rec);
         SetControlAppearance();
     end;
-    var Instr: InStream;
-    OutStr: OutStream;
-    SpecificationsTxt: Text;
-    SpecificationsBigTxt: BigText;
-    QtyEditable: Boolean;
+
+    var
+        Instr: InStream;
+        OutStr: OutStream;
+        SpecificationsTxt: Text;
+        SpecificationsBigTxt: BigText;
+        QtyEditable: Boolean;
+
     procedure SetControlAppearance()
     var
         myInt: Integer;
     begin
-        if Rec."Inspection Decisions" <> Rec."Inspection Decisions"::" " then QtyEditable:=false
+        if Rec."Inspection Decisions" <> Rec."Inspection Decisions"::" " then
+            QtyEditable := false
         else
-            QtyEditable:=true;
+            QtyEditable := true;
     end;
 }

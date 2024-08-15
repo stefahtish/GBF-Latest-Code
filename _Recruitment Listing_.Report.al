@@ -1,7 +1,7 @@
 report 50493 "Recruitment Listing"
 {
     Caption = 'Recruitment Listing';
-    RDLCLayout = './Reports/Report 51521624  - Recruitment Listing.rdl';
+    RDLCLayout = './Reports/Report 51521624  - Recruitment Listings.rdl';
     ApplicationArea = All;
 
     dataset

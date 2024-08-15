@@ -506,14 +506,13 @@ page 50752 "Purchase Request"
 
                     trigger OnAction()
                     begin
-                        // IF CONFIRM('Are you sure you want to create an RFQ for this requisition?',FALSE)=TRUE THEN
-                        //  BEGIN
-                        //    TESTFIELD(Status,Status::Released);
-                        //    ProcurementMgt.CreateRFQ(Rec);
-                        //  END;
-                        //
-                        // COMMIT;
-                        // CurrPage.CLOSE;
+                        IF CONFIRM('Are you sure you want to create an RFQ for this requisition?', FALSE) = TRUE THEN BEGIN
+                            rec.TESTFIELD(Status, rec.Status::Released);
+                            ProcurementMgt.CreateRFQ(Rec);
+                        END;
+
+                        COMMIT;
+                        CurrPage.CLOSE;
                     end;
                 }
                 action("Raise RFP")

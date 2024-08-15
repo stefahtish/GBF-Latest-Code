@@ -38,20 +38,8 @@ page 50133 "Imprest Lines"
                     Editable = true;
                     ApplicationArea = basic, suite;
 
-                    // trigger OnValidate()
-                    // var
-                    //     PaymentLine: Record "Payment Lines";
-                    //     Pyament: record payments;
-                    // begin
-                    //     PaymentLine.Reset;
-                    //     // PaymentLine.SetRange("Payment Type", "Payment Type");
-                    //     PaymentLine.SetRange(No, Pyament."No.");
-                    //     if PaymentLine.FindSet() then begin
-                    //         PaymentLine."Shortcut Dimension 1 Code" := Pyament."Shortcut Dimension 1 Code";
-                    //         PaymentLine."Shortcut Dimension 2 Code" := Pyament."Shortcut Dimension 2 Code";
-                    //         PaymentLine.Modify()
-                    //     end;
-                    // end;
+
+
                 }
                 field("Account Name"; Rec."Account Name")
                 {
@@ -69,21 +57,7 @@ page 50133 "Imprest Lines"
                     ApplicationArea = Jobs;
                     ToolTip = 'Specifies the number of the related project.';
 
-                    trigger OnValidate()
-                    var
-                        PaymentLine: record "Payment Lines";
-                        pay: record payments;
-                    begin
-                        PaymentLine.Reset;
-                        // PaymentLine.SetRange("Payment Type", "Payment Type");
-                        PaymentLine.SetRange(No, pay."No.");
-                        if PaymentLine.FindSet() then begin
-                            PaymentLine."Shortcut Dimension 1 Code" := rec."Shortcut Dimension 1 Code";
-                            PaymentLine."Shortcut Dimension 2 Code" := rec."Shortcut Dimension 2 Code";
-                            PaymentLine.Modify()
-                        end;
 
-                    end;
                 }
                 field("Job Task No."; Rec."Job Task No.")
                 {
@@ -103,6 +77,7 @@ page 50133 "Imprest Lines"
                 field("Based On Travel Rates"; Rec."Based On Travel Rates")
                 {
                     Enabled = false;
+                    Visible = false;
                     ApplicationArea = basic, suite;
                 }
                 field("No of Days"; Rec."No of Days")
@@ -113,6 +88,7 @@ page 50133 "Imprest Lines"
                 field("Daily Rate"; Rec."Daily Rate")
                 {
                     Enabled = false;
+                    Visible = false;
                     ApplicationArea = basic, suite;
                 }
                 field(Amount; Rec.Amount)
@@ -123,10 +99,17 @@ page 50133 "Imprest Lines"
 
                     trigger OnValidate()
                     var
-
+                        PaymentRec: Record Payments;
                     begin
-                        ValidatePaymentNarration();
-                        CurrPage.Update();
+                        // Retrieve the Payment Header record
+                        PaymentRec.Reset();
+                        PaymentRec.SetRange("No.", Rec.No);
+                        if PaymentRec.FindFirst() then begin
+
+                            Rec."Shortcut Dimension 1 Code" := PaymentRec."Shortcut Dimension 1 Code";
+                            Rec."Shortcut Dimension 2 Code" := PaymentRec."Shortcut Dimension 2 Code";
+                            Rec.Modify();
+                        end;
                     end;
 
 
@@ -265,11 +248,13 @@ page 50133 "Imprest Lines"
                 field("Line No"; Rec."Line No")
                 {
                     Enabled = false;
+                    Visible = false;
                     ApplicationArea = basic, suite;
                 }
                 field("Payment Type"; Rec."Payment Type")
                 {
                     Enabled = false;
+                    Visible = false;
                     ApplicationArea = basic, suite;
                 }
             }

@@ -47,6 +47,7 @@ page 50753 "Purchase Request Approved"
                 field("Location Code"; Rec."Location Code")
                 {
                     ApplicationArea = Basic, Suite;
+                    Visible = false;
                 }
                 field(Amount; Rec.Amount)
                 {
@@ -103,6 +104,7 @@ page 50753 "Purchase Request Approved"
 
                 trigger OnAction()
                 begin
+                    rec.TestField(Selected, true);
                     if Confirm('Are you sure you want to approve PFR No. %1 and send it to Request For Quotation?', false, Rec."No.") = true then begin
                         Rec."Cleared For RFQ" := true;
                         Rec.Archived := true;
@@ -173,6 +175,32 @@ page 50753 "Purchase Request Approved"
     trigger OnOpenPage()
     begin
         SetPageView;
+        IR.SetRange("Document Type", IR."Document Type"::Purchase);
+        IR.SetRange("Fully Ordered", false);
+        IR.SetRange(Status, IR.Status::Released);
+        IR.SetRange(Archived, false);
+        if IR.FindSet() then begin
+            repeat
+                IR.Selected := false;
+                IR.Modify();
+            until IR.Next() = 0;
+        end;
+        ;
+    end;
+
+    trigger OnClosePage()
+    begin
+        // Set all records to Not Selected
+        IR.SetRange("Document Type", IR."Document Type"::Purchase);
+        IR.SetRange("Fully Ordered", false);
+        IR.SetRange(Status, IR.Status::Released);
+        IR.SetRange(Archived, false);
+        if IR.FindSet() then begin
+            repeat
+                IR.Selected := false;
+                IR.Modify();
+            until IR.Next() = 0;
+        end;
     end;
 
     var

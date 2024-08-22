@@ -33,7 +33,7 @@ table 50117 "Cash Management Setups"
         field(8; "Rounding Type"; Option)
         {
             OptionCaption = 'Up,Nearest,Down';
-            OptionMembers = Up, Nearest, Down;
+            OptionMembers = Up,Nearest,Down;
         }
         field(9; "Rounding Precision"; Decimal)
         {
@@ -204,7 +204,7 @@ table 50117 "Cash Management Setups"
         field(50; "Library Charge Batch"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Gen. Journal Batch".Name WHERE("Journal Template Name"=FIELD("Library Charge Template"));
+            TableRelation = "Gen. Journal Batch".Name WHERE("Journal Template Name" = FIELD("Library Charge Template"));
         }
         field(51; "Library Charge Account"; Code[20])
         {
@@ -401,7 +401,7 @@ table 50117 "Cash Management Setups"
         field(50137; "Default Bank"; Code[30])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Bank Account" WHERE("Bank Type"=CONST(Bank));
+            TableRelation = "Bank Account" WHERE("Bank Type" = CONST(Bank));
         }
         field(50141; "Pay Mode"; Code[20])
         {
@@ -445,6 +445,11 @@ table 50117 "Cash Management Setups"
         {
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
+        }
+        field(50153; "Claim Overspend Code"; code[100])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Receipts and Payment Types".Code;
         }
     }
     keys

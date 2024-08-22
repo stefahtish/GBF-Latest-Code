@@ -81,7 +81,7 @@ page 51276 "General Management Cues"
             {
                 field("Staff Claims List"; Rec."Staff Claims List")
                 {
-                    DrillDownPageId = "Staff Claim List-General";
+                    DrillDownPageId = "Staff Claim List";
                 }
                 field("Pending Staff Claim List"; Rec."Pending Staff Claim List")
                 {
@@ -96,7 +96,7 @@ page 51276 "General Management Cues"
             {
                 field("Purchase Request List"; Rec."Purchase Request List")
                 {
-                    DrillDownPageId = "Purchase Request List-General";
+                    DrillDownPageId = "Purchase Request List";
                 }
                 field("Purchase Request Approved"; Rec."Purchase Request Approved")
                 {

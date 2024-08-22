@@ -14,6 +14,7 @@ page 51261 "Finance Manager RC"
             part("Finance Management Cues"; "Finance Management Cues")
             {
                 ApplicationArea = Basic, Suite;
+                Editable = false;
             }
         }
     }

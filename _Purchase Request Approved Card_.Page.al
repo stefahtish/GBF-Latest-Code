@@ -126,6 +126,14 @@ page 50779 "Purchase Request Approved Card"
                     Visible = CommentVisible;
                 }
             }
+            part(PurchaseRequestSub2; "Purchase Request Subformv")
+            {
+                ApplicationArea = all;
+                Caption = 'Vendor RFQ Details';
+                SubPageLink = "Document No." = FIELD("No.");
+                //UpdatePropagation = Both;
+                //Visible = true;
+            }
             part(PurchaseRequestSubform; "Purchase Request Subform")
             {
                 Caption = 'Purchase Request Subform';
@@ -212,6 +220,21 @@ page 50779 "Purchase Request Approved Card"
                     ApprovalsMgmt.OnCancelReqApprovalRequest(Rec);
                 end;
             }
+
+            action("Re-Open")
+            {
+                ApplicationArea = All;
+                caption = 'Re-open';
+                Image = ReOpen;
+                Promoted = true;
+                PromotedCategory = Category4;
+
+                trigger OnAction()
+                begin
+                    rec.Status := rec.Status::Open;
+                    rec.Modify()
+                end;
+            }
             action(Approvals)
             {
                 Caption = 'Approvals';
@@ -262,10 +285,13 @@ page 50779 "Purchase Request Approved Card"
                     irLine: record "Internal Request Line";
                 begin
                     Rec.TestField(Status, Rec.Status::Released);
+
                     // irLine.TestField(Type2);
                     // irLine.TestField("Charge to No.");
                     if Confirm('Are you sure you want to approve PFR No. %1 and send it to Request For Quotation?', false, Rec."No.") = true then begin
                         Rec."Cleared For RFQ" := true;
+                        rec.selected := true;
+                        Rec.Archived := true;
                         Rec.Modify;
                         Commit;
                         Message('%1 Approved Successfully', Rec."No.");

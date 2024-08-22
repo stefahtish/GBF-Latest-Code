@@ -179,6 +179,14 @@ page 50752 "Purchase Request"
                     Visible = CommentVisible;
                 }
             }
+            part(PurchaseRequestSub2; "Purchase Request Subformv")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Vendor Details';
+                SubPageLink = "Document No." = FIELD("No.");
+                UpdatePropagation = Both;
+                Visible = RFQVisible;
+            }
             part(PurchaseRequestSub; "Purchase Request Sub")
             {
                 ApplicationArea = Basic, Suite;
@@ -195,6 +203,7 @@ page 50752 "Purchase Request"
                 UpdatePropagation = Both;
                 Visible = Rec."Insert Other Items" = false;
             }
+
             field("Total Amount"; Rec."Total Amount")
             {
                 ApplicationArea = All;

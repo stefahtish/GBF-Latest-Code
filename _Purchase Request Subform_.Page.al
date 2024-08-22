@@ -233,7 +233,7 @@ page 50161 "Purchase Request Subform"
                     ApplicationArea = Basic, Suite;
 
                     //Editable = false;
-                    //Visible = false;
+                    Visible = false;
                     //Editable = OpenApprovalEntriesExist;
                     //Enabled = not OpenApprovalEntriesExist;
                     trigger OnValidate()
@@ -250,7 +250,8 @@ page 50161 "Purchase Request Subform"
                 {
                     ApplicationArea = Basic, Suite;
                     //Editable = false;
-                    Visible = Not Rec.completed;
+                    //Visible = Not Rec.completed;
+                    Visible = false;
 
                     //Enabled = not OpenApprovalEntriesExist;
                     trigger OnValidate()
@@ -268,12 +269,14 @@ page 50161 "Purchase Request Subform"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Completed field.', Comment = '%';
                     Editable = false;
+                    Visible = false;
                 }
                 field("PO No."; Rec."PO No.")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the PO No. field.', Comment = '%';
                     Editable = false;
+                    Visible = false;
                 }
                 field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
                 {
@@ -428,7 +431,8 @@ page 50161 "Purchase Request Subform"
                 {
                     ApplicationArea = Basic, Suite;
                     Enabled = NOT IsStatusPending;
-                    Visible = ShowSupplier;
+                    // Visible = ShowSupplier;
+                    Visible = false;
                 }
                 field("Currency Code"; Rec."Currency Code")
                 {

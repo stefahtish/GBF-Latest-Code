@@ -2782,11 +2782,13 @@ codeunit 50104 "Payments Management"
         ImprestLines: Record "Payment Lines";
         OptionNumber: Integer;
         PaymentsPost: Codeunit "Payments Management";
+        Cashmngmtsetup: record "Cash Management Setups";
     begin
         OptionNumber := DIALOG.StrMenu(Text021, 0, Text022);
         //Header
         PaymentRec.Init;
         PaymentRec.TransferFields(Imprest);
+        //tCashmngmtsetup.TestField("Claim Overspend Code");
         PaymentRec."No." := '';
         case OptionNumber of
             1:
@@ -2835,7 +2837,10 @@ codeunit 50104 "Payments Management"
         end;
         case OptionNumber OF
             3:
-                PaymentLines."Expenditure Type" := 'OVERSPEND'
+                if Cashmngmtsetup.Get() then begin
+                    PaymentLines."Expenditure Type" := Cashmngmtsetup."Claim Overspend Code"
+                end
+
 
         END;
         case OptionNumber OF

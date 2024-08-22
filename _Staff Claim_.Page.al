@@ -477,7 +477,7 @@ page 50152 "Staff Claim"
                 Caption = 'P&osting';
                 Image = Post;
 
-                //  Visible = false;
+                Visible = false;
                 action(Post)
                 {
                     Caption = 'P&ost';

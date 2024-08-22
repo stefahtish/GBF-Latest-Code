@@ -11,6 +11,7 @@ page 50106 "Cash Management Setups"
         {
             group(General)
             {
+
                 field("Payment Voucher Template"; Rec."Payment Voucher Template")
                 {
                     ApplicationArea = All;
@@ -232,6 +233,10 @@ page 50106 "Cash Management Setups"
                 {
                     ToolTip = 'Specifies the value of the Purpose Pay field.';
                     ApplicationArea = All;
+                }
+                field("Claim Overspend Code"; Rec."Claim Overspend Code")
+                {
+                    ToolTip = 'Specifies the value of the Claim Overspend Code field.';
                 }
             }
             group(Numbering)

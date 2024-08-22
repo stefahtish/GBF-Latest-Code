@@ -36,14 +36,16 @@ pageextension 50160 MyExtension extends "Job G/L Journal"
             }
         }
     }
-    var BatchName: Code[10];
-    FileName: Text[100];
-    SheetName: Text[100];
-    TempExcelBuffer: Record "Excel Buffer" temporary;
-    UploadExcelMsg: Label 'Please Choose the Excel file.';
-    NoFileFoundMsg: Label 'No Excel file found!';
-    BatchISBlankMsg: Label 'Batch name is blank';
-    ExcelImportSucess: Label 'Excel is successfully imported.';
+    var
+        BatchName: Code[10];
+        FileName: Text[100];
+        SheetName: Text[100];
+        TempExcelBuffer: Record "Excel Buffer" temporary;
+        UploadExcelMsg: Label 'Please Choose the Excel file.';
+        NoFileFoundMsg: Label 'No Excel file found!';
+        BatchISBlankMsg: Label 'Batch name is blank';
+        ExcelImportSucess: Label 'Excel is successfully imported.';
+
     local procedure ReadExcelSheet()
     var
         FileMgt: Codeunit "File Management";
@@ -52,8 +54,8 @@ pageextension 50160 MyExtension extends "Job G/L Journal"
     begin
         UploadIntoStream(UploadExcelMsg, '', '', FromFile, IStream);
         if FromFile <> '' then begin
-            FileName:=FileMgt.GetFileName(FromFile);
-            SheetName:=TempExcelBuffer.SelectSheetsNameStream(IStream);
+            FileName := FileMgt.GetFileName(FromFile);
+            SheetName := TempExcelBuffer.SelectSheetsNameStream(IStream);
         end
         else
             Error(NoFileFoundMsg);
@@ -62,6 +64,7 @@ pageextension 50160 MyExtension extends "Job G/L Journal"
         TempExcelBuffer.OpenBookStream(IStream, SheetName);
         TempExcelBuffer.ReadSheet();
     end;
+
     local procedure ImportExcelData(LBatchName: Code[20]; LBatchTemp: Code[20])
     var
         GenJournalLine: Record "Gen. Journal Line";
@@ -70,39 +73,40 @@ pageextension 50160 MyExtension extends "Job G/L Journal"
         LineNo: Integer;
         MaxRowNo: Integer;
     begin
-        RowNo:=0;
-        ColNo:=0;
-        MaxRowNo:=0;
-        LineNo:=0;
+        RowNo := 0;
+        ColNo := 0;
+        MaxRowNo := 0;
+        LineNo := 0;
         GenJournalLine.Reset();
         GenJournalLine.SetRange("Journal Template Name", LBatchTemp);
         GenJournalLine.SetRange("Journal Batch Name", LBatchName);
-        if GenJournalLine.FindLast()then LineNo:=GenJournalLine."Line No.";
+        if GenJournalLine.FindLast() then LineNo := GenJournalLine."Line No.";
         TempExcelBuffer.Reset();
-        if TempExcelBuffer.FindLast()then begin
-            MaxRowNo:=TempExcelBuffer."Row No.";
+        if TempExcelBuffer.FindLast() then begin
+            MaxRowNo := TempExcelBuffer."Row No.";
         end;
-        for RowNo:=2 to MaxRowNo do begin
-            LineNo:=LineNo + 10000;
+        for RowNo := 2 to MaxRowNo do begin
+            LineNo := LineNo + 10000;
             GenJournalLine.Init();
             //Evaluate(SOImportBuffer."Batch Name", BatchName);
-            GenJournalLine."Line No.":=LineNo;
-            GenJournalLine."Journal Batch Name":=LBatchName;
-            GenJournalLine."Journal Template Name":=LBatchTemp;
-            GenJournalLine."Account Type":=GenJournalLine."Account Type"::"G/L Account";
+            GenJournalLine."Line No." := LineNo;
+            GenJournalLine."Journal Batch Name" := LBatchName;
+            GenJournalLine."Journal Template Name" := LBatchTemp;
+            GenJournalLine."Account Type" := GenJournalLine."Account Type"::"G/L Account";
             Evaluate(GenJournalLine."Posting Date", GetValueAtCell(RowNo, 1));
             Evaluate(GenJournalLine."Document No.", GetValueAtCell(RowNo, 2));
-            // Evaluate(GenJournalLine."Account Type", GetValueAtCell(RowNo, 3));
-            Evaluate(GenJournalLine."Account No.", GetValueAtCell(RowNo, 3));
-            Evaluate(GenJournalLine.Description, GetValueAtCell(RowNo, 4));
-            GenJournalLine.Amount:=GetDecimal(TempExcelBuffer, RowNo, 5);
+            Evaluate(GenJournalLine."Account Type", GetValueAtCell(RowNo, 3));
+            Evaluate(GenJournalLine."Account No.", GetValueAtCell(RowNo, 4));
+            Evaluate(GenJournalLine.Description, GetValueAtCell(RowNo, 5));
+            GenJournalLine.Amount := GetDecimal(TempExcelBuffer, RowNo, 6);
+            //GenJournalLine.Validate(Amount);
             //  Evaluate(GenJournalLine.Amount, GetValueAtCell(RowNo, 6));
-            Evaluate(GenJournalLine."Job No.", GetValueAtCell(RowNo, 6));
-            Evaluate(GenJournalLine."Job Task No.", GetValueAtCell(RowNo, 7));
-            Evaluate(GenJournalLine."Job Quantity", GetValueAtCell(RowNo, 8));
-            Evaluate(GenJournalLine."Shortcut Dimension 1 Code", GetValueAtCell(RowNo, 9));
-            Evaluate(GenJournalLine."Shortcut Dimension 2 Code", GetValueAtCell(RowNo, 10));
-            Evaluate(GenJournalLine."External Document No.", GetValueAtCell(RowNo, 11));
+            Evaluate(GenJournalLine."Job No.", GetValueAtCell(RowNo, 7));
+            Evaluate(GenJournalLine."Job Task No.", GetValueAtCell(RowNo, 8));
+            Evaluate(GenJournalLine."Job Quantity", GetValueAtCell(RowNo, 9));
+            Evaluate(GenJournalLine."Shortcut Dimension 1 Code", GetValueAtCell(RowNo, 10));
+            Evaluate(GenJournalLine."Shortcut Dimension 2 Code", GetValueAtCell(RowNo, 11));
+            Evaluate(GenJournalLine."External Document No.", GetValueAtCell(RowNo, 12));
             // SOImportBuffer."Sheet Name" := SheetName;
             // SOImportBuffer."File Name" := FileName;
             // SOImportBuffer."Imported Date" := Today;
@@ -111,19 +115,26 @@ pageextension 50160 MyExtension extends "Job G/L Journal"
         end;
         Message(ExcelImportSucess);
     end;
-    procedure GetDecimal(var Buffer: Record "Excel Buffer" temporary; Row: Integer; Col: Integer): Decimal var
+
+    procedure GetDecimal(var Buffer: Record "Excel Buffer" temporary; Row: Integer; Col: Integer): Decimal
+    var
         D: Decimal;
     begin
-        if Buffer.Get(Row, Col)then begin
-            Evaluate(D, Buffer."Cell Value as Text")end;
+        if Buffer.Get(Row, Col) then begin
+            Evaluate(D, Buffer."Cell Value as Text")
+        end;
         exit(D);
     end;
-    local procedure GetValueAtCell(RowNo: Integer; ColNo: Integer): Text begin
+
+    local procedure GetValueAtCell(RowNo: Integer; ColNo: Integer): Text
+    begin
         TempExcelBuffer.Reset();
-        If TempExcelBuffer.Get(RowNo, ColNo)then exit(TempExcelBuffer."Cell Value as Text")
+        If TempExcelBuffer.Get(RowNo, ColNo) then
+            exit(TempExcelBuffer."Cell Value as Text")
         else
             exit('');
     end;
+
     local procedure ExportCustLedgerEntries(var GenJounalLine: Record "Gen. Journal Line")
     var
         TempExcelBuffer: Record "Excel Buffer" temporary;
@@ -135,7 +146,7 @@ pageextension 50160 MyExtension extends "Job G/L Journal"
         TempExcelBuffer.NewRow();
         TempExcelBuffer.AddColumn(GenJounalLine.FieldCaption("Posting Date"), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
         TempExcelBuffer.AddColumn(GenJounalLine.FieldCaption("Document No."), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-        //TempExcelBuffer.AddColumn(GenJounalLine.FieldCaption("Account Type"), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(GenJounalLine.FieldCaption("Account Type"), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
         TempExcelBuffer.AddColumn(GenJounalLine.FieldCaption("Account No."), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
         TempExcelBuffer.AddColumn(GenJounalLine.FieldCaption(Description), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
         TempExcelBuffer.AddColumn(GenJounalLine.FieldCaption(Amount), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);

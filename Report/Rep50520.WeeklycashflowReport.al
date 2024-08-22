@@ -81,11 +81,9 @@ report 50520 "Weekly cashflow Report"
                 CalcFields("Original Amount", "Remaining Amount");
                 if "Currency Code" = '' then
                     "Currency Code" := 'KES';
-                // if ShowOnlyPositiveBalance then
-                //     VendorLedgerEntry.SetFilter("Remaining Amount", '<-1');
                 if ShowOnlyPositiveBalance then
-                    //VendorLedgerEntry."Remaining Amount" := VendorLedgerEntry."Remaining Amount" * -1;
-                VendorLedgerEntry.SetFilter("Remaining Amount", '<>0');
+                    VendorLedgerEntry.SetFilter("Remaining Amount", '<>0');
+                IF VendorLedgerEntry."Remaining Amount" = 0 THEN CurrReport.Skip();
 
             end;
         }

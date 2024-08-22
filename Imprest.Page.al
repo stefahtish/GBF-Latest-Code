@@ -479,6 +479,11 @@ page 50132 Imprest
                         //CalcFields("Imprest Amount");
                         if Rec."Imprest Amount" <= 0 then Error(Error001);
                         Rec.TestField("Payment Narration");
+                        lines.SetRange(No, rec."No.");
+                        if Lines.FindFirst() then begin
+                            Lines.TestField("Job No.");
+                            Lines.TestField("Job Task No.");
+                        end;
 
                         rec.TestField("Account No.");
                         rec.TestField("Staff No.");

@@ -34,32 +34,32 @@ tableextension 50109 ApprovalEntryTableExt extends "Approval Entry"
         field(50008; Finance; Boolean)
         {
             FieldClass = FlowField;
-            CalcFormula = lookup("Workflow - Table Relation".Finance where("Table ID"=field("Table ID")));
+            CalcFormula = lookup("Workflow - Table Relation".Finance where("Table ID" = field("Table ID")));
         }
         field(50009; Audit; Boolean)
         {
             FieldClass = FlowField;
-            CalcFormula = lookup("Workflow - Table Relation".Audit where("Table ID"=field("Table ID")));
+            CalcFormula = lookup("Workflow - Table Relation".Audit where("Table ID" = field("Table ID")));
         }
         field(50010; HR; Boolean)
         {
             FieldClass = FlowField;
-            CalcFormula = lookup("Workflow - Table Relation".HR where("Table ID"=field("Table ID")));
+            CalcFormula = lookup("Workflow - Table Relation".HR where("Table ID" = field("Table ID")));
         }
         field(50011; Procurement; Boolean)
         {
             FieldClass = FlowField;
-            CalcFormula = lookup("Workflow - Table Relation".Procurement where("Table ID"=field("Table ID")));
+            CalcFormula = lookup("Workflow - Table Relation".Procurement where("Table ID" = field("Table ID")));
         }
         field(50012; ICT; Boolean)
         {
             FieldClass = FlowField;
-            CalcFormula = lookup("Workflow - Table Relation".ICT where("Table ID"=field("Table ID")));
+            CalcFormula = lookup("Workflow - Table Relation".ICT where("Table ID" = field("Table ID")));
         }
-        field(650013; Compliance; Boolean)
+        field(50013; Compliance; Boolean)
         {
             FieldClass = FlowField;
-            CalcFormula = lookup("Workflow - Table Relation".Finance where("Table ID"=field("Table ID")));
+            CalcFormula = lookup("Workflow - Table Relation".Finance where("Table ID" = field("Table ID")));
         }
     }
 }

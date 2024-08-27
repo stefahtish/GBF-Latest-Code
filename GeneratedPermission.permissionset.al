@@ -3186,5 +3186,18 @@ permissionset 50100 GeneratedPermission
         query "BanksAccLedgerEntry-BI" = X,
         query "Chart of Accounts-BI" = X,
         query "Employees-BI" = X,
-        query Sales_ItemCategoryTest = X;
+        query Sales_ItemCategoryTest = X,
+        tabledata "Portal User" = RIMD,
+        table "Portal User" = X,
+        report " Training Cost Comparision" = X,
+        report Employees = X,
+        report "hr training application" = X,
+        report "Intact report" = X,
+        report "Qualification Report" = X,
+        report "Training Schedule" = X,
+        report "Weekly cashflow Report" = X,
+        codeunit ERecruitment = X,
+        codeunit "Timesheet Reminders" = X,
+        page "Purchase Request Subformv" = X,
+        page "Qualified Applicants" = X;
 }

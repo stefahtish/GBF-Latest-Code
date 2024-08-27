@@ -14,32 +14,32 @@ tableextension 50127 SalesShipmentHdrExt extends "Sales Shipment Header"
         {
             DataClassification = ToBeClassified;
         }
-        field(9409; "Customer Category"; Code[20])
+        field(50003; "Customer Category"; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Customer Posting Group".Code;
         }
-        field(9550; "Requested Evacuation End Date"; Date)
+        field(50004; "Requested Evacuation End Date"; Date)
         {
             DataClassification = ToBeClassified;
         }
-        field(9551; "PurchHeader No."; Code[20])
+        field(50005; "PurchHeader No."; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(9552; "Rent Invoice"; Boolean)
+        field(50006; "Rent Invoice"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(9553; TPS; Boolean)
+        field(50007; TPS; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(9554; "Property Unit"; Code[20])
+        field(50008; "Property Unit"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(9555; "Property Floor"; Code[20])
+        field(50009; "Property Floor"; Code[20])
         {
             DataClassification = ToBeClassified;
         }

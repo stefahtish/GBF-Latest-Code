@@ -19,10 +19,7 @@ pageextension 50112 GeneralJournalPageExt extends "General Journal"
         {
             Visible = false;
         }
-        modify("EU 3-Party Trade")
-        {
-            Visible = false;
-        }
+
         modify("External Document No.")
         {
             Visible = true;

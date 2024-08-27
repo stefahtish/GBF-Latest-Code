@@ -178,7 +178,7 @@ report 50325 "Generate Employee Interbank"
             PayModes.SetRange("Bal. Account Type", PayModes."Bal. Account Type"::EFT);
             if PayModes.FindFirst() then PmtMode := PayModes.Code;
             BankCode := ' ';
-            LocBankCode := BankAcc."Bank code";
+            LocBankCode := BankAcc."Bank code2";
             BankBranch := BankAcc."Bank Branch No.";
         end;
         Payeeesc := DELCHR(BankAcc."Bank Account Name", '=', ' ');

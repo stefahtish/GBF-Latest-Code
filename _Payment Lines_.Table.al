@@ -109,7 +109,7 @@ table 50125 "Payment Lines"
                             Bank.TestField("Bank Branch No.");
                             Bank.TestField("Bank Account No.");
                             Bank.TestField(Name);
-                            Validate("Payee Bank Code", Bank."Bank Code");
+                            Validate("Payee Bank Code", Bank."Bank Code2");
                             Validate("Payee Bank Branch Code", Bank."Bank Branch No.");
                             Validate("Payee Bank Account No", Bank."Bank Account No.");
                             "Payee Account Name" := Bank.Name;
@@ -1663,11 +1663,11 @@ table 50125 "Payment Lines"
                             Currency := Bank."Currency Code";
                             if "Account No" = PaymentRec."Source Bank" then Error('Receiving bank cannot be same as Source Bank');
                             //insert bank
-                            Bank.TestField("Bank code");
+                            Bank.TestField("Bank code2");
                             Bank.TestField("Bank Branch No.");
                             Bank.TestField("Bank Account No.");
                             Bank.TestField(Name);
-                            Validate("Payee Bank Code", Bank."Bank Code");
+                            Validate("Payee Bank Code", Bank."Bank Code2");
                             Validate("Payee Bank Branch Code", Bank."Bank Branch No.");
                             Validate("Payee Bank Account No", Bank."Bank Account No.");
                             "Payee Account Name" := Bank."Bank Account Name";

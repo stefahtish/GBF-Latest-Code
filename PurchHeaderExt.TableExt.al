@@ -4,23 +4,23 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
     {
         modify("Posting Date")
         {
-        trigger OnAfterValidate()
-        var
-            UserSetUp: record "User Setup";
-        begin
-        end;
+            trigger OnAfterValidate()
+            var
+                UserSetUp: record "User Setup";
+            begin
+            end;
         }
         modify("Document Date")
         {
-        trigger OnAfterValidate()
-        var
-            myInt: Integer;
-        begin
-            PurchSetup.Get;
-            PurchSetup.TestField("Order Due Days");
-            "Due Date":=CalcDate(PurchSetup."Order Due Days", "Order Date");
-            Modify();
-        end;
+            trigger OnAfterValidate()
+            var
+                myInt: Integer;
+            begin
+                PurchSetup.Get;
+                PurchSetup.TestField("Order Due Days");
+                "Due Date" := CalcDate(PurchSetup."Order Due Days", "Order Date");
+                Modify();
+            end;
         }
         // modify("Buy-from Vendor No.")
         // {
@@ -75,7 +75,7 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
         field(54003; "LPO Category"; Code[10])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Supplier Category"."Category Code" WHERE(Type=FILTER(LPO));
+            TableRelation = "Supplier Category"."Category Code" WHERE(Type = FILTER(LPO));
         }
         field(54005; "Fully Ordered"; Boolean)
         {
@@ -106,8 +106,8 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
 
             trigger OnValidate()
             begin
-                if Employee.Get("Employee No.")then begin
-                    "Employee Name":=Employee."First Name" + ' ' + Employee."Middle Name" + ' ' + Employee."Last Name";
+                if Employee.Get("Employee No.") then begin
+                    "Employee Name" := Employee."First Name" + ' ' + Employee."Middle Name" + ' ' + Employee."Last Name";
                 end;
             end;
         }
@@ -119,18 +119,18 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
         {
             DataClassification = ToBeClassified;
             OptionCaption = 'Consumables,Cost of Sales,Fixed Asset';
-            OptionMembers = Consumables, "Cost of Sales", "Fixed Asset";
+            OptionMembers = Consumables,"Cost of Sales","Fixed Asset";
         }
         field(54015; "SRN Type"; Option)
         {
             DataClassification = ToBeClassified;
             OptionCaption = 'Consumables,Cost of Sales,Fixed Asset';
-            OptionMembers = Consumables, "Cost of Sales", "Fixed Asset";
+            OptionMembers = Consumables,"Cost of Sales","Fixed Asset";
         }
         field(54016; "RFQ No."; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Internal Request Header"."No." WHERE("Document Type"=FILTER(RFQ));
+            TableRelation = "Internal Request Header"."No." WHERE("Document Type" = FILTER(RFQ));
 
             trigger OnValidate()
             var
@@ -141,36 +141,40 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
                     if Confirm('Are you sure you want to use this RFQ Document', false) = true then begin
                         IR.Reset;
                         IR.SetRange("No.", "RFQ No.");
-                        if IR.Find('-')then begin
+                        if IR.Find('-') then begin
                             IRLine.Reset;
                             IRLine.SetRange("Document No.", IR."No.");
                             //IRLine.SETFILTER("Qty. to Receive",'>%1',0);
-                            if IRLine.Find('-')then begin
+                            if IRLine.Find('-') then begin
                                 PurchSetup.Get;
-                                "Document Date":=Today;
-                                "Requisition No.":=IR."Requisition No.";
-                                "Assigned User ID":=UserId;
+                                "Document Date" := Today;
+                                "Requisition No." := IR."Requisition No.";
+                                "Assigned User ID" := UserId;
                                 Commit;
                                 repeat //insert lines
                                     PurchLine.Init;
+
                                     PurchLine.TransferFields(IRLine);
-                                    PurchLine."Document Type":="Document Type";
-                                    PurchLine."Document No.":="No.";
+                                    PurchLine."Document Type" := "Document Type";
+                                    PurchLine."Document No." := "No.";
                                     PurchLine.Validate("No.");
-                                    PurchLine."Buy-from Vendor No.":="Buy-from Vendor No.";
-                                    PurchLine."Pay-to Vendor No.":="Buy-from Vendor No.";
+
+                                    PurchLine."Buy-from Vendor No." := "Buy-from Vendor No.";
+                                    PurchLine."Pay-to Vendor No." := "Buy-from Vendor No.";
                                     PurchLine.Validate("Buy-from Vendor No.", "Pay-to Vendor No.");
-                                    PurchLine."Quantity Received":=0;
+                                    PurchLine."Quantity Received" := 0;
                                     PurchLine.Validate(Quantity, IRLine."Qty. to Receive");
                                     //MESSAGE(IRLine."Requisition No.");
-                                    PurchLine."Requisition No.":=IRLine."Requisition No.";
-                                    PurchLine."Unit of Measure":=IRLine."Unit of Measure";
-                                    PurchLine."Unit of Measure Code":=IRLine."Unit of Measure";
-                                    PurchLine.Description:=IRLine.Description;
-                                    PurchLine.Specification2:=IRLine.Specification2;
+                                    PurchLine."Requisition No." := IRLine."Requisition No.";
+                                    PurchLine."Unit of Measure" := IRLine."Unit of Measure";
+                                    PurchLine."Unit of Measure Code" := IRLine."Unit of Measure";
+                                    PurchLine.Description := IRLine.Description;
+                                    PurchLine.Specification2 := IRLine.Specification2;
+                                    PurchLine.Type := IRLine.Type2;
+                                    PurchLine."No." := IRLine."Charge to No.";
                                     PurchLine.Insert;
-                                    IRLine."Quantity Received":=IRLine."Quantity Received" + IRLine."Qty. to Receive";
-                                    IRLine."Qty. to Receive":=IRLine.Quantity - IRLine."Quantity Received";
+                                    IRLine."Quantity Received" := IRLine."Quantity Received" + IRLine."Qty. to Receive";
+                                    IRLine."Qty. to Receive" := IRLine.Quantity - IRLine."Quantity Received";
                                 //IRLine.MODIFY;
                                 until IRLine.Next = 0;
                             end;
@@ -178,46 +182,46 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
                     end
                     else
                         exit;
-                /*END ELSE IF "Combine Order"=FALSE THEN
-                      BEGIN
-                        DocNo:=NoseriesMgt.GetNextNo(PurchSetup."Quote Nos.",0D,TRUE);
-                        PurchHeader.INIT;
-                        PurchHeader.TRANSFERFIELDS(IR);
-                        PurchHeader.VALIDATE("No.");
-                        PurchHeader."No.":=DocNo;
-                        PurchHeader."Document Type":=PurchHeader."Document Type"::Quote;
-                        PurchHeader.Status:=PurchHeader.Status::Open;
-                        //PurchHeader."Buy-from Vendor No.":=IRLine.Supplier;
-                        //PurchHeader.VALIDATE("Buy-from Vendor No.");
-                        PurchHeader."Document Date":=TODAY;
-                        PurchHeader."Requisition No.":="No.";
-                        PurchHeader.INSERT;
-                      PurchSetup.GET;
-                      //insert lines
-                      PurchLine.INIT;
-                      PurchLine.TRANSFERFIELDS(IRLine);
-                      PurchLine.VALIDATE(Type);
-                      PurchLine.VALIDATE("No.");
-                      PurchLine."Document No.":=DocNo;
-                      PurchLine."Document Type":=PurchLine."Document Type"::Quote;
-                      PurchLine."Quantity Received":=0;
-                      PurchLine.VALIDATE(Quantity,IRLine."Qty. to Receive");
-                      PurchLine."Requisition No.":="No.";
-                //      PurchLine."Gen. Bus. Posting Group":='GENERAL';
-                //      PurchLine."Gen. Prod. Posting Group":='GENERAL';
-                //      PurchLine."VAT Bus. Posting Group":="VAT Bus. Posting Group";
-                      PurchLine.INSERT;
-                //      Committement.UncommitPurchReq(IRLine,IR);
-                //      Committement.EncumberPO(PurchLine,PurchHeader);
-                      IRLine."Quantity Received":=IRLine."Quantity Received"+IRLine."Qty. to Receive";
-                      IRLine."Qty. to Receive":=IRLine.Quantity-IRLine."Quantity Received";
-                      //IRLine.MODIFY;
-                      MESSAGE('Quote No %1 has been created',DocNo);
-                      END;
-                    END;
-                //    IF CheckifFullyordered(IR)=TRUE THEN
-                //      IR."Fully Ordered":=TRUE;
-                //      IR.MODIFY;*/
+                    /*END ELSE IF "Combine Order"=FALSE THEN
+                          BEGIN
+                            DocNo:=NoseriesMgt.GetNextNo(PurchSetup."Quote Nos.",0D,TRUE);
+                            PurchHeader.INIT;
+                            PurchHeader.TRANSFERFIELDS(IR);
+                            PurchHeader.VALIDATE("No.");
+                            PurchHeader."No.":=DocNo;
+                            PurchHeader."Document Type":=PurchHeader."Document Type"::Quote;
+                            PurchHeader.Status:=PurchHeader.Status::Open;
+                            //PurchHeader."Buy-from Vendor No.":=IRLine.Supplier;
+                            //PurchHeader.VALIDATE("Buy-from Vendor No.");
+                            PurchHeader."Document Date":=TODAY;
+                            PurchHeader."Requisition No.":="No.";
+                            PurchHeader.INSERT;
+                          PurchSetup.GET;
+                          //insert lines
+                          PurchLine.INIT;
+                          PurchLine.TRANSFERFIELDS(IRLine);
+                          PurchLine.VALIDATE(Type);
+                          PurchLine.VALIDATE("No.");
+                          PurchLine."Document No.":=DocNo;
+                          PurchLine."Document Type":=PurchLine."Document Type"::Quote;
+                          PurchLine."Quantity Received":=0;
+                          PurchLine.VALIDATE(Quantity,IRLine."Qty. to Receive");
+                          PurchLine."Requisition No.":="No.";
+                    //      PurchLine."Gen. Bus. Posting Group":='GENERAL';
+                    //      PurchLine."Gen. Prod. Posting Group":='GENERAL';
+                    //      PurchLine."VAT Bus. Posting Group":="VAT Bus. Posting Group";
+                          PurchLine.INSERT;
+                    //      Committement.UncommitPurchReq(IRLine,IR);
+                    //      Committement.EncumberPO(PurchLine,PurchHeader);
+                          IRLine."Quantity Received":=IRLine."Quantity Received"+IRLine."Qty. to Receive";
+                          IRLine."Qty. to Receive":=IRLine.Quantity-IRLine."Quantity Received";
+                          //IRLine.MODIFY;
+                          MESSAGE('Quote No %1 has been created',DocNo);
+                          END;
+                        END;
+                    //    IF CheckifFullyordered(IR)=TRUE THEN
+                    //      IR."Fully Ordered":=TRUE;
+                    //      IR.MODIFY;*/
                 end;
             end;
         }
@@ -245,7 +249,7 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
         }
         field(54021; "Max Date"; Date)
         {
-            CalcFormula = Max("Purchase Line"."Expected Receipt Date" WHERE("Document No."=FIELD("No.")));
+            CalcFormula = Max("Purchase Line"."Expected Receipt Date" WHERE("Document No." = FIELD("No.")));
             FieldClass = FlowField;
         }
         field(54022; "Cancel Comments"; Text[50])
@@ -288,13 +292,13 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
         field(54031; "Order Type"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = " ", Ammend;
+            OptionMembers = " ",Ammend;
             ObsoleteState = Removed;
         }
         field(54032; "Ammend Order No."; Code[10])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Purchase Header" where("Document Type"=const(Order));
+            TableRelation = "Purchase Header" where("Document Type" = const(Order));
             ObsoleteState = Removed;
         }
         field(54033; "Sent for Inspection"; Boolean)
@@ -308,12 +312,12 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
         field(54500; "OrderType"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = " ", Ammend;
+            OptionMembers = " ",Ammend;
         }
         field(54501; "Ammend Order No"; Code[10])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Purchase Header" where("Document Type"=const(Order));
+            TableRelation = "Purchase Header" where("Document Type" = const(Order));
         }
         field(54502; "Procurement Method"; Text[10])
         {
@@ -343,9 +347,10 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
     }
     trigger OnAfterInsert()
     begin
-        "User ID":=UserId;
+        "User ID" := UserId;
         validate("Document Date");
     end;
+
     trigger OnInsert()
     begin
         PurchasePayable.Get();
@@ -354,12 +359,14 @@ tableextension 50124 PurchHeaderExt extends "Purchase Header"
             Noseries.InitSeries(PurchasePayable."GRN Nos", xRec."No. Series1", 0D, "GRN Nos", "No. Series1");
         end;
     end;
-    var PurchSetup: Record "Purchases & Payables Setup";
-    GLSetup: Record "General Ledger Setup";
-    GLAcc: Record "G/L Account";
-    PurchLine: Record "Purchase Line";
-    Employee: Record Employee;
-    UserSetUp: record "User Setup";
-    PurchasePayable: Record "Purchases & Payables Setup";
-    Noseries: Codeunit NoSeriesManagement;
+
+    var
+        PurchSetup: Record "Purchases & Payables Setup";
+        GLSetup: Record "General Ledger Setup";
+        GLAcc: Record "G/L Account";
+        PurchLine: Record "Purchase Line";
+        Employee: Record Employee;
+        UserSetUp: record "User Setup";
+        PurchasePayable: Record "Purchases & Payables Setup";
+        Noseries: Codeunit NoSeriesManagement;
 }

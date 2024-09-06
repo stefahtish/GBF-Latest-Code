@@ -3,9 +3,10 @@ page 50188 "Purchase Request List-General"
     CardPageID = "Purchase Request";
     DeleteAllowed = false;
     ApplicationArea = all;
+    PageType = List;
     UsageCategory = Lists;
     SourceTable = "Internal Request Header";
-    SourceTableView = WHERE("Document Type"=CONST(Purchase), "Fully Ordered"=CONST(false));
+    SourceTableView = WHERE("Document Type" = CONST(Purchase), "Fully Ordered" = CONST(false));
 
     layout
     {
@@ -53,7 +54,7 @@ page 50188 "Purchase Request List-General"
             part("FactBox"; "Requests FactBox Test")
             {
                 ApplicationArea = All;
-                SubPageLink = "No."=FIELD("No.");
+                SubPageLink = "No." = FIELD("No.");
             }
             systempart(Control13; Notes)
             {
@@ -68,13 +69,14 @@ page 50188 "Purchase Request List-General"
     }
     trigger OnAfterGetRecord()
     begin
-    // DocStatus:=PaymentsRec.FormatStatus(Status);
-    //DocStatus:=FormatStatus(Status);
+        // DocStatus:=PaymentsRec.FormatStatus(Status);
+        //DocStatus:=FormatStatus(Status);
     end;
+
     trigger OnOpenPage()
     begin
         //DocStatus:=PaymentsRec.FormatStatus(Status);//NOT (UserSetup."Show All") OR
-        if UserSetup.Get(UserId)then begin
+        if UserSetup.Get(UserId) then begin
             if not UserSetup."Show All" then begin
                 Rec.FilterGroup(2);
                 Rec.SetRange("Requested By", UserId);
@@ -83,7 +85,9 @@ page 50188 "Purchase Request List-General"
         else
             Error('%1 does not exist in the Users Setup', UserId);
     end;
-    var DocStatus: Option New, "HOD Approved", "Finance Approved", "Approval Pending", Rejected, "DED/DFA Approved", Released, Fulfilled;
-    PaymentsRec: Record "Internal Request Header";
-    UserSetup: Record "User Setup";
+
+    var
+        DocStatus: Option New,"HOD Approved","Finance Approved","Approval Pending",Rejected,"DED/DFA Approved",Released,Fulfilled;
+        PaymentsRec: Record "Internal Request Header";
+        UserSetup: Record "User Setup";
 }

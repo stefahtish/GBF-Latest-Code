@@ -35,6 +35,7 @@ page 50132 Imprest
                 field("Apply on behalf"; Rec."Apply on behalf")
                 {
                     ApplicationArea = Basic, Suite;
+                    Visible = false;
                 }
                 field("Account No."; Rec."Account No.")
                 {
@@ -50,6 +51,7 @@ page 50132 Imprest
                 {
                     ApplicationArea = Basic, Suite;
                     // Enabled = false;
+                    Visible = false;
                 }
                 group(Control54)
                 {
@@ -208,11 +210,13 @@ page 50132 Imprest
                 {
                     ApplicationArea = Basic, Suite;
                     Enabled = false;
+                    Visible = false;
                 }
                 field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic, Suite;
                     Enabled = false;
+                    Visible = false;
                 }
                 field(Status; Rec.Status)
                 {
@@ -466,6 +470,7 @@ page 50132 Imprest
 
                     trigger OnAction()
                     var
+                        Lines: Record "Payment Lines";
                         ImprestSlots: Integer;
                         Error001: Label 'Imprest Amount can not be less than or equal to 0';
                     begin
@@ -474,6 +479,14 @@ page 50132 Imprest
                         //CalcFields("Imprest Amount");
                         if Rec."Imprest Amount" <= 0 then Error(Error001);
                         Rec.TestField("Payment Narration");
+                        lines.SetRange(No, rec."No.");
+                        if Lines.FindFirst() then begin
+                            Lines.TestField("Job No.");
+                            Lines.TestField("Job Task No.");
+                        end;
+
+                        rec.TestField("Account No.");
+                        rec.TestField("Staff No.");
                         Committment.CheckImprestCommittment(Rec);
                         Committment.ImprestCommittment(Rec, ErrorMsg);
                         if ErrorMsg <> '' then Error(ErrorMsg);

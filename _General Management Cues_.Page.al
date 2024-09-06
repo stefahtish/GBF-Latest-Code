@@ -49,6 +49,14 @@ page 51276 "General Management Cues"
                     StyleExpr = true;
                     Style = Favorable;
                 }
+                field("Pending Imprest Surrenders"; Rec."Pending Imprest Surrenders")
+                {
+                    Caption = 'Pending';
+                    ApplicationArea = Basic, Suite;
+                    DrillDownPageId = "Pending Imprest Surrenders";
+                    StyleExpr = true;
+                    Style = Favorable;
+                }
                 field("Approved Imprest Surrenders"; Rec."Approved Imprest Surrenders")
                 {
                     Caption = 'Approved';
@@ -73,22 +81,22 @@ page 51276 "General Management Cues"
             {
                 field("Staff Claims List"; Rec."Staff Claims List")
                 {
-                    DrillDownPageId = "Staff Claim List-General";
+                    DrillDownPageId = "Staff Claim List";
                 }
                 field("Pending Staff Claim List"; Rec."Pending Staff Claim List")
                 {
-                    DrillDownPageId = "Staff Claim List-General";
+                    DrillDownPageId = "Pending Staff Claim List";
                 }
                 field("Approved Staff Claim"; Rec."Approved Staff Claim")
                 {
-                    DrillDownPageId = "Staff Claim List-General";
+                    DrillDownPageId = "Approved Staff Claim";
                 }
             }
             cuegroup("Purchase Request")
             {
                 field("Purchase Request List"; Rec."Purchase Request List")
                 {
-                    DrillDownPageId = "Purchase Request List-General";
+                    DrillDownPageId = "Purchase Request List";
                 }
                 field("Purchase Request Approved"; Rec."Purchase Request Approved")
                 {

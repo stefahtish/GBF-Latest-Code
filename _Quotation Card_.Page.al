@@ -172,7 +172,7 @@ page 50761 "Quotation Card"
                     PromotedIsBig = true;
                     ToolTip = 'Upload documents for the record.';
 
-                    //Visible = false;
+                    Visible = false;
                     trigger OnAction()
                     var
                     begin
@@ -188,7 +188,7 @@ page 50761 "Quotation Card"
                     Promoted = true;
                     PromotedCategory = Category9;
                     ToolTip = 'Add a file as an attachment. You can attach images as well as documents.';
-                    Visible = false;
+                    Visible = true;
 
                     trigger OnAction()
                     var

@@ -179,6 +179,14 @@ page 50752 "Purchase Request"
                     Visible = CommentVisible;
                 }
             }
+            part(PurchaseRequestSub2; "Purchase Request Subformv")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Vendor Details';
+                SubPageLink = "Document No." = FIELD("No.");
+                UpdatePropagation = Both;
+                Visible = RFQVisible;
+            }
             part(PurchaseRequestSub; "Purchase Request Sub")
             {
                 ApplicationArea = Basic, Suite;
@@ -195,6 +203,7 @@ page 50752 "Purchase Request"
                 UpdatePropagation = Both;
                 Visible = Rec."Insert Other Items" = false;
             }
+
             field("Total Amount"; Rec."Total Amount")
             {
                 ApplicationArea = All;
@@ -506,14 +515,13 @@ page 50752 "Purchase Request"
 
                     trigger OnAction()
                     begin
-                        // IF CONFIRM('Are you sure you want to create an RFQ for this requisition?',FALSE)=TRUE THEN
-                        //  BEGIN
-                        //    TESTFIELD(Status,Status::Released);
-                        //    ProcurementMgt.CreateRFQ(Rec);
-                        //  END;
-                        //
-                        // COMMIT;
-                        // CurrPage.CLOSE;
+                        IF CONFIRM('Are you sure you want to create an RFQ for this requisition?', FALSE) = TRUE THEN BEGIN
+                            rec.TESTFIELD(Status, rec.Status::Released);
+                            ProcurementMgt.CreateRFQ(Rec);
+                        END;
+
+                        COMMIT;
+                        CurrPage.CLOSE;
                     end;
                 }
                 action("Raise RFP")

@@ -3,10 +3,10 @@ page 50185 "Staff Claim List-General"
     CardPageID = "Staff Claim";
     DeleteAllowed = false;
     PageType = List;
-    ApplicationArea = all;
-    UsageCategory = Lists;
+    ApplicationArea = none;
+    UsageCategory = none;
     SourceTable = Payments;
-    SourceTableView = WHERE("Payment Type"=CONST("Staff Claim"));
+    SourceTableView = WHERE("Payment Type" = CONST("Staff Claim"), Posted = filter(false));
 
     layout
     {
@@ -62,7 +62,7 @@ page 50185 "Staff Claim List-General"
             part("FactBox"; "Payments FactBox Test")
             {
                 ApplicationArea = All;
-                SubPageLink = "No."=FIELD("No.");
+                SubPageLink = "No." = FIELD("No.");
             }
         }
     }
@@ -71,11 +71,12 @@ page 50185 "Staff Claim List-General"
     }
     trigger OnAfterGetRecord()
     begin
-    //DocStatus:=FormatStatus(Status);
+        //DocStatus:=FormatStatus(Status);
     end;
+
     trigger OnOpenPage()
     begin
-        if UserSetup.Get(UserId)then begin
+        if UserSetup.Get(UserId) then begin
             if not UserSetup."Show All" then begin
                 Rec.FilterGroup(2);
                 Rec.SetRange("Created By", UserId);
@@ -84,6 +85,8 @@ page 50185 "Staff Claim List-General"
         else
             Error('%1 does not exist in the Users Setup', UserId);
     end;
-    var DocStatus: Option New, "HOD Approved", "Finance Approved", "Approval Pending", Rejected, "DED/DFA Approved";
-    UserSetup: Record "User Setup";
+
+    var
+        DocStatus: Option New,"HOD Approved","Finance Approved","Approval Pending",Rejected,"DED/DFA Approved";
+        UserSetup: Record "User Setup";
 }

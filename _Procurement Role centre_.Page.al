@@ -511,31 +511,31 @@ page 50766 "Procurement Role centre"
                         RunObject = page "Appraisal List - Pending";
                         RunPageLink = Status = CONST("Pending Approval");
                     }
-                    action("Appraisal Periods")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Appraisal Periods";
-                    }
-                    action("Managerial Core Values/competence")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Managerial Core Values Setup";
-                    }
-                    action("Core Values/Competece")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Core Value/Competence Setup";
-                    }
-                    action("Rating Scale")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Rating Scale List";
-                    }
-                    action("Appraisal Preamble Setup")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Appraisal Preamble Setup";
-                    }
+                    // action("Appraisal Periods")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = page "Appraisal Periods";
+                    // }
+                    // action("Managerial Core Values/competence")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = page "Managerial Core Values Setup";
+                    // }
+                    // action("Core Values/Competece")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = page "Core Value/Competence Setup";
+                    // }
+                    // action("Rating Scale")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = page "Rating Scale List";
+                    // }
+                    // action("Appraisal Preamble Setup")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = page "Appraisal Preamble Setup";
+                    // }
                 }
                 group("Reports")
                 {

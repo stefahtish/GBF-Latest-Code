@@ -2001,7 +2001,7 @@ page 50224 "Finance Role Center"
                     action("Approved Staff Claim ")
                     {
                         ApplicationArea = basic, suite;
-                        RunObject = Page "Staff Claim List-General";
+                        RunObject = Page "Approved Staff Claim";
                     }
                     action("Purchase Request Approved ")
                     {

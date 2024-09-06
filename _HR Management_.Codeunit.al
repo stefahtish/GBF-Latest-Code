@@ -22,7 +22,7 @@ codeunit 50119 "HR Management"
         FileManagement: Codeunit "File Management";
         Emailmessage: Codeunit "Email Message";
         Email: codeunit email;
-        //SMTPSetup: Record "SMTP Mail Setup";
+        SMTPSetup: Record "Email Account";
         SenderName: Text;
         SenderAddress: Text;
         Receipient: List of [Text];
@@ -609,7 +609,7 @@ codeunit 50119 "HR Management"
         RecipientCC: List of [Text];
         Attachment: Text;
         ErrorMsg: Text;
-        EmailBody: Label 'Dear %1, <br>Congratulations! You have Successfully secured a position at the <strong>Institute of Energy Studies & Research</strong>. <br>Kindly visit  your applicatioin Portal to Download the Admission Letter.';
+        EmailBody: Label 'Dear %1, <br>Congratulations! You have Successfully secured a position at the <strong>GBF</strong>. <br>Kindly visit  your applicatioin Portal to Download the Admission Letter.';
         NewBody: Label '<p style="font-family:Verdana,Arial;font-size:10pt">Dear<b> %1,</b></p><p style="font-family:Verdana,Arial;font-size:9pt">This is to notify you that there is a company activity:  <Strong> %2 </Strong>-<Strong> on %3 </Strong> that you have been chosen to oversee. The venue will be %4 and the duration is %5 -%6';
         MailSuccess: Label 'Employees have been notified successfully.';
         NoOfRecipients: Integer;
@@ -1534,7 +1534,7 @@ codeunit 50119 "HR Management"
                                     Emailmessage.AppendToBody(StrSubstNo(EmailBodyText));
                                     Emailmessage.AddAttachment(FileName, Attachment, '');
                                     EMAIL.Send(Emailmessage);
-                                    //eddie ErrorMsg := Emailmessage.GetLastSendMailErrorText();
+                                    // ErrorMsg := Emailmessage.GetLastSendMailErrorText();
                                     if ErrorMsg <> '' then
                                         CommLines."E-Mail Sent" := false
                                     else

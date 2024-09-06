@@ -180,6 +180,7 @@ page 50245 "Approved/Post Imprest Card"
                 field("Date of Project"; Rec."Date of Project")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                     Editable = NOT OpenApprovalEntriesExist;
                 }
                 field("No of Days"; Rec."No of Days")
@@ -190,6 +191,7 @@ page 50245 "Approved/Post Imprest Card"
                 field("Date of Completion"; Rec."Date of Completion")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                     Editable = NOT OpenApprovalEntriesExist;
                 }
                 field("Due Date"; Rec."Due Date")
@@ -232,17 +234,20 @@ page 50245 "Approved/Post Imprest Card"
                 field("Confirm Receipt"; Rec."Confirm Receipt")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                     Editable = false;
                 }
                 field("Confirm Receipt User"; Rec."Confirm Receipt User")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                     Editable = false;
                 }
                 field("Confirm Receipt Date-Time"; Rec."Confirm Receipt Date-Time")
                 {
                     ApplicationArea = All;
                     Editable = false;
+                    Visible = false;
                 }
             }
             part(ImprestLines; "Imprest Lines")
@@ -258,6 +263,7 @@ page 50245 "Approved/Post Imprest Card"
                 ApplicationArea = basic, suite;
                 // Editable = NOT OpenApprovalEntriesExist;
                 SubPageLink = No = FIELD("No.");
+                Visible = false;
             }
         }
         area(factboxes)
@@ -635,6 +641,7 @@ page 50245 "Approved/Post Imprest Card"
                     Promoted = true;
                     ApplicationArea = basic, suite;
                     PromotedCategory = Process;
+                    Visible = false;
                     Image = PostSendTo;
                     Enabled = not Rec.Posted and DocReleased;
 

@@ -3,10 +3,10 @@ page 50184 "Imprest Surrenders-General"
     CardPageID = "Imprest Surrender";
     DeleteAllowed = false;
     PageType = List;
-    ApplicationArea = all;
-    UsageCategory = Lists;
+    ApplicationArea = none;
+    UsageCategory = none;
     SourceTable = Payments;
-    SourceTableView = WHERE("Payment Type"=CONST("Imprest Surrender"));
+    SourceTableView = WHERE("Payment Type" = CONST("Imprest Surrender"));
 
     layout
     {
@@ -74,7 +74,7 @@ page 50184 "Imprest Surrenders-General"
             part("FactBox"; "Payments FactBox Test")
             {
                 ApplicationArea = All;
-                SubPageLink = "No."=FIELD("No.");
+                SubPageLink = "No." = FIELD("No.");
             }
         }
     }
@@ -108,14 +108,15 @@ page 50184 "Imprest Surrenders-General"
     trigger OnAfterGetRecord()
     begin
         Rec.CalcFields("Impress Amount 1", "Impress Amount 2", "Actual Amount Spent 1", "Actual Amount Spent 2", "Cash Receipt Amount 1", "Cash Receipt Amount 2");
-        Rec."Imprest Amount":=Rec."Impress Amount 1" + Rec."Impress Amount 2";
-        Rec."Actual Amount Spent":=Rec."Actual Amount Spent 1" + Rec."Actual Amount Spent 2";
-        Rec."Cash Receipt Amount":=Rec."Cash Receipt Amount 1" + Rec."Cash Receipt Amount 2";
+        Rec."Imprest Amount" := Rec."Impress Amount 1" + Rec."Impress Amount 2";
+        Rec."Actual Amount Spent" := Rec."Actual Amount Spent 1" + Rec."Actual Amount Spent 2";
+        Rec."Cash Receipt Amount" := Rec."Cash Receipt Amount 1" + Rec."Cash Receipt Amount 2";
         Rec.Modify(true);
     end;
+
     trigger OnOpenPage()
     begin
-        if UserSetup.Get(UserId)then begin
+        if UserSetup.Get(UserId) then begin
             if not UserSetup."Show All" then begin
                 Rec.FilterGroup(2);
                 Rec.SetRange("Created By", UserId);
@@ -124,6 +125,8 @@ page 50184 "Imprest Surrenders-General"
         else
             Error('%1 does not exist in the Users Setup', UserId);
     end;
-    var DocStatus: Option New, "HOD Approved", "Finance Approved", "Approval Pending", Rejected, "DED/DFA Approved";
-    UserSetup: Record "User Setup";
+
+    var
+        DocStatus: Option New,"HOD Approved","Finance Approved","Approval Pending",Rejected,"DED/DFA Approved";
+        UserSetup: Record "User Setup";
 }

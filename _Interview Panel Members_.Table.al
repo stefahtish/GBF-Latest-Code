@@ -7,13 +7,13 @@ table 50251 "Interview Panel Members"
         field(2; "Panel Member Code"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = IF(Type=CONST(Internal))Employee;
+            TableRelation = IF (Type = CONST(Internal)) Employee;
 
             trigger OnValidate()
             var
                 EmployeeRec: Record Employee;
             begin
-                if EmployeeRec.get("Panel Member Code")then "Panel Member Name":=EmployeeRec.FullName();
+                if EmployeeRec.get("Panel Member Code") then "Panel Member Name" := EmployeeRec.FullName();
             end;
         }
         field(3; "Panel Member Name"; Text[250])
@@ -24,7 +24,7 @@ table 50251 "Interview Panel Members"
         {
             DataClassification = ToBeClassified;
             OptionCaption = ' ,Internal,External';
-            OptionMembers = " ", Internal, External;
+            OptionMembers = " ",Internal,External;
         }
         field(5; "Line No."; Integer)
         {
@@ -34,7 +34,7 @@ table 50251 "Interview Panel Members"
     }
     keys
     {
-        key(Key1; "Line No.", "Panel Member Code")
+        key(Key1; "Line No.", "Panel Member Code", "Panel Member Name")
         {
             Clustered = true;
         }

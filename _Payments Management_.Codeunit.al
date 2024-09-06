@@ -948,6 +948,12 @@ codeunit 50104 "Payments Management"
             GenJnLine."Journal Batch Name" := 'IMPREST';
             GenJnLine."Line No." := LineNo;
             GenJnLine."Account Type" := GenJnLine."Account Type"::"Bank Account";
+            GenJnLine."Shortcut Dimension 1 Code" := ImprestLines."Shortcut Dimension 1 Code";
+            GenJnLine.Validate(GenJnLine."Shortcut Dimension 1 Code");
+            GenJnLine."Shortcut Dimension 2 Code" := ImprestLines."Shortcut Dimension 2 Code";
+            GenJnLine.Validate(GenJnLine."Shortcut Dimension 2 Code");
+            GenJnLine."Dimension Set ID" := ImprestLines."Dimension Set ID";
+            GenJnLine.Validate(GenJnLine."Dimension Set ID");
             GenJnLine."Account No." := Imprest."Paying Bank Account";
             GenJnLine."Posting Date" := Today;
             GenJnLine."Document No." := Imprest."No.";
@@ -958,11 +964,7 @@ codeunit 50104 "Payments Management"
             GenJnLine.Description := Imprest.Payee;
             GenJnLine.Amount := -TotalAmount;
             GenJnLine.Validate(Amount);
-            GenJnLine."Shortcut Dimension 1 Code" := Imprest."Shortcut Dimension 1 Code";
-            GenJnLine.Validate("Shortcut Dimension 1 Code");
-            GenJnLine."Shortcut Dimension 2 Code" := Imprest."Shortcut Dimension 2 Code";
-            GenJnLine.Validate("Shortcut Dimension 2 Code");
-            GenJnLine."Dimension Set ID" := Imprest."Dimension Set ID";
+
             // GenJnLine."Reason Code" := ImprestLines."General Expense Code";
             GenJnLine.Validate(GenJnLine."Dimension Set ID");
             GenJnLine."Bal. Account Type" := GenJnLine."Bal. Account Type"::Customer;
@@ -970,8 +972,19 @@ codeunit 50104 "Payments Management"
             GenJnLine."Posting Group" := GetCustomerPostingGroup(Imprest."Account No.");
             GenJnLine."Currency Code" := Imprest.Currency;
             GenJnLine.Validate("Bal. Account No.");
+            GenJnLine."Shortcut Dimension 1 Code" := ImprestLines."Shortcut Dimension 1 Code";
+            GenJnLine.Validate(GenJnLine."Shortcut Dimension 1 Code");
+            GenJnLine."Shortcut Dimension 2 Code" := ImprestLines."Shortcut Dimension 2 Code";
+            GenJnLine.Validate(GenJnLine."Shortcut Dimension 2 Code");
+            GenJnLine."Dimension Set ID" := ImprestLines."Dimension Set ID";
+            GenJnLine.Validate(GenJnLine."Dimension Set ID");
             GenJnLine."Customer Transaction Type" := GenJnLine."Customer Transaction Type"::Imprest;
             GenJnLine."Due Date" := Imprest."Surrender Date";
+            GenJnLine."Shortcut Dimension 1 Code" := Imprest."Shortcut Dimension 1 Code";
+            GenJnLine.Validate("Shortcut Dimension 1 Code");
+            GenJnLine."Shortcut Dimension 2 Code" := Imprest."Shortcut Dimension 2 Code";
+            GenJnLine.Validate("Shortcut Dimension 2 Code");
+            GenJnLine."Dimension Set ID" := Imprest."Dimension Set ID";
             if GenJnLine.Amount <> 0 then GenJnLine.Insert;
             CODEUNIT.Run(CODEUNIT::"Gen. Jnl.-Post", GenJnLine);
             GLEntry.Reset;
@@ -1784,7 +1797,7 @@ codeunit 50104 "Payments Management"
             //Get surrender template
             Temp.Get(UserId);
             JTemplate := Temp."Imprest Sur Template";
-            JBatch := Imprest."No."; // Temp."Imprest Sur Batch";
+            JBatch := Temp."Imprest Sur Batch"; //Imprest."No."; //
             if JTemplate = '' then begin
                 Error('Ensure the Imprest Surrender Template is set up in Cash Office Setup');
             end;
@@ -1819,19 +1832,17 @@ codeunit 50104 "Payments Management"
             GenJnLine."Currency Code" := Imprest.Currency;
             GenJnLine.Validate("Currency Code");
             GenJnLine.Validate(Amount);
+            GenJnLine."Applies-to Doc. No." := Imprest."Imprest Issue Doc. No";//GetImprestPostedPV(Imprest."Imprest Issue Doc. No");
+            GenJnLine.Validate("Currency Code");
+            GenJnLine.Validate(Amount);
+            GenJnLine.Validate(GenJnLine."Dimension Set ID");
+            GenJnLine.Validate(GenJnLine."Applies-to Doc. No.");
+            GenJnLine."Customer Transaction Type" := GenJnLine."Customer Transaction Type"::Imprest;
             GenJnLine."Shortcut Dimension 1 Code" := Imprest."Shortcut Dimension 1 Code";
             GenJnLine.Validate("Shortcut Dimension 1 Code");
             GenJnLine."Shortcut Dimension 2 Code" := Imprest."Shortcut Dimension 2 Code";
             GenJnLine.Validate("Shortcut Dimension 2 Code");
             GenJnLine."Dimension Set ID" := Imprest."Dimension Set ID";
-            GenJnLine.Validate(GenJnLine."Dimension Set ID");
-            //  GenJnLine."VAT Bus. Posting Group":='LOCAL';
-            // GenJnLine."Applies-to Doc. Type":=GenJnLine."Applies-to Doc. Type"::" ";
-            GenJnLine."Applies-to Doc. No." := GetImprestPostedPV(Imprest."Imprest Issue Doc. No");
-            GenJnLine.Validate("Currency Code");
-            GenJnLine.Validate(Amount);
-            GenJnLine."Customer Transaction Type" := GenJnLine."Customer Transaction Type"::Imprest;
-            GenJnLine.Validate(GenJnLine."Applies-to Doc. No.");
             if GenJnLine.Amount <> 0 then GenJnLine.Insert;
             /*// Post receipt or payment to  the customer
              LineNo:=LineNo+10000;
@@ -1931,13 +1942,13 @@ codeunit 50104 "Payments Management"
                     GenJnLine."Currency Code" := Imprest.Currency;
                     GenJnLine.Validate("Currency Code");
                     GenJnLine.Validate(GenJnLine.Amount);
-                    GenJnLine."Shortcut Dimension 1 Code" := ImprestLines."Shortcut Dimension 1 Code";
-                    GenJnLine.Validate(GenJnLine."Shortcut Dimension 1 Code");
-                    GenJnLine."Shortcut Dimension 2 Code" := ImprestLines."Shortcut Dimension 2 Code";
-                    GenJnLine.Validate(GenJnLine."Shortcut Dimension 2 Code");
-                    GenJnLine."Dimension Set ID" := ImprestLines."Dimension Set ID";
+                    GenJnLine."Shortcut Dimension 1 Code" := Imprest."Shortcut Dimension 1 Code";
+                    GenJnLine.Validate("Shortcut Dimension 1 Code");
+                    GenJnLine."Shortcut Dimension 2 Code" := Imprest."Shortcut Dimension 2 Code";
+                    GenJnLine.Validate("Shortcut Dimension 2 Code");
+                    //GenJnLine."Dimension Set ID" := Imprest."Dimension Set ID";
                     // GenJnLine."Reason Code" := ImprestLines."General Expense Code";
-                    GenJnLine.Validate(GenJnLine."Dimension Set ID");
+                    //GenJnLine.Validate(GenJnLine."Dimension Set ID");
                     //GenJnLine."VAT Bus. Posting Group":='LOCAL';
                     //GenJnLine."Gen. Posting Type":=GenJnLine."Gen. Posting Type"::Sale;
                     if GenJnLine.Amount <> 0 then GenJnLine.Insert;
@@ -1966,18 +1977,24 @@ codeunit 50104 "Payments Management"
                             GenJnLine."Bal. Account Type" := GenJnLine."Account Type"::"Bank Account";
                             GenJnLine."Bal. Account No." := ImprestLines."Receiving Bank";
                             GenJnLine.Validate("Bal. Account No.");
-                            GenJnLine."Shortcut Dimension 1 Code" := ImprestLines."Shortcut Dimension 1 Code";
-                            GenJnLine.Validate(GenJnLine."Shortcut Dimension 1 Code");
-                            GenJnLine."Shortcut Dimension 2 Code" := ImprestLines."Shortcut Dimension 2 Code";
-                            GenJnLine.Validate(GenJnLine."Shortcut Dimension 2 Code");
-                            GenJnLine."Dimension Set ID" := ImprestLines."Dimension Set ID";
-                            GenJnLine.Validate(GenJnLine."Dimension Set ID");
+
                             // GenJnLine."Reason Code" := ImprestLines."General Expense Code";
                             //GenJnLine."VAT Bus. Posting Group":='LOCAL';
                             //GenJnLine."Applies-to Doc. Type":=GenJnLine."Applies-to Doc. Type"::" ";
-                            GenJnLine."Applies-to Doc. No." := GetImprestPostedPV(Imprest."Imprest Issue Doc. No");
+                            GenJnLine."Applies-to Doc. No." := Imprest."Imprest Issue Doc. No";// GetImprestPostedPV(Imprest."Imprest Issue Doc. No");
                             GenJnLine."Customer Transaction Type" := GenJnLine."Customer Transaction Type"::Imprest;
                             GenJnLine.Validate(GenJnLine."Applies-to Doc. No.");
+                            // GenJnLine."Shortcut Dimension 1 Code" := ImprestLines."Shortcut Dimension 1 Code";
+                            // GenJnLine.Validate(GenJnLine."Shortcut Dimension 1 Code");
+                            // GenJnLine."Shortcut Dimension 2 Code" := ImprestLines."Shortcut Dimension 2 Code";
+                            // GenJnLine.Validate(GenJnLine."Shortcut Dimension 2 Code");
+                            // GenJnLine."Dimension Set ID" := ImprestLines."Dimension Set ID";
+                            //GenJnLine.Validate(GenJnLine."Dimension Set ID");
+                            GenJnLine."Shortcut Dimension 1 Code" := Imprest."Shortcut Dimension 1 Code";
+                            GenJnLine.Validate("Shortcut Dimension 1 Code");
+                            GenJnLine."Shortcut Dimension 2 Code" := Imprest."Shortcut Dimension 2 Code";
+                            GenJnLine.Validate("Shortcut Dimension 2 Code");
+                            GenJnLine."Dimension Set ID" := Imprest."Dimension Set ID";
                             if GenJnLine.Amount <> 0 then GenJnLine.Insert;
                         end;
                     end;
@@ -2043,18 +2060,19 @@ codeunit 50104 "Payments Management"
                             GenJnLine."Bal. Account Type" := GenJnLine."Account Type"::"Bank Account";
                             GenJnLine."Bal. Account No." := ExtImprestLines."Receiving Bank";
                             GenJnLine.Validate("Bal. Account No.");
+
+                            // GenJnLine."Reason Code" := ImprestLines."General Expense Code";
+                            //GenJnLine."VAT Bus. Posting Group":='LOCAL';
+                            //GenJnLine."Applies-to Doc. Type":=GenJnLine."Applies-to Doc. Type"::" ";
+                            GenJnLine."Applies-to Doc. No." := Imprest."Imprest Issue Doc. No";//GetImprestPostedPV(Imprest."Imprest Issue Doc. No");
+                            GenJnLine."Customer Transaction Type" := GenJnLine."Customer Transaction Type"::Imprest;
+                            GenJnLine.Validate(GenJnLine."Applies-to Doc. No.");
                             GenJnLine."Shortcut Dimension 1 Code" := ExtImprestLines."Shortcut Dimension 1 Code";
                             GenJnLine.Validate(GenJnLine."Shortcut Dimension 1 Code");
                             GenJnLine."Shortcut Dimension 2 Code" := ExtImprestLines."Shortcut Dimension 2 Code";
                             GenJnLine.Validate(GenJnLine."Shortcut Dimension 2 Code");
                             GenJnLine."Dimension Set ID" := ExtImprestLines."Dimension Set ID";
                             GenJnLine.Validate(GenJnLine."Dimension Set ID");
-                            // GenJnLine."Reason Code" := ImprestLines."General Expense Code";
-                            //GenJnLine."VAT Bus. Posting Group":='LOCAL';
-                            //GenJnLine."Applies-to Doc. Type":=GenJnLine."Applies-to Doc. Type"::" ";
-                            GenJnLine."Applies-to Doc. No." := GetImprestPostedPV(Imprest."Imprest Issue Doc. No");
-                            GenJnLine."Customer Transaction Type" := GenJnLine."Customer Transaction Type"::Imprest;
-                            GenJnLine.Validate(GenJnLine."Applies-to Doc. No.");
                             if GenJnLine.Amount <> 0 then GenJnLine.Insert;
                         end;
                     end;
@@ -2764,11 +2782,13 @@ codeunit 50104 "Payments Management"
         ImprestLines: Record "Payment Lines";
         OptionNumber: Integer;
         PaymentsPost: Codeunit "Payments Management";
+        Cashmngmtsetup: record "Cash Management Setups";
     begin
         OptionNumber := DIALOG.StrMenu(Text021, 0, Text022);
         //Header
         PaymentRec.Init;
         PaymentRec.TransferFields(Imprest);
+        //tCashmngmtsetup.TestField("Claim Overspend Code");
         PaymentRec."No." := '';
         case OptionNumber of
             1:
@@ -2817,7 +2837,10 @@ codeunit 50104 "Payments Management"
         end;
         case OptionNumber OF
             3:
-                PaymentLines."Expenditure Type" := 'OVERSPEND'
+                if Cashmngmtsetup.Get() then begin
+                    PaymentLines."Expenditure Type" := Cashmngmtsetup."Claim Overspend Code"
+                end
+
 
         END;
         case OptionNumber OF

@@ -218,11 +218,11 @@ codeunit 50150 HRPortal
     end;
 
     [ServiceEnabled]
-    procedure FnCreateImprestRequisition(requisitionNo: Code[20]; empNo: Code[20]; referenceNo: Text; paymentNarration: Text; destination: Code[20]; startDate: Date; returnDate: Date) RtnV: Text;
+    procedure FnCreateImprestRequisition(requisitionNo: Code[20]; empNo: Code[20]; referenceNo: Text; paymentNarration: Text; destination: Code[20]; department: Code[20]; projectCode: Code[20]; startDate: Date; returnDate: Date) RtnV: Text;
     begin
         Clear(JsObject);
         CLEARLASTERROR();
-        if not SubmitImprestRequisition(requisitionNo, empNo, referenceNo, paymentNarration, destination, startDate, returnDate) then begin
+        if not SubmitImprestRequisition(requisitionNo, empNo, referenceNo, paymentNarration, destination, department, projectCode, startDate, returnDate) then begin
             JsObject.Add('Error', 'TRUE');
             JsObject.Add('Error_Message', GETLASTERRORTEXT());
         end;
@@ -230,11 +230,16 @@ codeunit 50150 HRPortal
     end;
 
     [TryFunction]
-    procedure SubmitImprestRequisition(requisitionNo: Code[20]; empNo: Code[20]; referenceNo: Text; paymentNarration: Text; destination: Code[20]; startDate: Date; returnDate: Date)
+    procedure SubmitImprestRequisition(requisitionNo: Code[20]; empNo: Code[20]; referenceNo: Text; paymentNarration: Text; destination: Code[20]; department: Code[20]; projectCode: Code[20]; startDate: Date; returnDate: Date)
     var
         payments: Record Payments;
         employee: Record Employee;
+        myTextDate: Text;
+        myDate: Date;
     begin
+        myTextDate := '0001-01-01';
+        Evaluate(myDate, myTextDate);
+
         if requisitionNo = '' then begin
             payments.Reset();
             payments.Init;
@@ -243,17 +248,27 @@ codeunit 50150 HRPortal
             employee.Get(empNo);
             if employee.findset then begin
                 payments.payee := employee."First Name" + ' ' + employee."Last Name";
-                payments."Account Name" := employee."First Name" + ' ' + employee."Last Name";
+                payments.Payee := employee."First Name" + ' ' + employee."Last Name";
                 payments."Account No." := employee."Imprest Customer Code";
+                payments."Account Name" := employee."First Name" + ' ' + employee."Last Name";
+
             end;
             payments."Portal Request" := true;
             payments.Destination := destination;
+            payments."Shortcut Dimension 1 Code" := projectCode;
+            payments."Shortcut Dimension 2 Code" := department;
             payments."Payment Type" := payments."Payment Type"::Imprest;
             payments."Account Type" := payments."Account Type"::Customer;
             payments."Payment Narration" := paymentNarration;
-            payments."Date of Project" := startDate;
-            payments."Travel Date" := startDate;
-            payments."Date of Completion" := returnDate;
+            if (startDate <> myDate) then begin
+                payments."Date of Project" := startDate;
+                payments."Travel Date" := startDate;
+            end;
+
+            if (returnDate <> myDate) then begin
+                payments."Date of Completion" := returnDate;
+            end;
+
             payments.Date := Today;
             payments."Time Inserted" := Time;
             // payments.Validate("Account No.");          
@@ -271,11 +286,18 @@ codeunit 50150 HRPortal
             payments.setrange("No.", requisitionNo);
             payments.setrange(Status, payments.Status::Open);
             if payments.findset(true) then begin
+                payments."Shortcut Dimension 1 Code" := projectCode;
+                payments."Shortcut Dimension 2 Code" := department;
                 payments."Payment Narration" := paymentNarration;
                 payments.Destination := destination;
-                payments."Date of Project" := startDate;
-                payments."Travel Date" := startDate;
-                payments."Date of Completion" := returnDate;
+                if (startDate <> myDate) then begin
+                    payments."Date of Project" := startDate;
+                    payments."Travel Date" := startDate;
+                end;
+                if (returnDate <> myDate) then begin
+                    payments."Date of Completion" := returnDate;
+                end;
+
                 if payments.Modify(true) then begin
                     JsObject.Add('Error', 'FALSE');
                     JsObject.Add('DocNo', payments."No.");
@@ -344,8 +366,6 @@ codeunit 50150 HRPortal
         end else begin
             Error('Sorry, you could not add an imprest line. The imprest request is either not open or you are not the requestor. Kindly contact the administrator if this error persists.');
         end;
-
-
 
     end;
 
@@ -506,11 +526,11 @@ codeunit 50150 HRPortal
     end;
 
     [ServiceEnabled]
-    procedure FnCreateStaffClaimRequisition(requisitionNo: Code[20]; empNo: Code[20]; claimType: Integer; paymentNarration: Text) RtnV: Text;
+    procedure FnCreateStaffClaimRequisition(requisitionNo: Code[20]; empNo: Code[20]; claimType: Integer; department: Code[20]; projectCode: Code[20]; paymentNarration: Text) RtnV: Text;
     begin
         Clear(JsObject);
         CLEARLASTERROR();
-        if not SubmitStaffClaimRequisition(requisitionNo, empNo, claimType, paymentNarration) then begin
+        if not SubmitStaffClaimRequisition(requisitionNo, empNo, claimType, department, projectCode, paymentNarration) then begin
             JsObject.Add('Error', 'TRUE');
             JsObject.Add('Error_Message', GETLASTERRORTEXT());
         end;
@@ -518,7 +538,7 @@ codeunit 50150 HRPortal
     end;
 
     [TryFunction]
-    procedure SubmitStaffClaimRequisition(requisitionNo: Code[20]; empNo: Code[20]; claimType: Integer; paymentNarration: Text)
+    procedure SubmitStaffClaimRequisition(requisitionNo: Code[20]; empNo: Code[20]; claimType: Integer; department: Code[20]; projectCode: Code[20]; paymentNarration: Text)
     var
         payments: Record Payments;
         employee: Record Employee;
@@ -536,6 +556,8 @@ codeunit 50150 HRPortal
             payments."Portal Request" := true;
             payments."Payment Type" := payments."Payment Type"::"Staff Claim";
             payments."Payment Narration" := paymentNarration;
+            payments."Shortcut Dimension 1 Code" := projectCode;
+            payments."Shortcut Dimension 2 Code" := department;
             payments."Claim Type" := claimType;
             payments.Validate("Claim Type");
             payments.Date := Today;
@@ -556,6 +578,8 @@ codeunit 50150 HRPortal
             payments.setrange(Status, payments.Status::Open);
             if payments.findset(true) then begin
                 payments."Payment Narration" := paymentNarration;
+                payments."Shortcut Dimension 1 Code" := projectCode;
+                payments."Shortcut Dimension 2 Code" := department;
                 payments."Claim Type" := claimType;
                 payments.Validate("Claim Type");
                 if payments.Modify(true) then begin
@@ -714,7 +738,7 @@ codeunit 50150 HRPortal
                 Error('Sorry, an error occurred while processing your request. Kindly try again.');
             end;
         end else begin
-            // modify
+            // Update
             purchase.reset;
             purchase.setrange(purchase."Employee No.", empNo);
             purchase.setrange("No.", requisitionNo);
@@ -988,6 +1012,7 @@ codeunit 50150 HRPortal
         DocNo: Text;
         ProjectNo: Text;
         TaskNo: Text;
+        CauseofAbsence: Text;
         Type: Integer;
         WorkHourToken: JsonToken;
         WorkHoursArray: JsonArray;
@@ -1012,6 +1037,9 @@ codeunit 50150 HRPortal
 
         JsonObject.Get('taskNo', JsonToken);
         TaskNo := JsonToken.AsValue().AsText();
+
+        JsonObject.Get('causeofAbsence', JsonToken);
+        CauseofAbsence := JsonToken.AsValue().AsText();
 
         JsonObject.Get('type', JsonToken);
         Type := JsonToken.AsValue().AsInteger();
@@ -1047,7 +1075,7 @@ codeunit 50150 HRPortal
 
         Clear(JsObject);
         CLEARLASTERROR();
-        if not fnPopulateTimeSheetLinesJob28(resourceNo, docNo, projectNo, taskNo, type, WorkHoursList) then begin
+        if not fnPopulateTimeSheetLinesJob28(resourceNo, docNo, projectNo, taskNo, causeofAbsence, type, WorkHoursList) then begin
             JsObject.Add('Error', 'TRUE');
             JsObject.Add('Error_Message', GETLASTERRORTEXT());
         end;
@@ -1188,7 +1216,7 @@ codeunit 50150 HRPortal
     end;
 
     [TryFunction]
-    procedure fnPopulateTimeSheetLinesJob28(resourceNo: Code[30]; docNo: Code[30]; job: Code[30]; jobTask: Code[30]; type: Integer; workHours: List of [Integer]);
+    procedure fnPopulateTimeSheetLinesJob28(resourceNo: Code[30]; docNo: Code[30]; job: Code[30]; jobTask: Code[30]; causeofAbsence: Code[30]; type: Integer; workHours: List of [Integer]);
     var
         tbl_timesheetHeader: Record "Time Sheet Header";
         tbl_timeSheetLine: Record "Time Sheet Line";
@@ -1211,19 +1239,28 @@ codeunit 50150 HRPortal
                 myTimesheetLines += tbl_timeSheetLine.Count;
             tbl_timeSheetLine.Init;
             tbl_timeSheetLine."Time Sheet No." := docNo;
-            tbl_timeSheetLine.Type := tbl_timeSheetLine.Type::Job;
+            // tbl_timeSheetLine.Type := tbl_timeSheetLine.Type::Job;
+            tbl_timeSheetLine.Type := type;
             tbl_timeSheetLine."Line No." := myTimesheetLines * 10000;
             tbl_timeSheetLine."Job No." := job;
             tbl_timeSheetLine.Validate("Job No.");
             tbl_timeSheetLine."Job Task No." := jobTask;
             tbl_timeSheetLine.Validate("Job Task No.");
+            tbl_timeSheetLine."Cause of Absence Code" := causeofAbsence;
+            tbl_timeSheetLine.Validate("Cause of Absence Code");
             tbl_timeSheetLine.Status := tbl_timeSheetLine.Status::Open;
             // tbl_timeSheetLine."Distribution Percentage" := percDistribution;
             // tbl_timeSheetLine."Work Type Code" := workType;         
             myDate := tbl_timesheetHeader."Starting Date";
 
             if tbl_timeSheetLine.insert(true) then begin
-                for myHours := 1 to 7 do begin
+                // tbl_timeSheetLine.Validate("Job No.");
+                // tbl_timeSheetLine.Validate("Job Task No.");
+                if tbl_timeSheetLine.Modify(true) then begin
+
+                end;
+
+                for myHours := 1 to 5 do begin
 
                     tbl_timeSheetLineDetail.Init;
                     tbl_timeSheetLineDetail."Time Sheet No." := docNo;
@@ -1231,7 +1268,7 @@ codeunit 50150 HRPortal
                     tbl_timeSheetLineDetail.Date := myDate;
                     tbl_timeSheetLineDetail.Quantity := workHours.Get(myHours);
                     // tbl_timeSheetLineDetail.Type := tbl_timeSheetLineDetail.Type::Resource;
-                    tbl_timeSheetLineDetail.Type := type;
+                    //  tbl_timeSheetLineDetail.Type := type;
                     myDate += 1;
                     tbl_timeSheetLineDetail.insert(true);
                 end;
@@ -1646,8 +1683,8 @@ codeunit 50150 HRPortal
         if timesheetHeader.FindFirst() then begin
             // timesheetHeader.status
             VarVariant := timesheetHeader;
-            timesheetHeader."Submitted Exists" := true;
-            timesheetHeader.Validate("Submitted Exists");
+            // timesheetHeader."Submitted Exists" := true;
+            // timesheetHeader.Validate("Submitted Exists");
             if timesheetHeader.Modify(true) then begin
                 //  If ApprovalMgt.CheckApprovalsWorkflowEnabled(VarVariant) then
                 //      CustomApprovals.OnSendDocForApproval(VarVariant);
@@ -1996,6 +2033,43 @@ codeunit 50150 HRPortal
     end;
 
     [ServiceEnabled]
+    procedure FnOpenPaymentsDocument(docNo: Code[30]) RtnV: Text;
+    begin
+        Clear(JsObject);
+        CLEARLASTERROR();
+        if not OpenPaymentsDocument(docNo) then begin
+            JsObject.Add('Error', 'TRUE');
+            JsObject.Add('Error_Message', GETLASTERRORTEXT());
+        end;
+        JsObject.WriteTo(RtnV);
+    end;
+
+    [TryFunction]
+    procedure OpenPaymentsDocument(DocNo: Code[50])
+    begin
+        PaymentsRec.Reset;
+        PaymentsRec.SetRange("No.", DocNo);
+        PaymentsRec.SetRange(Posted, true);
+        PaymentsRec.SetRange(Status, PaymentsRec.Status::Released);
+        if PaymentsRec.FindSet() then begin
+            PaymentsRec.Status := PaymentsRec.Status::Open;
+            if PaymentsRec.Modify(true) then begin
+                JsObject.Add('Error', 'FALSE');
+            end
+            else begin
+                Error(('the document cannot be reopened'));
+            end;
+
+
+        end
+        else begin
+            Error('Oops! You can only open a document that is approved and not posted');
+        end;
+
+    end;
+
+
+    [ServiceEnabled]
     procedure FnUploadAttachedDocument(docNo: Code[50]; fileName: Text; fileExt: Text; attachment: Text; tableID: Integer) returnV: Text
     begin
         Clear(JsObject);
@@ -2024,6 +2098,15 @@ codeunit 50150 HRPortal
             end;
             tableFound := true;
         end;
+        if TableID = Database::"Internal Request Header" then begin
+            purchasesRec.RESET;
+            purchasesRec.SETRANGE("No.", DocNo);
+            if purchasesRec.FIND('-') then begin
+                FromRecRef.GETTABLE(purchasesRec);
+            end;
+            tableFound := true;
+        end;
+
 
         if tableFound = true then begin
             if FileName <> '' then begin

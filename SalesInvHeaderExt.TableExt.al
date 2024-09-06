@@ -18,63 +18,63 @@ tableextension 50129 SalesInvHeaderExt extends "Sales Invoice Header"
         {
             DataClassification = ToBeClassified;
         }
-        field(9409; "Customer Category"; Code[20])
+        field(50004; "Customer Category"; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Customer Posting Group".Code;
         }
-        field(9550; "Requested Evacuation End Date"; Date)
+        field(50005; "Requested Evacuation End Date"; Date)
         {
             DataClassification = ToBeClassified;
         }
-        field(9551; "PurchHeader No."; Code[20])
+        field(50006; "PurchHeader No."; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(9552; "Rent Invoice"; Boolean)
+        field(50007; "Rent Invoice"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(9553; TPS; Boolean)
+        field(50008; TPS; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(9554; "Property Unit"; Code[20])
+        field(50009; "Property Unit"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(9555; "Property Floor"; Code[20])
+        field(50010; "Property Floor"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(9556; "Schedule Created"; Boolean)
+        field(50011; "Schedule Created"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(9557; Rescheduled; Boolean)
+        field(50012; Rescheduled; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(9558; "Rescheduled By"; Code[50])
+        field(50013; "Rescheduled By"; Code[50])
         {
             DataClassification = ToBeClassified;
         }
-        field(9559; "Date Rescheduled"; DateTime)
+        field(50014; "Date Rescheduled"; DateTime)
         {
             DataClassification = ToBeClassified;
         }
-        field(9560; "Reschedule Balance"; Decimal)
+        field(50015; "Reschedule Balance"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(9561; "TPS Repayment Date"; Date)
+        field(50016; "TPS Repayment Date"; Date)
         {
             DataClassification = ToBeClassified;
         }
-        field(9562; Branch; Code[200])
+        field(50017; Branch; Code[200])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Customer Branches".Branch where("Customer No."=field("Sell-to Customer No."));
+            TableRelation = "Customer Branches".Branch where("Customer No." = field("Sell-to Customer No."));
         }
     }
 }

@@ -253,7 +253,7 @@ table 50124 Payments
         }
         field(19; Status; Option)
         {
-            Editable = true;
+            Editable = false;
             OptionCaption = 'Open,Pending Approval,Pending Prepayment,Released,Rejected,,Closed,Archived,Finance Approved';
             OptionMembers = Open,"Pending Approval","Pending Prepayment",Released,Rejected,Closed,Archived,"Finance Approved";
         }

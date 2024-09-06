@@ -80,7 +80,10 @@ report 50520 "Weekly cashflow Report"
             begin
                 CalcFields("Original Amount", "Remaining Amount");
                 if "Currency Code" = '' then
-                    "Currency Code" := 'KES'
+                    "Currency Code" := 'KES';
+                if ShowOnlyPositiveBalance then
+                    VendorLedgerEntry.SetFilter("Remaining Amount", '<>0');
+                IF VendorLedgerEntry."Remaining Amount" = 0 THEN CurrReport.Skip();
 
             end;
         }
@@ -97,6 +100,12 @@ report 50520 "Weekly cashflow Report"
                     {
                         ApplicationArea = All;
                         Caption = 'Show Only Positive Balance';
+                        trigger OnValidate()
+                        var
+                            myInt: Integer;
+                        begin
+
+                        end;
                     }
                 }
             }
@@ -120,9 +129,7 @@ report 50520 "Weekly cashflow Report"
         CompanyInfo.CalcFields(Picture);
         VendorLedgerEntry.CalcFields("Original Amount");
         VendorLedgerEntry.CalcFields("Remaining Amount");
-        if ShowOnlyPositiveBalance then
-            VendorLedgerEntry.SetFilter("Remaining Amount", '>0');
-        // VendorLedgerEntry.SetFilter("Document Type", '%1', VendorLedgerEntry."Document Type"::Invoice);
+
 
 
     end;

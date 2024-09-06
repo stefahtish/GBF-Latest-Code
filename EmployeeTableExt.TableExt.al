@@ -4,203 +4,203 @@ tableextension 50101 EmployeeTableExt extends Employee
     {
         modify("Birth Date")
         {
-        trigger OnAfterValidate()
-        begin
-            HumanResSetup.Get();
-            if "Special Retirement Age" then begin
-                Evaluate(dateform, Format(HumanResSetup."Other Retirement Age") + 'Y');
-                "Retirement Date":=CalcDate(dateform, "Birth Date");
-                "Date of Birth - Age":=HRDates.DetermineAge("Birth Date", Today);
-            end
-            else
+            trigger OnAfterValidate()
             begin
-                Evaluate(dateform, Format(HumanResSetup."Retirement Age") + 'Y');
-                "Retirement Date":=CalcDate(dateform, "Birth Date");
-                "Date of Birth - Age":=HRDates.DetermineAge("Birth Date", Today);
+                HumanResSetup.Get();
+                if "Special Retirement Age" then begin
+                    Evaluate(dateform, Format(HumanResSetup."Other Retirement Age") + 'Y');
+                    "Retirement Date" := CalcDate(dateform, "Birth Date");
+                    "Date of Birth - Age" := HRDates.DetermineAge("Birth Date", Today);
+                end
+                else begin
+                    Evaluate(dateform, Format(HumanResSetup."Retirement Age") + 'Y');
+                    "Retirement Date" := CalcDate(dateform, "Birth Date");
+                    "Date of Birth - Age" := HRDates.DetermineAge("Birth Date", Today);
+                end;
+                ;
             end;
-            ;
-        end;
         }
         modify("Employment Date")
         {
-        trigger OnAfterValidate()
-        var
-            myInt: Integer;
-        begin
-            "Date Of Join":="Employment Date";
-        end;
+            trigger OnAfterValidate()
+            var
+                myInt: Integer;
+            begin
+                "Date Of Join" := "Employment Date";
+            end;
         }
-        field(81; "Date of Birth - Age"; Text[50])
+        field(60058; "Date of Birth - Age"; Text[50])
         {
             DataClassification = ToBeClassified;
             Editable = false;
         }
-        field(82; Password; Code[20])
+        field(60059; Password; Code[20])
         {
             DataClassification = ToBeClassified;
             ExtendedDatatype = Masked;
         }
-        field(83; "Nature of Employment"; Text[50])
+        field(60060; "Nature of Employment"; Text[50])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Employment Contract".Code;
 
             trigger OnValidate()
             begin
-                if EmpContract.Get("Nature of Employment")then "Employment Type":=EmpContract."Employee Type" end;
+                if EmpContract.Get("Nature of Employment") then "Employment Type" := EmpContract."Employee Type"
+            end;
         }
-        field(84; "Contract Start Date"; Date)
+        field(60061; "Contract Start Date"; Date)
         {
             DataClassification = ToBeClassified;
 
             trigger OnValidate()
             begin
-                ContractPeriod:=CalcDate("Contract Length", "Contract Start Date");
-                "Contract End Date":=ContractPeriod;
+                ContractPeriod := CalcDate("Contract Length", "Contract Start Date");
+                "Contract End Date" := ContractPeriod;
             end;
         }
-        field(85; "Contract End Date"; Date)
+        field(60062; "Contract End Date"; Date)
         {
             DataClassification = ToBeClassified;
             Editable = false;
         }
-        field(86; "Employment Date - Age"; Text[50])
+        field(60063; "Employment Date - Age"; Text[50])
         {
             DataClassification = ToBeClassified;
             Editable = false;
         }
-        field(153; "First Language"; Code[20])
+        field(60064; "First Language"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(154; "Second Language"; Code[20])
+        field(60065; "Second Language"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(155; "First Language Read"; Boolean)
+        field(60066; "First Language Read"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(156; "First Language Write"; Boolean)
+        field(60067; "First Language Write"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(157; "First Language Speak"; Boolean)
+        field(60068; "First Language Speak"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(158; "Second Language Read"; Boolean)
+        field(60069; "Second Language Read"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(159; "Second Language Write"; Boolean)
+        field(60070; "Second Language Write"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(160; "Second Language Speak"; Boolean)
+        field(60071; "Second Language Speak"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(161; "Other Language"; Code[20])
+        field(60072; "Other Language"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(170; "Job Position"; Code[80])
+        field(60073; "Job Position"; Code[80])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Company Job";
 
             trigger OnValidate()
             begin
-                if Jobs.Get("Job Position")then begin
-                    "Job Title2":=Jobs."Job Description";
+                if Jobs.Get("Job Position") then begin
+                    "Job Title2" := Jobs."Job Description";
                 end;
             end;
         }
-        field(171; "Job Position Title"; Text[500])
+        field(60074; "Job Position Title"; Text[500])
         {
             DataClassification = ToBeClassified;
         }
-        field(180; "Annual Leave Days"; Decimal)
+        field(60075; "Annual Leave Days"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(181; "Compassionate Leave Days"; Decimal)
+        field(60076; "Compassionate Leave Days"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(182; "Maternity Leave Days"; Decimal)
+        field(60077; "Maternity Leave Days"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(183; "Paternity Leave Days"; Decimal)
+        field(60078; "Paternity Leave Days"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(184; "Sick Leave Days"; Decimal)
+        field(60079; "Sick Leave Days"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(185; "Study Leave Days"; Decimal)
+        field(60080; "Study Leave Days"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(186; "Other Leave Days (Total)"; Decimal)
+        field(60081; "Other Leave Days (Total)"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(187; "Leave Period Filter"; Code[20])
+        field(60082; "Leave Period Filter"; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Leave Periods"."Leave Period";
         }
-        field(188; "Leave Type Filter"; Code[20])
+        field(60083; "Leave Type Filter"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(189; "Reimbursed Leave Days"; Decimal)
+        field(60084; "Reimbursed Leave Days"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(190; "Cash - Leave Earned"; Decimal)
+        field(60085; "Cash - Leave Earned"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(191; "Cash Per Leave Day"; Decimal)
+        field(60086; "Cash Per Leave Day"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(8001; Signature; MediaSet)
+        field(60087; Signature; MediaSet)
         {
             DataClassification = ToBeClassified;
         }
-        field(8002; "Lecturer Type"; Option)
+        field(60088; "Lecturer Type"; Option)
         {
             DataClassification = ToBeClassified;
             OptionCaption = ' ,Full-Time,Part-Time';
-            OptionMembers = " ", "Full-Time", "Part-Time";
+            OptionMembers = " ","Full-Time","Part-Time";
         }
-        field(8003; "Lecturer Password"; Code[100])
+        field(60089; "Lecturer Password"; Code[100])
         {
             DataClassification = ToBeClassified;
             ExtendedDatatype = Masked;
         }
-        field(8004; "Is Lecturer"; Boolean)
+        field(60090; "Is Lecturer"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(8005; "User ID"; Code[50])
+        field(60091; "User ID"; Code[50])
         {
             DataClassification = ToBeClassified;
             TableRelation = "User Setup"."User ID";
         }
-        field(9000; Disabled; Option)
+        field(60092; Disabled; Option)
         {
             DataClassification = ToBeClassified;
             OptionCaption = ' ,No,Yes';
-            OptionMembers = " ", No, Yes;
+            OptionMembers = " ",No,Yes;
         }
-        field(9002; "NSSF No."; Code[20])
+        field(60093; "NSSF No."; Code[20])
         {
             DataClassification = ToBeClassified;
         }
@@ -214,7 +214,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50002; "Basic Pay"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type=CONST(Payment), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Basic Salary Code"=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type = CONST(Payment), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Basic Salary Code" = CONST(true)));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -228,19 +228,19 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50005; "Total Allowances"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type=CONST(Payment), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Non-Cash Benefit"=CONST(false), Gratuity=CONST(false), "Normal Earnings"=CONST(true), "Insurance Code"=FILTER(false)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type = CONST(Payment), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Non-Cash Benefit" = CONST(false), Gratuity = CONST(false), "Normal Earnings" = CONST(true), "Insurance Code" = FILTER(false)));
             Editable = false;
             FieldClass = FlowField;
         }
         field(50006; "Taxable Allowance"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Taxable=CONST(true), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter")));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Taxable = CONST(true), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(50007; "Total Deductions"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type=FILTER(Deduction|Loan), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter")));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type = FILTER(Deduction | Loan), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter")));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -251,18 +251,18 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-                if Banks.Get("Employee's Bank")then "Employee Bank Name":=Banks.Name;
+                if Banks.Get("Employee's Bank") then "Employee Bank Name" := Banks.Name;
             end;
         }
         field(50009; "Bank Branch"; Code[50])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Bank Branches"."Branch Code" WHERE("Bank Code"=FIELD("Employee's Bank"));
+            TableRelation = "Bank Branches"."Branch Code" WHERE("Bank Code" = FIELD("Employee's Bank"));
 
             trigger OnValidate()
             begin
-                if Branches.Get("Employee's Bank", "Bank Branch")then "Employee Branch Name":=Branches."Branch Name";
-                "Employee Bank Sort Code":="Employee's Bank" + "Bank Branch";
+                if Branches.Get("Employee's Bank", "Bank Branch") then "Employee Branch Name" := Branches."Branch Name";
+                "Employee Bank Sort Code" := "Employee's Bank" + "Bank Branch";
             end;
         }
         field(50010; "Bank Account Number"; Code[80])
@@ -277,24 +277,24 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-            /*
-                IF xRec."Posting Group"='PROBATION' THEN
-                BEGIN
-                
-                 IF "Date Of Join"<>0D THEN
-                 BEGIN
-                   NoofMonthsWorked:=0;
-                   Nextmonth:="Date Of Join";
-                   REPEAT
-                      Nextmonth:=CALCDATE('1M',Nextmonth);
-                      NoofMonthsWorked:=NoofMonthsWorked+1;
-                   UNTIL NoofMonthsWorked=HumanResSetup."Probation Period(Months)";
-                      EndDate:=Nextmonth;
-                 END;
-                 IF EndDate>TODAY THEN
-                   ERROR('You cannot change status from Probation before the probation period has expired');
-                END;
-                */
+                /*
+                    IF xRec."Posting Group"='PROBATION' THEN
+                    BEGIN
+
+                     IF "Date Of Join"<>0D THEN
+                     BEGIN
+                       NoofMonthsWorked:=0;
+                       Nextmonth:="Date Of Join";
+                       REPEAT
+                          Nextmonth:=CALCDATE('1M',Nextmonth);
+                          NoofMonthsWorked:=NoofMonthsWorked+1;
+                       UNTIL NoofMonthsWorked=HumanResSetup."Probation Period(Months)";
+                          EndDate:=Nextmonth;
+                     END;
+                     IF EndDate>TODAY THEN
+                       ERROR('You cannot change status from Probation before the probation period has expired');
+                    END;
+                    */
             end;
         }
         field(50012; "Salary Scale"; Code[30])
@@ -304,24 +304,24 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-                if Scale.Get("Salary Scale")then Halt:=Scale."Maximum Pointer";
+                if Scale.Get("Salary Scale") then Halt := Scale."Maximum Pointer";
             end;
         }
         field(50013; "Tax Deductible Amount"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Tax Deductible"=CONST(true), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Non-Cash Benefit"=CONST(false)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Tax Deductible" = CONST(true), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Non-Cash Benefit" = CONST(false)));
             FieldClass = FlowField;
         }
         field(50014; "Pay Period Filter"; Date)
         {
             FieldClass = FlowFilter;
-            TableRelation = IF("Employment Type"=FILTER(Permanent|Partime))"Payroll PeriodX"
-            ELSE IF("Employment Type"=FILTER(Casual))"Payroll Period Casuals"
-            ELSE IF("Employment Type"=FILTER(Trustee))"Payroll Period Trustees";
+            TableRelation = IF ("Employment Type" = FILTER(Permanent | Partime)) "Payroll PeriodX"
+            ELSE IF ("Employment Type" = FILTER(Casual)) "Payroll Period Casuals"
+            ELSE IF ("Employment Type" = FILTER(Trustee)) "Payroll Period Trustees";
         }
         field(50015; "SSF Employer to Date"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X"."Employer Amount" WHERE("Tax Deductible"=CONST(true), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter")));
+            CalcFormula = Sum("Assignment Matrix-X"."Employer Amount" WHERE("Tax Deductible" = CONST(true), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter")));
             FieldClass = FlowField;
         }
         field(50016; "PIN Number"; Code[20])
@@ -330,7 +330,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50017; "Cumm. PAYE"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), Paye=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), Paye = CONST(true)));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -340,7 +340,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50019; "Benefits-Non Cash"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Non-Cash Benefit"=CONST(true), Type=CONST(Payment), Taxable=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Non-Cash Benefit" = CONST(true), Type = CONST(Payment), Taxable = CONST(true)));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -351,22 +351,22 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50021; "Home Savings"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), Type=CONST(Deduction), "Tax Deductible"=CONST(true), Retirement=CONST(false)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), Type = CONST(Deduction), "Tax Deductible" = CONST(true), Retirement = CONST(false)));
             FieldClass = FlowField;
         }
         field(50022; "Retirement Contribution"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Tax Deductible"=CONST(true), Retirement=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Tax Deductible" = CONST(true), Retirement = CONST(true)));
             FieldClass = FlowField;
         }
         field(50023; "Owner Occupier"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), Type=CONST(Payment), "Tax Deductible"=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), Type = CONST(Payment), "Tax Deductible" = CONST(true)));
             FieldClass = FlowField;
         }
         field(50024; "Total Savings"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), Type=CONST("Saving Scheme"), "Payroll Period"=FIELD("Pay Period Filter")));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), Type = CONST("Saving Scheme"), "Payroll Period" = FIELD("Pay Period Filter")));
             FieldClass = FlowField;
         }
         field(50025; PensionNo; Code[20])
@@ -375,23 +375,23 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50026; "Share Amount"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), Shares=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), Shares = CONST(true)));
             Caption = 'coop skg fund';
             FieldClass = FlowField;
         }
         field(50027; "Other deductions"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), Paye=CONST(false)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), Paye = CONST(false)));
             FieldClass = FlowField;
         }
         field(50028; Interest; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X"."Interest Amount" WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), Type=FILTER(Deduction)));
+            CalcFormula = Sum("Assignment Matrix-X"."Interest Amount" WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), Type = FILTER(Deduction)));
             FieldClass = FlowField;
         }
         field(50029; "Taxable Income"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), Taxable=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), Taxable = CONST(true)));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -406,24 +406,24 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-                if Jobs.Get(Position)then "Job Title2":=Jobs."Job Description";
-                if((xRec.Position <> '') and (Position <> xRec.Position))then begin
+                if Jobs.Get(Position) then "Job Title2" := Jobs."Job Description";
+                if ((xRec.Position <> '') and (Position <> xRec.Position)) then begin
                     Jobs.Reset;
                     Jobs.SetRange(Jobs."Job ID", Position);
-                    if Jobs.Find('-')then begin
-                        "Job Title2":=Jobs."Job Description";
-                    /*Payroll.COPY(Rec);
-                        Payroll.RESET;
-                        Payroll.SETRANGE(Payroll."No.","No.");
-                        IF Payroll.FIND('-') THEN BEGIN
-                            Payroll."Salary Scheme Category":=Jobs.Category;
-                            Payroll."Salary Steps":=Jobs.Grade;
-                          //  Payroll.VALIDATE(Payroll."Salary Steps");
-                            Payroll.MODIFY;
-                        END;*/
-                    //"Salary Scheme Category":=Jobs.Category;
-                    //"Salary Steps":=Jobs.Grade;
-                    //MODIFY;
+                    if Jobs.Find('-') then begin
+                        "Job Title2" := Jobs."Job Description";
+                        /*Payroll.COPY(Rec);
+                            Payroll.RESET;
+                            Payroll.SETRANGE(Payroll."No.","No.");
+                            IF Payroll.FIND('-') THEN BEGIN
+                                Payroll."Salary Scheme Category":=Jobs.Category;
+                                Payroll."Salary Steps":=Jobs.Grade;
+                              //  Payroll.VALIDATE(Payroll."Salary Steps");
+                                Payroll.MODIFY;
+                            END;*/
+                        //"Salary Scheme Category":=Jobs.Category;
+                        //"Salary Steps":=Jobs.Grade;
+                        //MODIFY;
                     end;
                 end;
             end;
@@ -432,7 +432,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         {
             DataClassification = ToBeClassified;
             OptionCaption = 'Full Time, Part Time';
-            OptionMembers = "Full Time", " Part Time";
+            OptionMembers = "Full Time"," Part Time";
         }
         field(50033; "Contract Type"; Code[30])
         {
@@ -441,15 +441,15 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-            /*
-                IF "Contract Type"="Contract Type"::"Long-Term" THEN
-                  "Contract Length"> '6M' ELSE
-                  ERROR('The Period is too short for the Contract Type');
-                
-                IF "Contract Type"="Contract Type"::"Short-Term" THEN
-                  "Contract Length"<'7M' ELSE
-                  ERROR('The Period is Longer than the Contract Type');
-                */
+                /*
+                    IF "Contract Type"="Contract Type"::"Long-Term" THEN
+                      "Contract Length"> '6M' ELSE
+                      ERROR('The Period is too short for the Contract Type');
+
+                    IF "Contract Type"="Contract Type"::"Short-Term" THEN
+                      "Contract Length"<'7M' ELSE
+                      ERROR('The Period is Longer than the Contract Type');
+                    */
             end;
         }
         field(50034; "Type of Contract"; Code[20])
@@ -459,7 +459,7 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-                if EmpContract.Get("Type of Contract")then "Contract Length":=EmpContract.Tenure;
+                if EmpContract.Get("Type of Contract") then "Contract Length" := EmpContract.Tenure;
             end;
         }
         field(50035; "Notice Period"; Code[30])
@@ -470,13 +470,13 @@ tableextension 50101 EmployeeTableExt extends Employee
         {
             DataClassification = ToBeClassified;
             OptionCaption = ' ,Single,Married,Separated,Divorced,Widow(er),Other';
-            OptionMembers = " ", Single, Married, Separated, Divorced, "Widow(er)", Other;
+            OptionMembers = " ",Single,Married,Separated,Divorced,"Widow(er)",Other;
         }
         field(50037; "Ethnic Origin"; Option)
         {
             DataClassification = ToBeClassified;
             OptionCaption = ',Black,African American,Hispanic,Asian,Indian,White';
-            OptionMembers = " ", Black, "African American", Hispanic, Asian, Indian, white;
+            OptionMembers = " ",Black,"African American",Hispanic,Asian,Indian,white;
         }
         field(50038; "First Language (R/W/S)"; Code[20])
         {
@@ -499,39 +499,39 @@ tableextension 50101 EmployeeTableExt extends Employee
             begin
                 HumanResSetup.Get;
                 HumanResSetup.TestField("Probation Period");
-                "Employment Date":="Date Of Join";
-                "End Of Probation Date":=CalcDate(HumanResSetup."Probation Period", "Date Of Join");
-            /*
-                DateInt:=DATE2DMY("Date Of Join",1);
-                "Pro-Rata on Joining":=HumanResSetup."No. Of Days in Month"-DateInt+1;
-                PayPeriod.RESET;
-                PayPeriod.SETRANGE(PayPeriod."Starting Date",0D,"Date Of Join");
-                PayPeriod.SETRANGE(PayPeriod."New Fiscal Year",TRUE);
-                IF PayPeriod.FIND('+') THEN
-                BEGIN
-                FiscalStart:=PayPeriod."Starting Date";
-                MaturityDate:=CALCDATE('1Y',PayPeriod."Starting Date")-1;
-                 MESSAGE('Maturity %1',MaturityDate)
-                END;
-                
-                IF ("Posting Group"='PERMANENT') OR ("Posting Group"='DG') THEN BEGIN
-                //MESSAGE('Date of join %1',"Date Of Join") ;
-                 Entitlement:=ROUND(((MaturityDate-"Date Of Join")/30),1)*2.5;
-                
-                EmpLeaves.RESET;
-                EmpLeaves.SETRANGE(EmpLeaves."Employee No","No.");
-                EmpLeaves.SETRANGE(EmpLeaves."Maturity Date",MaturityDate);
-                IF NOT EmpLeaves.FIND('-') THEN BEGIN
-                  EmpLeaves."Employee No":="No.";
-                  EmpLeaves."Leave Code":='ANNUAL';
-                  EmpLeaves."Maturity Date":=MaturityDate;
-                  EmpLeaves.Entitlement:=Entitlement;
-                //IF NOT EmpLeaves.GET("No.",'ANNUAL',MaturityDate) THEN
-                  EmpLeaves.INSERT;
-                END;
-                
-                END;
-                  */
+                "Employment Date" := "Date Of Join";
+                "End Of Probation Date" := CalcDate(HumanResSetup."Probation Period", "Date Of Join");
+                /*
+                    DateInt:=DATE2DMY("Date Of Join",1);
+                    "Pro-Rata on Joining":=HumanResSetup."No. Of Days in Month"-DateInt+1;
+                    PayPeriod.RESET;
+                    PayPeriod.SETRANGE(PayPeriod."Starting Date",0D,"Date Of Join");
+                    PayPeriod.SETRANGE(PayPeriod."New Fiscal Year",TRUE);
+                    IF PayPeriod.FIND('+') THEN
+                    BEGIN
+                    FiscalStart:=PayPeriod."Starting Date";
+                    MaturityDate:=CALCDATE('1Y',PayPeriod."Starting Date")-1;
+                     MESSAGE('Maturity %1',MaturityDate)
+                    END;
+
+                    IF ("Posting Group"='PERMANENT') OR ("Posting Group"='DG') THEN BEGIN
+                    //MESSAGE('Date of join %1',"Date Of Join") ;
+                     Entitlement:=ROUND(((MaturityDate-"Date Of Join")/30),1)*2.5;
+
+                    EmpLeaves.RESET;
+                    EmpLeaves.SETRANGE(EmpLeaves."Employee No","No.");
+                    EmpLeaves.SETRANGE(EmpLeaves."Maturity Date",MaturityDate);
+                    IF NOT EmpLeaves.FIND('-') THEN BEGIN
+                      EmpLeaves."Employee No":="No.";
+                      EmpLeaves."Leave Code":='ANNUAL';
+                      EmpLeaves."Maturity Date":=MaturityDate;
+                      EmpLeaves.Entitlement:=Entitlement;
+                    //IF NOT EmpLeaves.GET("No.",'ANNUAL',MaturityDate) THEN
+                      EmpLeaves.INSERT;
+                    END;
+
+                    END;
+                      */
             end;
         }
         field(50042; "End Of Probation Date"; Date)
@@ -544,10 +544,10 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-            /*  IF ("Date Of Leaving" <> 0D) AND ("Pension Scheme Join" <> 0D) THEN
-                   "Time Pension Scheme":= Dates.DetermineAge("Pension Scheme Join","Date Of Leaving");
+                /*  IF ("Date Of Leaving" <> 0D) AND ("Pension Scheme Join" <> 0D) THEN
+                       "Time Pension Scheme":= Dates.DetermineAge("Pension Scheme Join","Date Of Leaving");
 
-            */
+                */
             end;
         }
         field(50046; "Medical Scheme Join"; Date)
@@ -556,9 +556,9 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-            /*  IF  ("Date Of Leaving" <> 0D) AND ("Medical Scheme Join" <> 0D) THEN
-                   "Time Medical Scheme":= Dates.DetermineAge("Medical Scheme Join","Date Of Leaving");
-                */
+                /*  IF  ("Date Of Leaving" <> 0D) AND ("Medical Scheme Join" <> 0D) THEN
+                       "Time Medical Scheme":= Dates.DetermineAge("Medical Scheme Join","Date Of Leaving");
+                    */
             end;
         }
         field(50047; "Date Of Leaving"; Date)
@@ -567,65 +567,65 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-            /* IF ("Date Of Join" <> 0D) AND ("Date Of Leaving" <> 0D) THEN
-                  "Length Of Service":= Dates.DetermineAge("Date Of Join","Date Of Leaving");
-                 IF ("Pension Scheme Join" <> 0D) AND ("Date Of Leaving" <> 0D) THEN
-                  "Time Pension Scheme":= Dates.DetermineAge("Pension Scheme Join","Date Of Leaving");
-                 IF ("Medical Scheme Join" <> 0D) AND ("Date Of Leaving" <> 0D) THEN
-                  "Time Medical Scheme":= Dates.DetermineAge("Medical Scheme Join","Date Of Leaving");
+                /* IF ("Date Of Join" <> 0D) AND ("Date Of Leaving" <> 0D) THEN
+                      "Length Of Service":= Dates.DetermineAge("Date Of Join","Date Of Leaving");
+                     IF ("Pension Scheme Join" <> 0D) AND ("Date Of Leaving" <> 0D) THEN
+                      "Time Pension Scheme":= Dates.DetermineAge("Pension Scheme Join","Date Of Leaving");
+                     IF ("Medical Scheme Join" <> 0D) AND ("Date Of Leaving" <> 0D) THEN
+                      "Time Medical Scheme":= Dates.DetermineAge("Medical Scheme Join","Date Of Leaving");
 
 
-                 IF ("Date Of Leaving" <> 0D) AND ("Date Of Leaving" <> xRec."Date Of Leaving") THEN BEGIN
-                    ExitInterviews.SETRANGE("Employee No.","No.");
-                    OK:= ExitInterviews.FIND('-');
-                    IF OK THEN BEGIN
-                      ExitInterviews."Date Of Leaving":= "Date Of Leaving";
-                      ExitInterviews.MODIFY;
+                     IF ("Date Of Leaving" <> 0D) AND ("Date Of Leaving" <> xRec."Date Of Leaving") THEN BEGIN
+                        ExitInterviews.SETRANGE("Employee No.","No.");
+                        OK:= ExitInterviews.FIND('-');
+                        IF OK THEN BEGIN
+                          ExitInterviews."Date Of Leaving":= "Date Of Leaving";
+                          ExitInterviews.MODIFY;
+                        END;
+                        COMMIT();
+                     END;
+
+
+                    IF ("Date Of Leaving" <> 0D) AND ("Date Of Leaving" <> xRec."Date Of Leaving") THEN BEGIN
+                       CareerEvent.SetMessage('Left The Company');
+                       CareerEvent.RUNMODAL;
+                       OK:= CareerEvent.ReturnResult;
+                        IF OK THEN BEGIN
+                           CareerHistory.INIT;
+                           IF NOT CareerHistory.FIND('-') THEN
+                            CareerHistory."Line No.":=1
+                          ELSE BEGIN
+                            CareerHistory.FIND('+');
+                            CareerHistory."Line No.":=CareerHistory."Line No."+1;
+                          END;
+
+                           CareerHistory."Employee No.":= "No.";
+                           CareerHistory."Date Of Event":= "Date Of Leaving";
+                           CareerHistory."Career Event":= 'Left The Company';
+                           CareerHistory."Employee First Name":= "Known As";
+                           CareerHistory."Employee Last Name":= "Last Name";
+
+                           CareerHistory.INSERT;
+                        END;
                     END;
-                    COMMIT();
-                 END;
+                   */
+                /*
+                    ExitInterviewTemplate.RESET;
+                    //TrainingEvalTemplate.SETRANGE(TrainingEvalTemplate."AIT/Evaluation",TrainingEvalTemplate."AIT/Evaluation"::AIT);
+                    IF ExitInterviewTemplate.FIND('-') THEN
+                    REPEAT
+                    ExitInterviewLines.INIT;
+                    ExitInterviewLines."Employee No":="No.";
+                    ExitInterviewLines.Question:=ExitInterviewTemplate.Question;
+                    ExitInterviewLines."Line No":=ExitInterviewTemplate."Line No";
+                    ExitInterviewLines.Bold:=ExitInterviewTemplate.Bold;
+                    ExitInterviewLines."Answer Type":=ExitInterviewTemplate."Answer Type";
+                    IF NOT ExitInterviewLines.GET(ExitInterviewLines."Line No",ExitInterviewLines."Employee No") THEN
+                    ExitInterviewLines.INSERT
 
 
-                IF ("Date Of Leaving" <> 0D) AND ("Date Of Leaving" <> xRec."Date Of Leaving") THEN BEGIN
-                   CareerEvent.SetMessage('Left The Company');
-                   CareerEvent.RUNMODAL;
-                   OK:= CareerEvent.ReturnResult;
-                    IF OK THEN BEGIN
-                       CareerHistory.INIT;
-                       IF NOT CareerHistory.FIND('-') THEN
-                        CareerHistory."Line No.":=1
-                      ELSE BEGIN
-                        CareerHistory.FIND('+');
-                        CareerHistory."Line No.":=CareerHistory."Line No."+1;
-                      END;
-
-                       CareerHistory."Employee No.":= "No.";
-                       CareerHistory."Date Of Event":= "Date Of Leaving";
-                       CareerHistory."Career Event":= 'Left The Company';
-                       CareerHistory."Employee First Name":= "Known As";
-                       CareerHistory."Employee Last Name":= "Last Name";
-
-                       CareerHistory.INSERT;
-                    END;
-                END;
-               */
-            /*
-                ExitInterviewTemplate.RESET;
-                //TrainingEvalTemplate.SETRANGE(TrainingEvalTemplate."AIT/Evaluation",TrainingEvalTemplate."AIT/Evaluation"::AIT);
-                IF ExitInterviewTemplate.FIND('-') THEN
-                REPEAT
-                ExitInterviewLines.INIT;
-                ExitInterviewLines."Employee No":="No.";
-                ExitInterviewLines.Question:=ExitInterviewTemplate.Question;
-                ExitInterviewLines."Line No":=ExitInterviewTemplate."Line No";
-                ExitInterviewLines.Bold:=ExitInterviewTemplate.Bold;
-                ExitInterviewLines."Answer Type":=ExitInterviewTemplate."Answer Type";
-                IF NOT ExitInterviewLines.GET(ExitInterviewLines."Line No",ExitInterviewLines."Employee No") THEN
-                ExitInterviewLines.INSERT
-                
-                
-                UNTIL ExitInterviewTemplate.NEXT=0;
-                */
+                    UNTIL ExitInterviewTemplate.NEXT=0;
+                    */
             end;
         }
         field(50048; "Second Language (R/W/S)"; Code[20])
@@ -642,7 +642,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         {
             DataClassification = ToBeClassified;
             OptionCaption = ' ,Resignation,Non-Renewal Of Contract,Dismissal,Retirement,Death,Other';
-            OptionMembers = " ", Resignation, "Non-Renewal Of Contract", Dismissal, Retirement, Death, Other;
+            OptionMembers = " ",Resignation,"Non-Renewal Of Contract",Dismissal,Retirement,Death,Other;
 
             trigger OnValidate()
             var
@@ -652,11 +652,11 @@ tableextension 50101 EmployeeTableExt extends Employee
                 //**Added by ACR 12/08/2002
                 //**Block resource if Terminated
                 if "Resource No." <> '' then begin
-                    OK:="Lrec Resource".Get("Resource No.");
-                    "Lrec Resource".Blocked:=true;
+                    OK := "Lrec Resource".Get("Resource No.");
+                    "Lrec Resource".Blocked := true;
                     "Lrec Resource".Modify;
                 end;
-            //**
+                //**
             end;
         }
         field(50051; "Passport Number"; Code[20])
@@ -712,7 +712,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         field(50070; Present; Code[30])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Salary Pointer"."Salary Pointer" WHERE("Salary Scale"=FIELD("Salary Scale"));
+            TableRelation = "Salary Pointer"."Salary Pointer" WHERE("Salary Scale" = FIELD("Salary Scale"));
 
             trigger OnValidate()
             begin
@@ -731,7 +731,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50074; "Insurance Premium"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type=CONST(Deduction), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Insurance Code"=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type = CONST(Deduction), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Insurance Code" = CONST(true)));
             FieldClass = FlowField;
         }
         field(50075; "Date OfJoining Payroll"; Date)
@@ -744,12 +744,12 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50077; "Basic Arrears"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type=CONST(Payment), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Basic Pay Arrears"=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type = CONST(Payment), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Basic Pay Arrears" = CONST(true)));
             FieldClass = FlowField;
         }
         field(50078; "Relief Amount"; Decimal)
         {
-            CalcFormula = -Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Non-Cash Benefit"=CONST(true), Type=CONST(Payment), "Tax Deductible"=CONST(true), "Tax Relief"=CONST(true)));
+            CalcFormula = - Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Non-Cash Benefit" = CONST(true), Type = CONST(Payment), "Tax Deductible" = CONST(true), "Tax Relief" = CONST(true)));
             FieldClass = FlowField;
         }
         field(50079; "Employee Qty"; Integer)
@@ -759,12 +759,12 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50080; "Employee Act. Qty"; Integer)
         {
-            CalcFormula = Count(Employee WHERE("Termination Category"=FILTER(=" ")));
+            CalcFormula = Count(Employee WHERE("Termination Category" = FILTER(= " ")));
             FieldClass = FlowField;
         }
         field(50081; "Employee Arc. Qty"; Integer)
         {
-            CalcFormula = Count(Employee WHERE("Termination Category"=FILTER(<>" ")));
+            CalcFormula = Count(Employee WHERE("Termination Category" = FILTER(<> " ")));
             FieldClass = FlowField;
         }
         field(50082; "Other Language Read"; Boolean)
@@ -783,7 +783,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         {
             DataClassification = ToBeClassified;
             OptionCaption = '  ,Driver,Executive,Director';
-            OptionMembers = "  ", Driver, Executive, Director;
+            OptionMembers = "  ",Driver,Executive,Director;
         }
         field(50087; "Contract Number"; Code[20])
         {
@@ -791,7 +791,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50186; "Loan Interest"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X"."Loan Interest" WHERE(Type=FILTER(Deduction|Loan), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter")));
+            CalcFormula = Sum("Assignment Matrix-X"."Loan Interest" WHERE(Type = FILTER(Deduction | Loan), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter")));
             FieldClass = FlowField;
         }
         field(50187; "Resource Centre"; Boolean)
@@ -802,7 +802,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         {
             DataClassification = ToBeClassified;
             OptionCaption = 'Open,Pending Approval,Approved,Rejected,Cancelled';
-            OptionMembers = Open, "Pending Approval", Approved, Rejected, Cancelled;
+            OptionMembers = Open,"Pending Approval",Approved,Rejected,Cancelled;
         }
         field(50189; "Blood Type"; Code[30])
         {
@@ -823,7 +823,7 @@ tableextension 50101 EmployeeTableExt extends Employee
                 cty: Record CountyNew;
             begin
                 cty.SetRange("County Code", "County Code");
-                if cty.FindFirst()then "County Name":=cty.County;
+                if cty.FindFirst() then "County Name" := cty.County;
             end;
         }
         field(50192; "Retirement Date"; Date)
@@ -852,7 +852,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(50199; "House Allowance"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type=CONST(Payment), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "House Allowance Code"=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type = CONST(Payment), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "House Allowance Code" = CONST(true)));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -914,7 +914,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         {
             FieldClass = FlowFilter;
             OptionCaption = 'Open,Pending Approval,Active,Canceled,Rejected,Inactive,Deferred,Claim Processing,Archived';
-            OptionMembers = Open, "Pending Approval", Active, Canceled, Rejected, Inactive, Deferred, "Claim Processing", Archived;
+            OptionMembers = Open,"Pending Approval",Active,Canceled,Rejected,Inactive,Deferred,"Claim Processing",Archived;
         }
         field(60000; Name; Text[60])
         {
@@ -924,15 +924,15 @@ tableextension 50101 EmployeeTableExt extends Employee
         {
             DataClassification = ToBeClassified;
             OptionCaption = 'Active,Inactive,Permanently Inactive';
-            OptionMembers = Active, Inactive, "Permanently Inactive";
+            OptionMembers = Active,Inactive,"Permanently Inactive";
 
             trigger OnValidate()
             begin
-            /* HumanResSetup.GET;
-                 HumanResSetup.TESTFIELD("Maximum Probation Period");
-                  IF "Employment Status"="Employment Status"::"Extended Probation" THEN
-                  "End Of Probation Date":=CALCDATE(HumanResSetup."Maximum Probation Period","Date Of Join");
-                 */
+                /* HumanResSetup.GET;
+                     HumanResSetup.TESTFIELD("Maximum Probation Period");
+                      IF "Employment Status"="Employment Status"::"Extended Probation" THEN
+                      "End Of Probation Date":=CALCDATE(HumanResSetup."Maximum Probation Period","Date Of Join");
+                     */
             end;
         }
         field(60002; "Contract Length"; DateFormula)
@@ -941,11 +941,11 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-            /*
-                IF "Contract Type"="Contract Type"::"Long-Term" THEN
-                  "Contract Length">'<6M>' ELSE
-                  ERROR('The Contract Period Should be Greater than 6 Months');
-                */
+                /*
+                    IF "Contract Type"="Contract Type"::"Long-Term" THEN
+                      "Contract Length">'<6M>' ELSE
+                      ERROR('The Contract Period Should be Greater than 6 Months');
+                    */
             end;
         }
         field(60004; "Portal Registered"; Boolean)
@@ -969,7 +969,7 @@ tableextension 50101 EmployeeTableExt extends Employee
             ObsoleteState = Removed;
             DataClassification = ToBeClassified;
             OptionCaption = 'Permanent,Partime,Locum,Casual,Contract,Board Member,Attachee, Intern';
-            OptionMembers = Permanent, Partime, Locum, Casual, Contract, Trustee, Attachee, Intern;
+            OptionMembers = Permanent,Partime,Locum,Casual,Contract,Trustee,Attachee,Intern;
         }
         field(60009; "Currency Codes"; Code[30])
         {
@@ -977,14 +977,14 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(60010; "Net Pay"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Non-Cash Benefit"=CONST(false), Gratuity=CONST(false), "Tax Relief"=CONST(false)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Non-Cash Benefit" = CONST(false), Gratuity = CONST(false), "Tax Relief" = CONST(false)));
             FieldClass = FlowField;
         }
         field(60011; "Employment Type"; Option)
         {
             DataClassification = ToBeClassified;
             OptionCaption = 'Permanent,Partime,Casual,Contract,Board member,Attachee,Intern';
-            OptionMembers = Permanent, Partime, Casual, Contract, Trustee, Attachee, Intern;
+            OptionMembers = Permanent,Partime,Casual,Contract,Trustee,Attachee,Intern;
         }
         field(60012; "Area"; Code[50])
         {
@@ -997,7 +997,7 @@ tableextension 50101 EmployeeTableExt extends Employee
 
             trigger OnValidate()
             begin
-                if Ethnic.Get("Ethnic Community")then "Ethnic Name":=Ethnic."Ethnic Name";
+                if Ethnic.Get("Ethnic Community") then "Ethnic Name" := Ethnic."Ethnic Name";
             end;
         }
         field(60014; "Ethnic Name"; Text[60])
@@ -1027,20 +1027,20 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(60021; "Commuter Allowance"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type=CONST(Payment), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Commuter Allowance Code"=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type = CONST(Payment), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Commuter Allowance Code" = CONST(true)));
             Editable = false;
             FieldClass = FlowField;
         }
         field(60022; "Salary Arrears"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type=CONST(Payment), "Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Salary Arrears Code"=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE(Type = CONST(Payment), "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Salary Arrears Code" = CONST(true)));
             Editable = false;
             FieldClass = FlowField;
         }
         field(60023; "Debtor Code"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Customer where(PML=const(false));
+            TableRelation = Customer where(PML = const(false));
         }
         field(50100; "Imprest Customer Code"; Code[20])
         {
@@ -1050,11 +1050,11 @@ tableextension 50101 EmployeeTableExt extends Employee
         field(60024; "Current Leave Period"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Leave Periods" WHERE("Employment Type"=FIELD("Employment Type"), closed=FILTER(false));
+            TableRelation = "Leave Periods" WHERE("Employment Type" = FIELD("Employment Type"), closed = FILTER(false));
         }
         field(60025; "Leave Balance"; Decimal)
         {
-            CalcFormula = Sum("HR Leave Ledger Entries"."No. of days" WHERE("Staff No."=FIELD("No."), "Leave Period Code"=FIELD("Current Leave Period")));
+            CalcFormula = Sum("HR Leave Ledger Entries"."No. of days" WHERE("Staff No." = FIELD("No."), "Leave Period Code" = FIELD("Current Leave Period")));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -1064,7 +1064,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(60027; "Cumm. Secondary  PAYE"; Decimal)
         {
-            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "Secondary PAYE"=CONST(true)));
+            CalcFormula = Sum("Assignment Matrix-X".Amount WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "Secondary PAYE" = CONST(true)));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -1073,7 +1073,7 @@ tableextension 50101 EmployeeTableExt extends Employee
             FieldClass = FlowField;
             Editable = false;
             Description = 'With Flowfilters';
-            CalcFormula = Sum("HR Leave Ledger Entries"."No. of days" WHERE("Staff No."=FIELD("No."), "Leave Period Code"=FIELD("Leave Period Filter"), "Leave Type"=FIELD("Leave Type Filter")));
+            CalcFormula = Sum("HR Leave Ledger Entries"."No. of days" WHERE("Staff No." = FIELD("No."), "Leave Period Code" = FIELD("Leave Period Filter"), "Leave Type" = FIELD("Leave Type Filter")));
         }
         field(60029; "Gratuity Vendor No."; code[50])
         {
@@ -1091,7 +1091,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         field(60032; "Alternative Branch Code"; Text[50])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Dimension Value" where("Global Dimension No."=filter(1));
+            TableRelation = "Dimension Value" where("Global Dimension No." = filter(1));
         }
         field(60033; Race; Text[50])
         {
@@ -1115,7 +1115,7 @@ tableextension 50101 EmployeeTableExt extends Employee
         }
         field(60036; "Pension Contribution Benefit"; Decimal)
         {
-            CalcFormula = -Sum("Assignment Matrix-X"."Less Pension Contribution" WHERE("Employee No"=FIELD("No."), "Payroll Period"=FIELD("Pay Period Filter"), "PAYE"=CONST(true), Type=CONST(Deduction)));
+            CalcFormula = - Sum("Assignment Matrix-X"."Less Pension Contribution" WHERE("Employee No" = FIELD("No."), "Payroll Period" = FIELD("Pay Period Filter"), "PAYE" = CONST(true), Type = CONST(Deduction)));
             FieldClass = FlowField;
         }
         field(60050; "Leave Category"; Code[20])
@@ -1143,30 +1143,33 @@ tableextension 50101 EmployeeTableExt extends Employee
             HumanResSetup.TestField("Trustee Nos");
         end;
     end;
-    var HRDates: Codeunit "Dates Management";
-    DateMgmt: Codeunit "Dates Management";
-    Jobs: Record "Company Job";
-    Banks: Record Banks;
-    Employee: Record Employee;
-    Scale: Record "Salary Scale";
-    AssMatrix: Record "Assignment Matrix-X";
-    PayPeriod: Record "Payroll PeriodX";
-    Begindate: Date;
-    ScaleBenefits: Record "Scale Benefits";
-    HouseAllowances: Record "House Allowances";
-    Ded: Record DeductionsX;
-    ContractPeriod: Date;
-    EmpContract: Record "Employment Contract";
-    Ethnic: Record "Ethnic Communities";
-    Branches: Record "Bank Branches";
-    UserSetup: Record "User Setup";
-    Users: Record User;
-    Text0004: Label 'You are not allowed delete an Employee record with payroll entries, you can only Terminate or change status to Inactive';
-    Text001: Label 'Do you want to re-assign earnings and deductions to %1 %2 ?';
-    Text002: Label 'Please select the present salary pointer or assign a pointer with scale benefits defined for employee %1 %2';
-    Text003: Label 'There''s no open pay period open';
-    HumanResSetup: Record "Human Resources Setup";
-    dateform: DateFormula;
+
+    var
+        HRDates: Codeunit "Dates Management";
+        DateMgmt: Codeunit "Dates Management";
+        Jobs: Record "Company Job";
+        Banks: Record Banks;
+        Employee: Record Employee;
+        Scale: Record "Salary Scale";
+        AssMatrix: Record "Assignment Matrix-X";
+        PayPeriod: Record "Payroll PeriodX";
+        Begindate: Date;
+        ScaleBenefits: Record "Scale Benefits";
+        HouseAllowances: Record "House Allowances";
+        Ded: Record DeductionsX;
+        ContractPeriod: Date;
+        EmpContract: Record "Employment Contract";
+        Ethnic: Record "Ethnic Communities";
+        Branches: Record "Bank Branches";
+        UserSetup: Record "User Setup";
+        Users: Record User;
+        Text0004: Label 'You are not allowed delete an Employee record with payroll entries, you can only Terminate or change status to Inactive';
+        Text001: Label 'Do you want to re-assign earnings and deductions to %1 %2 ?';
+        Text002: Label 'Please select the present salary pointer or assign a pointer with scale benefits defined for employee %1 %2';
+        Text003: Label 'There''s no open pay period open';
+        HumanResSetup: Record "Human Resources Setup";
+        dateform: DateFormula;
+
     procedure DefaultAssignment()
     begin
         // if Confirm(Text001, false, "No.", "First Name" + ' ' + "Middle Name" + ' ' + "Last Name") then begin
@@ -1174,26 +1177,27 @@ tableextension 50101 EmployeeTableExt extends Employee
         GetPayPeriod;
         if Begindate <> 0D then begin
             AssMatrix.Init;
-            AssMatrix."Employee No":="No.";
-            AssMatrix.Type:=AssMatrix.Type::Payment;
-            AssMatrix."Payroll Period":=Begindate;
-            AssMatrix."Department Code":="Global Dimension 1 Code";
+            AssMatrix."Employee No" := "No.";
+            AssMatrix.Type := AssMatrix.Type::Payment;
+            AssMatrix."Payroll Period" := Begindate;
+            AssMatrix."Department Code" := "Global Dimension 1 Code";
             ScaleBenefits.Reset;
             ScaleBenefits.SetRange("Salary Scale", "Salary Scale");
             ScaleBenefits.SetRange("Salary Pointer", Present);
             ScaleBenefits.SetRange("Based on branches", false);
-            if ScaleBenefits.Find('-')then begin
-                repeat AssMatrix.Code:=ScaleBenefits."ED Code";
-                    AssMatrix.Description:=ScaleBenefits."ED Description";
+            if ScaleBenefits.Find('-') then begin
+                repeat
+                    AssMatrix.Code := ScaleBenefits."ED Code";
+                    AssMatrix.Description := ScaleBenefits."ED Description";
                     AssMatrix.Validate(Code);
-                    AssMatrix.Amount:=ScaleBenefits.Amount;
+                    AssMatrix.Amount := ScaleBenefits.Amount;
                     AssMatrix.Validate(Amount);
-                    if not AssMatrix.Get(AssMatrix."Employee No", AssMatrix.Type, AssMatrix.Code, AssMatrix."Payroll Period", AssMatrix."Reference No")then AssMatrix.Insert
-                    else
-                    begin
-                        AssMatrix.Code:=ScaleBenefits."ED Code";
+                    if not AssMatrix.Get(AssMatrix."Employee No", AssMatrix.Type, AssMatrix.Code, AssMatrix."Payroll Period", AssMatrix."Reference No") then
+                        AssMatrix.Insert
+                    else begin
+                        AssMatrix.Code := ScaleBenefits."ED Code";
                         AssMatrix.Validate(Code);
-                        AssMatrix.Amount:=ScaleBenefits.Amount;
+                        AssMatrix.Amount := ScaleBenefits.Amount;
                         AssMatrix.Validate(Amount);
                         AssMatrix.Modify;
                     end;
@@ -1206,23 +1210,26 @@ tableextension 50101 EmployeeTableExt extends Employee
             ScaleBenefits.SetRange("Salary Scale", "Salary Scale");
             ScaleBenefits.SetRange("Salary Pointer", Present);
             ScaleBenefits.SetRange("Based on branches", true);
-            if ScaleBenefits.Find('-')then begin
-                repeat HouseAllowances.reset;
+            if ScaleBenefits.Find('-') then begin
+                repeat
+                    HouseAllowances.reset;
                     HouseAllowances.SetRange("Job group", ScaleBenefits."Salary Scale");
                     HouseAllowances.SetRange(Pointer, ScaleBenefits."Salary Pointer");
                     HouseAllowances.SetRange(Branch, "Global Dimension 1 Code");
                     HouseAllowances.SetRange(Code, ScaleBenefits."ED Code");
-                    if HouseAllowances.Find('-')then repeat AssMatrix.Code:=ScaleBenefits."ED Code";
-                            AssMatrix.Description:=ScaleBenefits."ED Description";
+                    if HouseAllowances.Find('-') then
+                        repeat
+                            AssMatrix.Code := ScaleBenefits."ED Code";
+                            AssMatrix.Description := ScaleBenefits."ED Description";
                             AssMatrix.Validate(Code);
-                            AssMatrix.Amount:=HouseAllowances.Amount;
+                            AssMatrix.Amount := HouseAllowances.Amount;
                             AssMatrix.Validate(Amount);
-                            if not AssMatrix.Get(AssMatrix."Employee No", AssMatrix.Type, AssMatrix.Code, AssMatrix."Payroll Period", AssMatrix."Reference No")then AssMatrix.Insert
-                            else
-                            begin
-                                AssMatrix.Code:=ScaleBenefits."ED Code";
+                            if not AssMatrix.Get(AssMatrix."Employee No", AssMatrix.Type, AssMatrix.Code, AssMatrix."Payroll Period", AssMatrix."Reference No") then
+                                AssMatrix.Insert
+                            else begin
+                                AssMatrix.Code := ScaleBenefits."ED Code";
                                 AssMatrix.Validate(Code);
-                                AssMatrix.Amount:=ScaleBenefits.Amount;
+                                AssMatrix.Amount := ScaleBenefits.Amount;
                                 AssMatrix.Validate(Amount);
                                 AssMatrix.Modify;
                             end;
@@ -1232,18 +1239,19 @@ tableextension 50101 EmployeeTableExt extends Employee
             // Insert Deductions assigned to evry employee
             Ded.Reset;
             Ded.SetRange("Applies to All", true);
-            if Ded.Find('-')then begin
-                repeat AssMatrix.Init;
-                    AssMatrix."Employee No":="No.";
-                    AssMatrix.Type:=AssMatrix.Type::Deduction;
-                    AssMatrix."Payroll Period":=Begindate;
-                    AssMatrix."Department Code":="Global Dimension 1 Code";
-                    AssMatrix.Code:=Ded.Code;
+            if Ded.Find('-') then begin
+                repeat
+                    AssMatrix.Init;
+                    AssMatrix."Employee No" := "No.";
+                    AssMatrix.Type := AssMatrix.Type::Deduction;
+                    AssMatrix."Payroll Period" := Begindate;
+                    AssMatrix."Department Code" := "Global Dimension 1 Code";
+                    AssMatrix.Code := Ded.Code;
                     AssMatrix.Validate(Code);
-                    if not AssMatrix.Get(AssMatrix."Employee No", AssMatrix.Type, AssMatrix.Code, AssMatrix."Payroll Period")then AssMatrix.Insert
-                    else
-                    begin
-                        AssMatrix.Code:=Ded.Code;
+                    if not AssMatrix.Get(AssMatrix."Employee No", AssMatrix.Type, AssMatrix.Code, AssMatrix."Payroll Period") then
+                        AssMatrix.Insert
+                    else begin
+                        AssMatrix.Code := Ded.Code;
                         AssMatrix.Validate(Code);
                     end;
                 until Ded.Next = 0;
@@ -1251,16 +1259,17 @@ tableextension 50101 EmployeeTableExt extends Employee
         end
         else
             Error(Text003);
-    // end;
+        // end;
     end;
+
     procedure GetPayPeriod()
     begin
         PayPeriod.Reset;
         PayPeriod.SetRange(PayPeriod."Close Pay", false);
-        if PayPeriod.Find('-')then begin
+        if PayPeriod.Find('-') then begin
             //PayPeriodtext:=PayPeriod.Name;
-            Begindate:=PayPeriod."Starting Date";
-        //MESSAGE('%1',Begindate);
+            Begindate := PayPeriod."Starting Date";
+            //MESSAGE('%1',Begindate);
         end;
     end;
 }

@@ -273,7 +273,7 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
             var
                 Vend: Record Vendor;
             begin
-                if Vend.Get(Supplier)then "Supplier Name":=Vend.Name;
+                if Vend.Get(Supplier) then "Supplier Name" := Vend.Name;
             end;
         }
         field(50001; "Supplier Name"; Text[100])
@@ -298,19 +298,19 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
 
             trigger OnValidate()
             begin
-            /*IF TransCode.GET("Transaction Code") THEN BEGIN
-                  VALIDATE(Type,TransCode.Type);
-                  "No.":=TransCode."No.";
-                
-                END;
-                */
+                /*IF TransCode.GET("Transaction Code") THEN BEGIN
+                      VALIDATE(Type,TransCode.Type);
+                      "No.":=TransCode."No.";
+
+                    END;
+                    */
             end;
         }
         field(54002; "Quantity In Stock"; Decimal)
         {
-            CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No."=FIELD("No."), "Location Code"=FIELD("Location Code")));
+            CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("No."), "Location Code" = FIELD("Location Code")));
             Caption = 'Quantity In Stock';
-            DecimalPlaces = 0: 5;
+            DecimalPlaces = 0 : 5;
             Editable = false;
             FieldClass = FlowField;
         }
@@ -321,7 +321,7 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
         field(54004; "VOrder No."; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Purchase Header"."No." WHERE("Document Type"=CONST(Order), "Buy-from Vendor No."=FIELD(Supplier), Status=CONST(Open));
+            TableRelation = "Purchase Header"."No." WHERE("Document Type" = CONST(Order), "Buy-from Vendor No." = FIELD(Supplier), Status = CONST(Open));
         }
         field(54005; "Requested For"; Code[20])
         {
@@ -374,19 +374,19 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
         field(54017; "Requisition Type"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = " ", Purchase, Internal;
+            OptionMembers = " ",Purchase,Internal;
         }
         field(54018; Status; Option)
         {
             DataClassification = ToBeClassified;
             OptionCaption = 'New,Approval Pending,Transfer Budget Pending,Approved,Disapproved,Committed,Fulfilled,Canceled';
-            OptionMembers = New, "Approval Pending", "Transfer Budget Pending", Approved, Disapproved, Committed, Fulfilled, Canceled;
+            OptionMembers = New,"Approval Pending","Transfer Budget Pending",Approved,Disapproved,Committed,Fulfilled,Canceled;
         }
         field(54019; "Previous Status"; Option)
         {
             DataClassification = ToBeClassified;
             OptionCaption = 'New,Approval Pending,Transfer Budget Pending,Approved,Disapproved,Committed,Fulfilled,Canceled';
-            OptionMembers = New, "Approval Pending", "Transfer Budget Pending", Approved, Disapproved, Committed, Fulfilled, Canceled;
+            OptionMembers = New,"Approval Pending","Transfer Budget Pending",Approved,Disapproved,Committed,Fulfilled,Canceled;
         }
         field(54020; "Source Code"; Code[20])
         {
@@ -400,29 +400,29 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
         field(54022; "Procurement Plan Item"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Procurement Plan"."Plan Item No" WHERE("Plan Year"=FIELD("Procurement Plan"), "Shortcut Dimension 1 Code"=FIELD("Shortcut Dimension 1 Code"), "Shortcut Dimension 2 Code"=FIELD("Shortcut Dimension 2 Code"));
+            TableRelation = "Procurement Plan"."Plan Item No" WHERE("Plan Year" = FIELD("Procurement Plan"), "Shortcut Dimension 1 Code" = FIELD("Shortcut Dimension 1 Code"), "Shortcut Dimension 2 Code" = FIELD("Shortcut Dimension 2 Code"));
 
             trigger OnValidate()
             begin
-            /*IF ProcurementPlan.GET("Procurement Plan","Shortcut Dimension 1 Code","Shortcut Dimension 2 Code","Procurement Plan Item") THEN
-                BEGIN
-                IF ProcurementPlan."Procurement Type"=ProcurementPlan."Procurement Type"::Goods THEN
-                BEGIN
-                 Type:=Type::Item;
-                  "No.":=ProcurementPlan."No.";
-                END;
-                IF ProcurementPlan."Procurement Type"<>ProcurementPlan."Procurement Type"::Goods THEN
-                BEGIN
-                 Type:=Type::"G/L Account";
-                 "No.":=ProcurementPlan."Source of Funds";
-                END;
-                  "Budget Line":=ProcurementPlan."Source of Funds";
-                   Description:=ProcurementPlan."Item Description";
-                  "Unit of Measure":=ProcurementPlan."Unit of Measure";
-                  "Unit Cost":=ProcurementPlan."Unit Price";
-                  "Direct Unit Cost":=ProcurementPlan."Unit Price";
+                /*IF ProcurementPlan.GET("Procurement Plan","Shortcut Dimension 1 Code","Shortcut Dimension 2 Code","Procurement Plan Item") THEN
+                    BEGIN
+                    IF ProcurementPlan."Procurement Type"=ProcurementPlan."Procurement Type"::Goods THEN
+                    BEGIN
+                     Type:=Type::Item;
+                      "No.":=ProcurementPlan."No.";
+                    END;
+                    IF ProcurementPlan."Procurement Type"<>ProcurementPlan."Procurement Type"::Goods THEN
+                    BEGIN
+                     Type:=Type::"G/L Account";
+                     "No.":=ProcurementPlan."Source of Funds";
+                    END;
+                      "Budget Line":=ProcurementPlan."Source of Funds";
+                       Description:=ProcurementPlan."Item Description";
+                      "Unit of Measure":=ProcurementPlan."Unit of Measure";
+                      "Unit Cost":=ProcurementPlan."Unit Price";
+                      "Direct Unit Cost":=ProcurementPlan."Unit Price";
 
-                END;*/
+                    END;*/
             end;
         }
         field(54023; "Budget Line"; Code[20])
@@ -432,19 +432,19 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
         }
         field(54024; "Approved Budget Amount"; Decimal)
         {
-            CalcFormula = Sum("Procurement Plan"."Estimated Cost" WHERE("No."=FIELD("No."), "Plan Year"=FIELD("Procurement Plan"), "Shortcut Dimension 2 Code"=FIELD("Shortcut Dimension 2 Code"), "Plan Item No"=FIELD("Procurement Plan Item")));
+            CalcFormula = Sum("Procurement Plan"."Estimated Cost" WHERE("No." = FIELD("No."), "Plan Year" = FIELD("Procurement Plan"), "Shortcut Dimension 2 Code" = FIELD("Shortcut Dimension 2 Code"), "Plan Item No" = FIELD("Procurement Plan Item")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(54025; "Commitment Amount"; Decimal)
         {
-            CalcFormula = Sum("Commitment Entries"."Committed Amount" WHERE(Account=FIELD("Budget Line"), "Global Dimension 1"=FIELD("Shortcut Dimension 1 Code"), "Global Dimension 2"=FIELD("Shortcut Dimension 2 Code"), "Commitment Type"=FILTER(Commitment|"Commitment Reversal")));
+            CalcFormula = Sum("Commitment Entries"."Committed Amount" WHERE(Account = FIELD("Budget Line"), "Global Dimension 1" = FIELD("Shortcut Dimension 1 Code"), "Global Dimension 2" = FIELD("Shortcut Dimension 2 Code"), "Commitment Type" = FILTER(Commitment | "Commitment Reversal")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(54026; "Actual Expense"; Decimal)
         {
-            CalcFormula = Sum("G/L Entry".Amount WHERE("G/L Account No."=FIELD("Budget Line"), "Global Dimension 1 Code"=FIELD("Shortcut Dimension 1 Code"), "Global Dimension 2 Code"=FIELD("Shortcut Dimension 2 Code")));
+            CalcFormula = Sum("G/L Entry".Amount WHERE("G/L Account No." = FIELD("Budget Line"), "Global Dimension 1 Code" = FIELD("Shortcut Dimension 1 Code"), "Global Dimension 2 Code" = FIELD("Shortcut Dimension 2 Code")));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -468,7 +468,7 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
         }
         field(54031; "Old LPO Header"; Boolean)
         {
-            CalcFormula = Lookup("Purchase Header"."Old LPO" WHERE("No."=FIELD("Document No.")));
+            CalcFormula = Lookup("Purchase Header"."Old LPO" WHERE("No." = FIELD("Document No.")));
             FieldClass = FlowField;
         }
         field(54032; "Old Header"; Boolean)
@@ -479,7 +479,7 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
         {
             CaptionClass = '1,2,4';
             DataClassification = ToBeClassified;
-            TableRelation = "Dimension Value".Code WHERE("Global Dimension No."=CONST(4));
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(4));
 
             trigger OnValidate()
             begin
@@ -495,8 +495,9 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
         field(50042; "Inspection Decision"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = " ", Accept, Reject;
+            OptionMembers = " ",Accept,Reject;
             ObsoleteState = Removed;
+
         }
         field(50043; "General expense Code"; Code[20])
         {
@@ -506,7 +507,7 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
         field(50500; "Inspection Decisions"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = " ", Accept, Reject;
+            OptionMembers = " ",Accept,Reject;
         }
         field(50501; "General expense Codes"; Code[20])
         {
@@ -517,26 +518,26 @@ tableextension 50125 PurchLineExt extends "Purchase Line"
             DataClassification = ToBeClassified;
         }
     }
-// trigger OnBeforeDelete()
-// var
-//     myInt: Integer;
-// begin
-//     SuspendStatusCheck(true);
-// end;
-// trigger OnBeforeModify()
-// var
-//     myInt: Integer;
-// begin
-//     if "Line No." <> 0 then
-//         SuspendStatusCheck(true);
-// end;
-// var
-//     PurchaseHeader: Record "Purchase Header";
-// procedure GetPurchaseHeader()
-// var
-//     myInt: Integer;
-// begin
-//     PurchaseHeader.Reset();
-//     if PurchaseHeader.Get("Document Type", "Document No.") then;
-// end;
+    // trigger OnBeforeDelete()
+    // var
+    //     myInt: Integer;
+    // begin
+    //     SuspendStatusCheck(true);
+    // end;
+    // trigger OnBeforeModify()
+    // var
+    //     myInt: Integer;
+    // begin
+    //     if "Line No." <> 0 then
+    //         SuspendStatusCheck(true);
+    // end;
+    // var
+    //     PurchaseHeader: Record "Purchase Header";
+    // procedure GetPurchaseHeader()
+    // var
+    //     myInt: Integer;
+    // begin
+    //     PurchaseHeader.Reset();
+    //     if PurchaseHeader.Get("Document Type", "Document No.") then;
+    // end;
 }

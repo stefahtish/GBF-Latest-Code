@@ -314,11 +314,11 @@ codeunit 50150 HRPortal
     end;
 
     [ServiceEnabled]
-    procedure FnCreateImprestLine(empNo: Code[20]; imprestNo: Code[20]; expenditureType: Code[50]; projectNo: Code[20]; taskNo: Code[20]; imprestAmount: Decimal) RtnV: Text;
+    procedure FnCreateImprestLine(empNo: Code[20]; imprestNo: Code[20]; imprLineNo: Integer; expenditureType: Code[50]; projectNo: Code[20]; taskNo: Code[20]; imprestAmount: Decimal) RtnV: Text;
     begin
         Clear(JsObject);
         CLEARLASTERROR();
-        if not SubmitImprestLine(empNo, imprestNo, expenditureType, projectNo, taskNo, imprestAmount) then begin
+        if not SubmitImprestLine(empNo, imprestNo, imprLineNo, expenditureType, projectNo, taskNo, imprestAmount) then begin
             JsObject.Add('Error', 'TRUE');
             JsObject.Add('Error_Message', GETLASTERRORTEXT());
         end;
@@ -326,13 +326,40 @@ codeunit 50150 HRPortal
     end;
 
     [TryFunction]
-    procedure SubmitImprestLine(empNo: Code[20]; imprestNo: Code[20]; expenditureType: Code[50]; projectNo: Code[20]; taskNo: Code[20]; imprestAmount: Decimal)
+    procedure SubmitImprestLine(empNo: Code[20]; imprestNo: Code[20]; imprLineNo: Integer; expenditureType: Code[50]; projectNo: Code[20]; taskNo: Code[20]; imprestAmount: Decimal)
     var
         payments: Record Payments;
         imprestLines: Record "Payment Lines";
         LineNo: Integer;
 
     begin
+        /*      payments.Reset();
+            payments.setrange("No.", imprestNo);
+            payments.setrange("Staff No.", empNo);
+            payments.setrange(Status, payments.Status::Open);
+            if payments.findset(true) then begin
+                imprestLines.Reset();
+                imprestLines.SetRange("No", imprestNo);
+                 imprestLines.SetRange("Line No", imprLineNo);
+                if imprestLines.FindFirst() then begin          
+
+                imprestLines."Expenditure Type" := expenditureType;
+                imprestLines.Validate("Expenditure Type");
+                imprestLines.Amount := ImprestAmount;
+                imprestLines.Validate(Amount);
+                imprestLines."Job No." := projectNo;
+                imprestLines."Job Task No." := taskNo;
+                if imprestLines.Modify(true) then begin
+                    JsObject.Add('Error', 'FALSE');
+                    JsObject.Add('DocNo', payments."No.");
+                end else begin
+                    Error('Sorry, an error occurred while processing your request. Kindly try again');
+                end;
+
+
+
+                end;
+            end; */
 
         payments.Reset();
         payments.setrange("No.", imprestNo);
@@ -341,31 +368,52 @@ codeunit 50150 HRPortal
         if payments.findset(true) then begin
             imprestLines.Reset();
             imprestLines.SetRange("No", imprestNo);
-            if imprestLines.FindLast() then
-                LineNo := imprestLines."Line No" + 10000
-            else
-                LineNo := 10000;
+            imprestLines.SetRange("Line No", imprLineNo);
+            if imprestLines.FindFirst() then begin
+                imprestLines."Expenditure Type" := expenditureType;
+                imprestLines.Validate("Expenditure Type");
+                imprestLines.Amount := ImprestAmount;
+                imprestLines.Validate(Amount);
+                imprestLines."Job No." := projectNo;
+                imprestLines."Job Task No." := taskNo;
+                if imprestLines.Modify(true) then begin
+                    JsObject.Add('Error', 'FALSE');
+                    JsObject.Add('DocNo', payments."No.");
+                end else begin
+                    Error('Sorry, an error occurred while processing your request. Kindly try again');
+                end;
 
-            imprestLines.init;
-            imprestLines.No := imprestNo;
-            imprestLines.Validate(No);
-            imprestLines."Line No" := LineNo;
-            imprestLines."Expenditure Type" := expenditureType;
-            imprestLines.Validate("Expenditure Type");
-            imprestLines.Amount := ImprestAmount;
-            imprestLines.Validate(Amount);
-            imprestLines."Job No." := projectNo;
-            imprestLines."Job Task No." := taskNo;
-            if imprestLines.Insert(true) then begin
-                JsObject.Add('Error', 'FALSE');
-                JsObject.Add('DocNo', payments."No.");
             end else begin
-                Error('Sorry, an error occurred while processing your request. Kindly try again');
-            end;
+                imprestLines.Reset();
+                imprestLines.SetRange("No", imprestNo);
+                if imprestLines.FindLast() then
+                    LineNo := imprestLines."Line No" + 10000
+                else
+                    LineNo := 10000;
 
+                imprestLines.init;
+                imprestLines.No := imprestNo;
+                imprestLines.Validate(No);
+                imprestLines."Line No" := LineNo;
+                imprestLines."Expenditure Type" := expenditureType;
+                imprestLines.Validate("Expenditure Type");
+                imprestLines.Amount := ImprestAmount;
+                imprestLines.Validate(Amount);
+                imprestLines."Job No." := projectNo;
+                imprestLines."Job Task No." := taskNo;
+                if imprestLines.Insert(true) then begin
+                    JsObject.Add('Error', 'FALSE');
+                    JsObject.Add('DocNo', payments."No.");
+                end else begin
+                    Error('Sorry, an error occurred while processing your request. Kindly try again');
+                end;
+            end;
         end else begin
             Error('Sorry, you could not add an imprest line. The imprest request is either not open or you are not the requestor. Kindly contact the administrator if this error persists.');
         end;
+
+
+
 
     end;
 

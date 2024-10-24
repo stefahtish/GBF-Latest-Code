@@ -24,7 +24,7 @@ codeunit 50162 Eprocurement
     begin
         tableFound := false;
         if TableID = Database::Payments then begin
-            PaymentsRec.RESET;
+            prospectiveSuppliersRec.RESET;
             PaymentsRec.SETRANGE("No.", DocNo);
             if PaymentsRec.FIND('-') then begin
                 FromRecRef.GETTABLE(PaymentsRec);
@@ -143,6 +143,8 @@ codeunit 50162 Eprocurement
         RecRef: RecordRef;
         FileManagement_lCdu: Codeunit "File Management";
         Base64Convert: Codeunit "Base64 Convert";
+        prospectiveSuppliersRec: Record "Prospective Suppliers";
+
         purchasesRec: Record "Internal Request Header";
         PaymentsRec: Record Payments;
 
